@@ -1,0 +1,9 @@
+# User-specific stuff
+workspace.xml
+tasks.xml
+usage.statistics.xml
+dictionaries
+shelf
+
+# Compiled class
+*.class
