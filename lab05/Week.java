@@ -28,10 +28,11 @@ public class Week {
                     System.out.println("Oh, Thursday doesn't event start");
                 case 5:
                     System.out.println("It's Friday, I'm in love");
+                    break;
                 case 6:
-                    System.out.println("Saturday, wait");
+                    System.out.println("Saturday, wrong day");
                 case 7:
-                    System.out.println("And Sunday always comes too late");
+                    System.out.println("And Sunday wrong");
                     break;
                 default:
                     System.out.printf("\n\u001b[33;1mNot a valid number for day in a week.\u001b[0m\n");

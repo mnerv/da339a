@@ -28,13 +28,24 @@ public class Conditions {
         if (number > 1 && number < 4 || number > 7 && number < 9)
             System.out.println("Number is bigger bigger than 1 and less than 4 or bigger than 7 and less than 9.");
 
-        // TODO: 4c, not a requirement
+        if (args.length > 0 && args[0].equals("-c")) {
+            System.out.println();
 
-        if (args.length > 0 && args[0] == "-c") {
-            if (number % 3 != 0)
+            if (number % 3 == 0)
                 System.out.println("Number is not divisible by 3.");
-            else if (number % 4 != 0)
+
+            if (number % 4 != 0)
                 System.out.println("Number is not divisible by 4.");
+
+            if (number % 10 == 7)
+                System.out.println("The ones digit is 7.");
+
+            if (number > 100) {
+
+                if (number % 1000 / 100 == 7)
+                    System.out.println("The hundreds digit is 7.");
+            }
+
         }
 
         input.close();

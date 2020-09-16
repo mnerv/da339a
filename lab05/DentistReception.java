@@ -16,6 +16,7 @@ public class DentistReception {
         System.out.println("Cleaning: 2");
         System.out.println("Fixing:   3");
         System.out.println("Cancel:  -1");
+
         try {
             System.out.print("\nEnter treatment: ");
             treatment = input.nextInt();
@@ -46,7 +47,17 @@ public class DentistReception {
                 break;
         }
 
-        System.out.printf("\nYour total will be: %f\n", cost);
+        System.out.print("Add 10% discount? ");
+        input.nextLine();
+        String apply = input.nextLine();
+
+        System.out.printf("\nYour total before discount: %f", cost);
+
+        if (apply.equals("yes") || apply.equals("y") || apply.equals("ye")) {
+            cost = cost * 0.9;
+
+            System.out.printf("\nTotal after discount: %f\n", cost);
+        }
 
         input.close();
     }
