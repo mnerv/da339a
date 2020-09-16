@@ -16,30 +16,50 @@ public class Week {
             return;
         }
 
-        // TODO: 5b, change the text
-
-        switch (day) {
-            case 1:
-                System.out.println("Monday");
-            case 2:
-                System.out.println("Tuesday");
-            case 3:
-                System.out.println("Wednesday");
-            case 4:
-                System.out.println("Thursday");
-            case 5:
-                System.out.println("Friday");
-                break;
-            case 6:
-                System.out.println("Saturday");
-                break;
-            case 7:
-                System.out.println("Sunday");
-                break;
-            default:
-                System.out.printf("\n\u001b[33;1mNot a valid number for day in a week.\u001b[0m\n");
-                break;
-        }
+        if (args.length > 0 && args[0].equals("-b"))
+            switch (day) {
+                case 1:
+                    System.out.println("Monday you can fall apart");
+                case 2:
+                    System.out.print("Tuesday, ");
+                case 3:
+                    System.out.println("Wednesday break my heart");
+                case 4:
+                    System.out.println("Oh, Thursday doesn't event start");
+                case 5:
+                    System.out.println("It's Friday, I'm in love");
+                case 6:
+                    System.out.println("Saturday, wait");
+                case 7:
+                    System.out.println("And Sunday always comes too late");
+                    break;
+                default:
+                    System.out.printf("\n\u001b[33;1mNot a valid number for day in a week.\u001b[0m\n");
+                    break;
+            }
+        else
+            switch (day) {
+                case 1:
+                    System.out.println("Monday");
+                case 2:
+                    System.out.println("Tuesday");
+                case 3:
+                    System.out.println("Wednesday");
+                case 4:
+                    System.out.println("Thursday");
+                case 5:
+                    System.out.println("Friday");
+                    break;
+                case 6:
+                    System.out.println("Saturday");
+                    break;
+                case 7:
+                    System.out.println("Sunday");
+                    break;
+                default:
+                    System.out.printf("\n\u001b[33;1mNot a valid number for day in a week.\u001b[0m\n");
+                    break;
+            }
 
         input.close();
     }
