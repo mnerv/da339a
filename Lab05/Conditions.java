@@ -32,7 +32,7 @@ public class Conditions {
             System.out.println();
 
             if (number % 3 == 0)
-                System.out.println("Number is not divisible by 3.");
+                System.out.println("Number is divisible by 3.");
 
             if (number % 4 != 0)
                 System.out.println("Number is not divisible by 4.");
