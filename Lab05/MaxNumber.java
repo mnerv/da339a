@@ -37,6 +37,12 @@ public class MaxNumber {
 
         if (value1 == value2 && value2 == value3) {
             System.out.println("The values are equal.");
+        } else if (value1 == value2) {
+            System.out.println("The value 1 and 2 are equal.");
+        } else if (value1 == value3) {
+            System.out.println("The value 1 and 3 are equal.");
+        } else if (value2 == value3) {
+            System.out.println("The value 2 and 3 are equal.");
         } else if (value1 > value2 && value1 > value3) {
             System.out.println("Value 1 is biggest!");
         } else if (value2 > value1 && value2 > value3) {
