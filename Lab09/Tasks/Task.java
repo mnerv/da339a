@@ -5,6 +5,7 @@ import java.util.Locale;
 
 public abstract class Task {
     public static Scanner input = new Scanner(System.in);
+    protected static Locale locale = new Locale("en", "UK");
 
     public static int ReadInt() {
         int value = Integer.MIN_VALUE;
@@ -24,10 +25,20 @@ public abstract class Task {
         System.out.println("\n-----------------------------------\n");
     }
 
-    protected Locale locale;
+    public static void printf(String format, Object... args) {
+        System.out.printf(locale, format, args);
+    }
+
+    protected void PrintArrayInt(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            System.out.print(" ");
+        }
+        System.out.println();
+    }
 
     Task() {
-        locale = new Locale("en", "UK");
+
     }
 
     public abstract void Run();

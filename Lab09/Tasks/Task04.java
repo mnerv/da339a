@@ -18,5 +18,4 @@ public class Task04 extends Task {
 
         System.out.printf(locale, "Min: %.1f, Average: %.1f, Max: %.1f \n", minNum, sum / arr.length, maxNum);
     }
-
 }
