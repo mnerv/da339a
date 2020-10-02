@@ -23,13 +23,14 @@ public class Task03 extends Task {
             }
         }
 
-        // TODO: Task03b fix the array
         HDiv();
         System.out.println("Task03a");
         for (int i = 0; i < students.length; i++) {
             int points = Integer.parseInt(students[i][3]);
+
             if (points >= 25) {
-                System.out.printf("%s \t %s\n", students[i][1], points >= 25 && points < 40 ? "G" : "VG");
+                students[i][4] = points < 40 ? "G" : "VG";
+                System.out.printf("%s \t %s\n", students[i][1], students[i][4]);
             }
         }
 

@@ -17,9 +17,9 @@ public class Task01 extends Task {
         }
 
         if (searchIndex != -1) {
-            System.out.printf("Value %d found at index %d\n", searchValue, searchIndex);
+            printf("Value %d found at index %d\n", searchValue, searchIndex);
         } else {
-            System.out.printf("There are no value %d\n", searchValue);
+            printf("There are no value %d\n", searchValue);
         }
 
     }

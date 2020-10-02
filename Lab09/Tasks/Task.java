@@ -12,9 +12,12 @@ public abstract class Task {
 
         try {
             value = input.nextInt();
+            input.nextLine();
         } catch (Exception e) {
             System.err.printf(
                     "\n\u001b[31;1mError parsing input. It might not be an integer.\n\u001b[33;1mReturning MIN_VALUE\u001b[0m\n\n");
+            input.nextLine();
+
             return Integer.MIN_VALUE;
         }
 
@@ -35,10 +38,6 @@ public abstract class Task {
             System.out.print(" ");
         }
         System.out.println();
-    }
-
-    Task() {
-
     }
 
     public abstract void Run();
