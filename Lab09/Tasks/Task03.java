@@ -19,7 +19,7 @@ public class Task03 extends Task {
         System.out.println("Task03a\n");
         for (int i = 0; i < students.length; i++) {
             if (students[i][4] == "G" || students[i][4] == "VG") {
-                System.out.printf("%s \t %s\n", students[i][1], students[i][4]);
+                printf("%s \t %s\n", students[i][1], students[i][4]);
             }
         }
 
@@ -30,7 +30,7 @@ public class Task03 extends Task {
 
             if (points >= 25) {
                 students[i][4] = points < 40 ? "G" : "VG";
-                System.out.printf("%s \t %s\n", students[i][1], students[i][4]);
+                printf("%s \t %s\n", students[i][1], students[i][4]);
             }
         }
 

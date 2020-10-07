@@ -16,6 +16,6 @@ public class Task04 extends Task {
             minNum = current < minNum ? current : minNum;
         }
 
-        System.out.printf(locale, "Min: %.1f, Average: %.1f, Max: %.1f \n", minNum, sum / arr.length, maxNum);
+        printf(locale, "Min: %.1f, Average: %.1f, Max: %.1f \n", minNum, sum / arr.length, maxNum);
     }
 }
