@@ -4,10 +4,30 @@
  */
 
 import java.util.Scanner;
+import java.util.Locale;
 
 public class Assignment01 {
 
-    static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
+    private static Locale printLocale = new Locale("en", "UK");
+
+    public static void printf(String format, Object... args) {
+          System.out.printf(printLocale, format, args);
+    }
+
+    private static int ReadInt(){
+        int value = Integer.MIN_VALUE;
+
+        try {
+            value = input.nextInt();
+            input.nextLine();
+        } catch (Exception e) {
+            printf("\n\u001b[31;1mERROR:\u001b[33m NOT A NUMBER\u001b[0m\n\n");
+            value = Integer.MIN_VALUE;
+        }
+
+        return value;
+    }
 
     // @formatter:off
     static String[][] guestList = { 
@@ -25,8 +45,9 @@ public class Assignment01 {
     // @formatter:on
 
     public static void printGuestList() {
-        System.out.println("You chose to print the guest list"); // you don't need to keep this line
-        // Add your code here
+        for(int i = 0; i < guestList.length; i++){
+
+        }
     }
 
     public static void printStatistics() {
@@ -55,9 +76,6 @@ public class Assignment01 {
     }
 
     public static void changePlaces(int index1, int index2) {
-        System.out.println("You chose to switch places between index " + index1 + " and " + index2); // you don't need
-                                                                                                     // to
-                                                                                                     // keep this line
         // Add your code here
     }
 
@@ -67,6 +85,7 @@ public class Assignment01 {
     }
 
     public static void main(String[] args) {
-        // Add you code here with the main loop that handles the user's menu choices.
+        printf("Enter a number: ");
+        ReadInt();
     }
 }
