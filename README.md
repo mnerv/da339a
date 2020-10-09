@@ -1,3 +1,3 @@
 # Object Oriented Programming in Java
 
-Malmö University Lab projects
+Malmö University Labs and Assignments
