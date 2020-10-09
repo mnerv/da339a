@@ -7,6 +7,15 @@ import java.util.Scanner;
 import java.util.Locale;
 
 public class Assignment01 {
+    private static String[] menuList = {
+        "Show guest list",
+        "Add guest",
+        "Change guest's name",
+        "Change guest's age",
+        "Change guest's list position",
+        "Removed guest",
+        "Exit"
+    };
 
     // @formatter:off
     static String[][] guestList = { 
@@ -25,9 +34,13 @@ public class Assignment01 {
     // @formatter:on
 
     public static void printGuestList() {
+        printf("\u001b[37;1mGuest List\u001b[0m\n");
+        HLine();
         for(int i = 0; i < guestList.length; i++){
-            if(!guestList[i][0].equals(""))
-                printf("%d. %s\t%s\n", i, guestList[i][0], guestList[i][1]);
+            String name = guestList[i][0];
+            String age = guestList[i][1];
+
+            printf("%d. %s\t\t%s\n", i + 1, name, age);
         }
     }
 
@@ -61,18 +74,55 @@ public class Assignment01 {
     }
 
     public static void printMenu() {
-        System.out.println("You chose to print the menu"); // you don't need to keep this line
-        // Add your code here
+        printf("Menu\n");
+        HLine();
+        for(int i = 0; i < menuList.length; i++){
+            if(i < menuList.length - 1)
+                printf("%d. %s\n", i + 1, menuList[i]);
+            else 
+                printf("Enter -1 to exit\n\n");
+        }
+    }
+
+    private static void HLine(){
+        printf("-------------------------------\n");
     }
 
     private static Scanner input = new Scanner(System.in);
     private static Locale printLocale = new Locale("en", "UK");
+    private static String message = "";
 
     public static void main(String[] args) {
-        printf("Enter a number: ");
-        ReadInt();
+        boolean isRunning = true;
 
-        printGuestList();
+
+        while(isRunning) {
+            Clear();
+            printMenu();
+
+            if(!message.equals("")){
+                printf("%s\n\n", message);
+                message = "";
+            }
+
+            printf("Select: ");
+            int selector = ReadInt();
+           
+            switch (selector) {
+                case 0:
+                    break;
+                case -1:
+                    isRunning = false;
+                    break;
+                default:
+                    if(!message.equals(""))
+                        message += "\n";
+                    message += "Not a valid option.";
+                    break;
+            } 
+
+        }
+
     }
 
     public static void printf(String format, Object... args) {
@@ -83,13 +133,21 @@ public class Assignment01 {
         int value;
 
         try {
+            printf("\u001b[36m");
             value = Integer.parseInt(input.nextLine());
+            printf("\u001b[0m");
         } catch (Exception e) {
-            printf("\n\u001b[31;1mERROR:\u001b[33m NOT A NUMBER\u001b[0m\n\n");
+            message = "\n\u001b[31;1mERROR:\u001b[33m NOT AN INTEGER\u001b[0m\n";
+            printf("%s\n", message);
             value = Integer.MIN_VALUE;
         }
 
         return value;
+    }
+
+    private static void Clear(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }
