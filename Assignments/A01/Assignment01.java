@@ -4,6 +4,7 @@
  */
 
 import java.util.Scanner;
+
 import java.util.Locale;
 
 public class Assignment01 {
@@ -44,23 +45,52 @@ public class Assignment01 {
     }
 
     public static void printStatistics() {
-        System.out.println("You chose to print statistics"); // you don't need to keep this line
-        // Add your code here
+
     }
 
-    public static void addGuest(String name, String age) {
-        System.out.println("You chose to add a guest"); // you don't need to keep this line
-        // Add your code here
+    public static void addGuest() {
+        if (isFull()) {
+            PushErrorMesssage("Guest list full\n");
+            return;
+        }
+
+        Clear();
+
+        printf("Enter guest firstname and lastname\nName: ");
+        String name = input.nextLine();
+
+        if (name.equals("")) {
+            PushErrorMesssage("Name cannot be empty\n");
+            return;
+        }
+
+        printf("Enter guest's age: ");
+        int age = ReadInt();
+
+        if (age == Integer.MIN_VALUE) {
+            PushErrorMesssage("INPUT AGE IS NOT A NUMBER\n");
+            return;
+        }
+
+        for (int i = 0; i < guestList.length; i++) {
+            if (guestList[i][0].equals("")) {
+                guestList[i][0] = name;
+                guestList[i][1] = Integer.toString(age);
+
+                PushOutput("Added:\n%s, %d\n", name, age);
+                HLine();
+                printGuestList();
+                break;
+            }
+        }
+
     }
 
     public static void changeNamneOfGuest(int index, String newName) {
-        System.out.println("You chose to change the name of a guest"); // you don't need to keep this line
-        // Add your code here
+
     }
 
     public static void changeAgeOfGuest(int index, String newAge) {
-        System.out.println("You chose to change the age of a guest"); // you don't need to keep this line
-        // Add your code here
     }
 
     public static void removeGuest() {
@@ -78,18 +108,30 @@ public class Assignment01 {
             PushOutput("Removed:\n%d. %s\t\t%s\n", index, guestList[index][0], guestList[index][1]);
             HLine();
 
-            printGuestList();
-
             guestList[index - 1][0] = "";
             guestList[index - 1][1] = "";
+
+            printGuestList();
+
         } else {
-            PushMessage("Index out of range");
+            PushErrorMesssage("Index out of range");
         }
 
     }
 
+    public static boolean isFull() {
+        boolean full = true;
+
+        for (int i = 0; i < guestList.length; i++)
+            if (guestList[i][0] == "") {
+                full = false;
+                break;
+            }
+
+        return full;
+    }
+
     public static void changePlaces(int index1, int index2) {
-        // Add your code here
     }
 
     public static void printMenu() {
@@ -135,6 +177,9 @@ public class Assignment01 {
                 case 1:
                     printGuestList();
                     break;
+                case 2:
+                    addGuest();
+                    break;
                 case 6:
                     removeGuest();
                     break;
@@ -142,9 +187,7 @@ public class Assignment01 {
                     isRunning = false;
                     break;
                 default:
-                    if (!message.equals(""))
-                        message += "\n";
-                    message += "\u001b[33mNot a valid option\u001b[0m";
+                    PushMessage("\u001b[36m%d: \u001b[33mNot a valid option\u001b[0m", selector);
                     break;
             }
 
@@ -164,25 +207,33 @@ public class Assignment01 {
     }
 
     private static void PushOutput(String format, Object... args) {
-        output += String.format(format, args);
+        output += String.format(printLocale, format, args);
     }
 
     private static void SetOutput(String format, Object... args) {
-        output = String.format(format, args);
+        output = String.format(printLocale, format, args);
     }
 
     private static void PushMessage(String format, Object... args) {
-        message += String.format(format, args);
+        if (!message.equals(""))
+            message += "\n";
+
+        message += String.format(printLocale, format, args);
     }
 
     private static void SetMessage(String format, Object... args) {
-        message = String.format(format, args);
+        message = String.format(printLocale, format, args);
     }
 
     private static void PrintMessage() {
         if (!message.equals("")) {
             printf("%s\n\n", message);
         }
+    }
+
+    private static void PushErrorMesssage(String format, Object... args) {
+        String tmp = String.format(printLocale, format, args);
+        PushMessage("\u001b[31;1mERROR:\u001b[0m %s", tmp);
     }
 
     private static void ResetBuffer() {
@@ -206,7 +257,8 @@ public class Assignment01 {
             value = Integer.parseInt(input.nextLine());
             printf("\u001b[0m");
         } catch (Exception e) {
-            message = "\n\u001b[31;1mERROR:\u001b[33m NOT AN INTEGER\u001b[0m\n";
+            PushErrorMesssage("\u001b[33mNOT AN INTEGER\u001b[0m\n");
+            // message = "\n\u001b[31;1mERROR:\u001b[33m NOT AN INTEGER\u001b[0m\n";
             printf("%s\n", message);
             value = Integer.MIN_VALUE;
         }

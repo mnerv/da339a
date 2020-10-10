@@ -9,7 +9,7 @@
     - [ ] Kid count (13 years old)
     - [ ] The eldest and its age
     - [ ] The youngest and its age
-- [ ] Input new guest and guest's age if it's not full
+- [x] Input new guest and guest's age if it's not full
 - [ ] If it's full then Error message is shown
 - [ ] Change guest's name in the list
 - [ ] Change guest's age in the list
