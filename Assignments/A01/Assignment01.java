@@ -4,13 +4,13 @@
  */
 
 import java.util.Scanner;
-
 import java.util.Locale;
 
 public class Assignment01 {
     // @formatter:off
     private static String[] menuList = {
         "Show guest list",
+        "Show guest statistic",
         "Add guest",
         "Change guest's name",
         "Change guest's age",
@@ -45,7 +45,37 @@ public class Assignment01 {
     }
 
     public static void printStatistics() {
+        int childrenCount = 0;
+        int guestCount = 0;
+        int adultCount = 0;
 
+        int eldestIndex = 0;
+        int youngestIndex = 0;
+
+        for (int i = 0; i < guestList.length; i++) {
+            if (!guestList[i][0].equals("")) {
+                int age = Integer.parseInt(guestList[i][1]);
+                guestCount++;
+
+                if (age <= childAge) {
+                    childrenCount++;
+                } else if (age >= adultAge) {
+                    adultCount++;
+                }
+
+                if (i < guestList.length - 1 && !guestList[i + 1][0].equals("")) {
+                    int ageAhead = Integer.parseInt(guestList[i + 1][1]);
+
+                    eldestIndex = ageAhead > Integer.parseInt(guestList[eldestIndex][1]) ? i + 1 : eldestIndex;
+                    youngestIndex = ageAhead < Integer.parseInt(guestList[youngestIndex][1]) ? i + 1 : youngestIndex;
+                }
+            }
+        }
+
+        PushOutput("Guest statistics\n");
+        HLine();
+        PushOutput("Guest count: %d\nAdult count: %d\nChildren count: %d\nEldest: %s\nYoungest: %s\n", guestCount,
+                adultCount, childrenCount, guestList[eldestIndex][0], guestList[youngestIndex][0]);
     }
 
     public static void addGuest() {
@@ -86,18 +116,75 @@ public class Assignment01 {
 
     }
 
-    public static void changeNamneOfGuest(int index, String newName) {
+    public static void changeNamneOfGuest() {
+        ClearPrintListReset();
 
+        printf("Select guest nr. to change the name.\nSelect: ");
+        int index = ReadInt();
+        if (index == Integer.MIN_VALUE) {
+            PushErrorMesssage("Guest no. is not a number\n");
+            return;
+        }
+
+        if (index > 0 && index < guestList.length + 1) {
+            int i = index - 1;
+
+            printf("Enter name: ");
+            String name = input.nextLine();
+
+            if (name.equals("")) {
+                PushErrorMesssage("Name cannot be empty");
+                return;
+            }
+
+            String before = guestList[i][0];
+            guestList[i][0] = name;
+
+            PushOutput("Updated guest's name:\n %d. %s -> %s\n", index, before, name);
+            HLine();
+            printGuestList();
+
+        } else {
+            PushErrorMesssage("Guest no. is out of range\n");
+        }
     }
 
-    public static void changeAgeOfGuest(int index, String newAge) {
+    public static void changeAgeOfGuest() {
+        ClearPrintListReset();
+
+        printf("Select guest nr. to change the age.\nSelect: ");
+        int index = ReadInt();
+
+        if (index == Integer.MIN_VALUE) {
+            PushErrorMesssage("Guest no. is not a number\n");
+            return;
+        }
+
+        if (index > 0 && index < guestList.length + 1) {
+            int i = index - 1;
+
+            printf("Enter age: ");
+            int age = ReadInt();
+
+            if (age == Integer.MIN_VALUE) {
+                PushErrorMesssage("Age needs to be a number\n");
+                return;
+            }
+
+            String before = guestList[i][1];
+            guestList[i][1] = Integer.toString(age);
+
+            PushOutput("Updated guest's age:\n %d. %s, %s -> %s\n", index, guestList[i][0], before, guestList[i][1]);
+            HLine();
+            printGuestList();
+
+        } else {
+            PushErrorMesssage("Guest no. is out of range\n");
+        }
     }
 
     public static void removeGuest() {
-        Clear();
-        printGuestList();
-        PrintOutput();
-        ResetOutput();
+        ClearPrintListReset();
 
         printf("Select the guest to be removed\n");
         printf("Select: ");
@@ -105,7 +192,7 @@ public class Assignment01 {
 
         if (index > 0 && index < guestList.length) {
 
-            PushOutput("Removed:\n%d. %s\t\t%s\n", index, guestList[index][0], guestList[index][1]);
+            PushOutput("Removed:\n%d. %s\t\t%s\n", index, guestList[index - 1][0], guestList[index - 1][1]);
             HLine();
 
             guestList[index - 1][0] = "";
@@ -131,7 +218,49 @@ public class Assignment01 {
         return full;
     }
 
-    public static void changePlaces(int index1, int index2) {
+    public static void changePlaces() {
+        ClearPrintListReset();
+
+        printf("Change guest postion\n");
+        printf("Select guest no.: ");
+        int pos1 = ReadInt();
+
+        if (pos1 == Integer.MIN_VALUE) {
+            PushErrorMesssage("Input Guest no. is not a number\n");
+            return;
+        }
+
+        if (!(pos1 > 0 && pos1 < guestList.length + 1)) {
+            PushErrorMesssage("Guest no. is out of range");
+            return;
+        }
+
+        printf("Select swap position: ");
+        int pos2 = ReadInt();
+
+        if (pos2 == Integer.MIN_VALUE) {
+            PushErrorMesssage("Input swap position is not a number\n");
+            return;
+        }
+
+        if (!(pos2 > 0 && pos2 < guestList.length + 1)) {
+            PushErrorMesssage("Swap position is out of range\n");
+            return;
+        }
+
+        int i0 = pos1 - 1;
+        int i1 = pos2 - 1;
+
+        String[] tmp = { guestList[i0][0], guestList[i0][1], };
+
+        guestList[i0] = guestList[i1];
+        guestList[i1] = tmp;
+
+        PushOutput("Updated:\n");
+        PushOutput("%s, Position: %d -> %d\n", tmp[0], pos1, pos2);
+        HLine();
+        printGuestList();
+
     }
 
     public static void printMenu() {
@@ -147,10 +276,25 @@ public class Assignment01 {
     }
 
     private static void HLine() {
-        printf("-------------------------------\n");
-        PushOutput("-------------------------------\n");
+        for (int i = 0; i < HlineSize; i++) {
+            PushOutput("-");
+            printf("-");
+        }
+        PushOutput("\n");
+        printf("\n");
     }
 
+    private static void ClearPrintListReset() {
+        Clear();
+        printGuestList();
+        PrintOutput();
+        ResetOutput();
+    }
+
+    private static final int adultAge = 18;
+    private static final int childAge = 13;
+
+    private static int HlineSize = 32;
     private static Scanner input = new Scanner(System.in);
     private static Locale printLocale = new Locale("en", "UK");
     private static String message = "";
@@ -178,13 +322,26 @@ public class Assignment01 {
                     printGuestList();
                     break;
                 case 2:
+                    printStatistics();
+                    break;
+                case 3:
                     addGuest();
                     break;
+                case 4:
+                    changeNamneOfGuest();
+                    break;
+                case 5:
+                    changeAgeOfGuest();
+                    break;
                 case 6:
+                    changePlaces();
+                    break;
+                case 7:
                     removeGuest();
                     break;
                 case -1:
                     isRunning = false;
+                    printf("Goodbye\n");
                     break;
                 default:
                     PushMessage("\u001b[36m%d: \u001b[33mNot a valid option\u001b[0m", selector);
@@ -258,7 +415,6 @@ public class Assignment01 {
             printf("\u001b[0m");
         } catch (Exception e) {
             PushErrorMesssage("\u001b[33mNOT AN INTEGER\u001b[0m\n");
-            // message = "\n\u001b[31;1mERROR:\u001b[33m NOT AN INTEGER\u001b[0m\n";
             printf("%s\n", message);
             value = Integer.MIN_VALUE;
         }
