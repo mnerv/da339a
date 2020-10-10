@@ -14,7 +14,7 @@
 - [ ] Change guest's name in the list
 - [ ] Change guest's age in the list
 - [ ] Change guest position with another positon in the list
-- [ ] Remove guest from the list
+- [x] Remove guest from the list
 - [x] Print menu
 - [x] Ability to quit (no more SAO)
 

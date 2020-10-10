@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.Locale;
 
 public class Assignment01 {
+    // @formatter:off
     private static String[] menuList = {
         "Show guest list",
         "Add guest",
@@ -17,7 +18,6 @@ public class Assignment01 {
         "Exit"
     };
 
-    // @formatter:off
     static String[][] guestList = { 
     //    name,           age
         { "Adam Ason",   "35" }, 
@@ -34,13 +34,12 @@ public class Assignment01 {
     // @formatter:on
 
     public static void printGuestList() {
-        printf("\u001b[37;1mGuest List\u001b[0m\n");
+        PushOutput("\u001b[37;1mGuest List\u001b[0m\n");
         HLine();
-        for(int i = 0; i < guestList.length; i++){
+        for (int i = 0; i < guestList.length; i++) {
             String name = guestList[i][0];
             String age = guestList[i][1];
-
-            printf("%d. %s\t\t%s\n", i + 1, name, age);
+            PushOutput("%d. %s\t\t%s\n", i + 1, name, age);
         }
     }
 
@@ -64,9 +63,29 @@ public class Assignment01 {
         // Add your code here
     }
 
-    public static void removeGuest(int index) {
-        System.out.println("You chose to remove a guest"); // you don't need to keep this line
-        // Add your code here
+    public static void removeGuest() {
+        Clear();
+        printGuestList();
+        PrintOutput();
+        ResetOutput();
+
+        printf("Select the guest to be removed\n");
+        printf("Select: ");
+        int index = ReadInt();
+
+        if (index > 0 && index < guestList.length) {
+
+            PushOutput("Removed:\n%d. %s\t\t%s\n", index, guestList[index][0], guestList[index][1]);
+            HLine();
+
+            printGuestList();
+
+            guestList[index - 1][0] = "";
+            guestList[index - 1][1] = "";
+        } else {
+            PushMessage("Index out of range");
+        }
+
     }
 
     public static void changePlaces(int index1, int index2) {
@@ -74,62 +93,112 @@ public class Assignment01 {
     }
 
     public static void printMenu() {
-        printf("Menu\n");
+        if (output.equals(""))
+            printf("Menu\n");
         HLine();
-        for(int i = 0; i < menuList.length; i++){
-            if(i < menuList.length - 1)
+        for (int i = 0; i < menuList.length; i++) {
+            if (i < menuList.length - 1)
                 printf("%d. %s\n", i + 1, menuList[i]);
-            else 
+            else
                 printf("Enter -1 to exit\n\n");
         }
     }
 
-    private static void HLine(){
+    private static void HLine() {
         printf("-------------------------------\n");
+        PushOutput("-------------------------------\n");
     }
 
     private static Scanner input = new Scanner(System.in);
     private static Locale printLocale = new Locale("en", "UK");
     private static String message = "";
+    private static String output = "";
 
     public static void main(String[] args) {
         boolean isRunning = true;
 
-
-        while(isRunning) {
+        while (isRunning) {
             Clear();
-            printMenu();
 
-            if(!message.equals("")){
-                printf("%s\n\n", message);
-                message = "";
-            }
+            PrintOutput();
+            printMenu();
+            PrintMessage();
+
+            ResetBuffer();
 
             printf("Select: ");
             int selector = ReadInt();
-           
+
             switch (selector) {
                 case 0:
+                    break;
+                case 1:
+                    printGuestList();
+                    break;
+                case 6:
+                    removeGuest();
                     break;
                 case -1:
                     isRunning = false;
                     break;
                 default:
-                    if(!message.equals(""))
+                    if (!message.equals(""))
                         message += "\n";
-                    message += "Not a valid option.";
+                    message += "\u001b[33mNot a valid option\u001b[0m";
                     break;
-            } 
+            }
 
         }
 
     }
 
-    public static void printf(String format, Object... args) {
-          System.out.printf(printLocale, format, args);
+    /*-------------------- HELPER METHODS ---------------------------*/
+    private static void printf(String format, Object... args) {
+        System.out.printf(printLocale, format, args);
     }
 
-    private static int ReadInt(){
+    private static void PrintOutput() {
+        if (!output.equals("")) {
+            printf("%s\n", output);
+        }
+    }
+
+    private static void PushOutput(String format, Object... args) {
+        output += String.format(format, args);
+    }
+
+    private static void SetOutput(String format, Object... args) {
+        output = String.format(format, args);
+    }
+
+    private static void PushMessage(String format, Object... args) {
+        message += String.format(format, args);
+    }
+
+    private static void SetMessage(String format, Object... args) {
+        message = String.format(format, args);
+    }
+
+    private static void PrintMessage() {
+        if (!message.equals("")) {
+            printf("%s\n\n", message);
+        }
+    }
+
+    private static void ResetBuffer() {
+        ResetOutput();
+        ResetMessage();
+    }
+
+    private static void ResetOutput() {
+        SetOutput("");
+    }
+
+    private static void ResetMessage() {
+        SetMessage("");
+    }
+
+    private static int ReadInt() {
         int value;
 
         try {
@@ -145,7 +214,7 @@ public class Assignment01 {
         return value;
     }
 
-    private static void Clear(){
+    private static void Clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
