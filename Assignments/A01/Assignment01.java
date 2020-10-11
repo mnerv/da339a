@@ -20,7 +20,7 @@ public class Assignment01 {
     };
 
     static String[][] guestList = { 
-    //    name,           age
+    //    name,          age
         { "Adam Ason",   "35" }, 
         { "Berta Bson",  "70" }, 
         { "Ceasar Cson", "12" }, 
@@ -53,7 +53,7 @@ public class Assignment01 {
         int youngestIndex = 0;
 
         for (int i = 0; i < guestList.length; i++) {
-            if (!guestList[i][0].equals("")) {
+            if (!guestList[i][0].isEmpty() && !guestList[i][1].isEmpty()) {
                 int age = Integer.parseInt(guestList[i][1]);
                 guestCount++;
 
@@ -63,8 +63,14 @@ public class Assignment01 {
                     adultCount++;
                 }
 
-                if (i < guestList.length - 1 && !guestList[i + 1][0].equals("")) {
+                if (i < guestList.length - 1 && !guestList[i + 1][0].isEmpty() && !guestList[i][1].isEmpty()) {
                     int ageAhead = Integer.parseInt(guestList[i + 1][1]);
+
+                    if (guestList[youngestIndex][1].isEmpty())
+                        youngestIndex = i;
+
+                    if (guestList[eldestIndex][1].isEmpty())
+                        eldestIndex = i;
 
                     eldestIndex = ageAhead > Integer.parseInt(guestList[eldestIndex][1]) ? i + 1 : eldestIndex;
                     youngestIndex = ageAhead < Integer.parseInt(guestList[youngestIndex][1]) ? i + 1 : youngestIndex;
@@ -74,7 +80,7 @@ public class Assignment01 {
 
         PushOutput("Guest statistics\n");
         HLine();
-        PushOutput("Guest count: %d\nAdult count: %d\nChildren count: %d\nEldest: %s\nYoungest: %s\n", guestCount,
+        PushOutput("Guest count: %d\nAdult count: %d\nChildren count: %d\nEldest: %s\nYoungest: %s", guestCount,
                 adultCount, childrenCount, guestList[eldestIndex][0], guestList[youngestIndex][0]);
     }
 
@@ -89,7 +95,7 @@ public class Assignment01 {
         printf("Enter guest firstname and lastname\nName: ");
         String name = input.nextLine();
 
-        if (name.equals("")) {
+        if (name.trim().isEmpty()) {
             PushErrorMesssage("Name cannot be empty\n");
             return;
         }
@@ -99,6 +105,11 @@ public class Assignment01 {
 
         if (age == Integer.MIN_VALUE) {
             PushErrorMesssage("INPUT AGE IS NOT A NUMBER\n");
+            return;
+        }
+
+        if (age < 0) {
+            PushErrorMesssage("Age cannot be less than 0\n");
             return;
         }
 
@@ -132,8 +143,8 @@ public class Assignment01 {
             printf("Enter name: ");
             String name = input.nextLine();
 
-            if (name.equals("")) {
-                PushErrorMesssage("Name cannot be empty");
+            if (name.trim().isEmpty()) {
+                PushErrorMesssage("Name cannot be empty\n");
                 return;
             }
 
@@ -145,7 +156,7 @@ public class Assignment01 {
             printGuestList();
 
         } else {
-            PushErrorMesssage("Guest no. is out of range\n");
+            PushErrorMesssage("Guest number is out of range\n");
         }
     }
 
@@ -156,7 +167,7 @@ public class Assignment01 {
         int index = ReadInt();
 
         if (index == Integer.MIN_VALUE) {
-            PushErrorMesssage("Guest no. is not a number\n");
+            PushErrorMesssage("Guest number is not a number\n");
             return;
         }
 
@@ -168,6 +179,11 @@ public class Assignment01 {
 
             if (age == Integer.MIN_VALUE) {
                 PushErrorMesssage("Age needs to be a number\n");
+                return;
+            }
+
+            if (age < 0) {
+                PushErrorMesssage("Age cannot be less than 0\n");
                 return;
             }
 
@@ -317,6 +333,7 @@ public class Assignment01 {
 
             switch (selector) {
                 case 0:
+                    PushOutput("Hello There");
                     break;
                 case 1:
                     printGuestList();
@@ -340,7 +357,7 @@ public class Assignment01 {
                     removeGuest();
                     break;
                 case -1:
-                    isRunning = false;
+                    isRunning = false; // NO MORE SAO
                     printf("Goodbye\n");
                     break;
                 default:
@@ -357,6 +374,9 @@ public class Assignment01 {
         System.out.printf(printLocale, format, args);
     }
 
+    /**
+     * Prints out the output buffer with newline
+     */
     private static void PrintOutput() {
         if (!output.equals("")) {
             printf("%s\n", output);
