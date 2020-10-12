@@ -49,7 +49,7 @@ public class Assignment01 {
         int guestCount = 0;
         int adultCount = 0;
 
-        int eldestIndex = 0;
+        int oldestIndex = 0;
         int youngestIndex = 0;
 
         for (int i = 0; i < guestList.length; i++) {
@@ -69,10 +69,10 @@ public class Assignment01 {
                     if (guestList[youngestIndex][1].isEmpty())
                         youngestIndex = i;
 
-                    if (guestList[eldestIndex][1].isEmpty())
-                        eldestIndex = i;
+                    if (guestList[oldestIndex][1].isEmpty())
+                        oldestIndex = i;
 
-                    eldestIndex = ageAhead > Integer.parseInt(guestList[eldestIndex][1]) ? i + 1 : eldestIndex;
+                    oldestIndex = ageAhead > Integer.parseInt(guestList[oldestIndex][1]) ? i + 1 : oldestIndex;
                     youngestIndex = ageAhead < Integer.parseInt(guestList[youngestIndex][1]) ? i + 1 : youngestIndex;
                 }
             }
@@ -80,8 +80,9 @@ public class Assignment01 {
 
         PushOutput("Guest statistics\n");
         HLine();
-        PushOutput("Guest count: %d\nAdult count: %d\nChildren count: %d\nEldest: %s\nYoungest: %s", guestCount,
-                adultCount, childrenCount, guestList[eldestIndex][0], guestList[youngestIndex][0]);
+        PushOutput("Guest count: %d\nAdult count: %d\nChildren count: %d\nOldest: %s age %s\nYoungest: %s age %s",
+                guestCount, adultCount, childrenCount, guestList[oldestIndex][0], guestList[oldestIndex][1],
+                guestList[youngestIndex][0], guestList[youngestIndex][1]);
     }
 
     public static void addGuest() {
@@ -140,6 +141,11 @@ public class Assignment01 {
         if (index > 0 && index < guestList.length + 1) {
             int i = index - 1;
 
+            if (guestList[i][0].isEmpty()) {
+                PushErrorMesssage("Guess no. %d is empty", index);
+                return;
+            }
+
             printf("Enter name: ");
             String name = input.nextLine();
 
@@ -163,7 +169,7 @@ public class Assignment01 {
     public static void changeAgeOfGuest() {
         ClearPrintListReset();
 
-        printf("Select guest nr. to change the age.\nSelect: ");
+        printf("Select guest no. to change the age.\nSelect: ");
         int index = ReadInt();
 
         if (index == Integer.MIN_VALUE) {
@@ -173,6 +179,11 @@ public class Assignment01 {
 
         if (index > 0 && index < guestList.length + 1) {
             int i = index - 1;
+
+            if (guestList[i][0].isEmpty()) {
+                PushErrorMesssage("Guess no. %d is empty", index);
+                return;
+            }
 
             printf("Enter age: ");
             int age = ReadInt();
