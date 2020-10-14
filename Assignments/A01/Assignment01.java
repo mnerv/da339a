@@ -41,7 +41,7 @@ public class Assignment01 {
         int longestAge = 0;
 
         final int space = 6;
-        final String sf1 = "%d. %-";
+        final String sf1 = "%2d. %-";
         final String sf2 = "s%s\n";
 
         for (int i = 0; i < guestList.length; i++) {
