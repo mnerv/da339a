@@ -36,11 +36,30 @@ public class Assignment01 {
 
     public static void printGuestList() {
         PushOutput("\u001b[37;1mGuest List\u001b[0m\n");
-        HLine();
+
+        int longestName = 0;
+        int longestAge = 0;
+
+        final int space = 6;
+        final String sf1 = "%d. %-";
+        final String sf2 = "s%s\n";
+
+        for (int i = 0; i < guestList.length; i++) {
+            longestName = guestList[i][0].length() > longestName ? guestList[i][0].length() : longestName;
+            longestAge = guestList[i][1].length() > longestAge ? guestList[i][1].length() : longestAge;
+        }
+
+        longestName += space;
+
+        final String format = sf1 + longestName + sf2;
+
+        HLine(longestName + space + longestAge);
+
         for (int i = 0; i < guestList.length; i++) {
             String name = guestList[i][0];
             String age = guestList[i][1];
-            PushOutput("%d. %s\t\t%s\n", i + 1, name, age);
+
+            PushOutput(format, i + 1, name, age);
         }
     }
 
@@ -303,7 +322,11 @@ public class Assignment01 {
     }
 
     private static void HLine() {
-        for (int i = 0; i < HlineSize; i++) {
+        HLine(HlineSize);
+    }
+
+    private static void HLine(int size) {
+        for (int i = 0; i < size; i++) {
             PushOutput("-");
             printf("-");
         }
