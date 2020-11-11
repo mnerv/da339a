@@ -7,3 +7,10 @@ shelf
 
 # Compiled class
 *.class
+
+# directories
+target
+.idea
+
+# files
+*.iml
