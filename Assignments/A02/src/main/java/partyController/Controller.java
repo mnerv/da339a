@@ -20,19 +20,6 @@ public class Controller {
 
     }
 
-    private void updateView(int index) {
-        // TODO: updateView
-    }
-
-    private void buttonPressed(ButtonType btn) {
-        // TODO: buttonPressed
-    }
-
-    private boolean validateIndex(int index) {
-        // TODO: validateIndex
-        return false;
-    }
-
     public void guestTypeChanged(ButtonType btn) {
         // TODO: guestTypeChanged
     }
@@ -41,17 +28,35 @@ public class Controller {
         // TODO: guestListIndexChanged
     }
 
-//    private Guest getGuestDataFromView() {
-//        // TODO: getGuestDataFromView
-//    }
 
     public void setCountryItem(Object country, int index) {
         // TODO: setCountryItem
+    }
+
+    public void buttonPressed(ButtonType btn) {
+        // TODO: buttonPressed
+        System.out.println("Hello, Pressed: " + btn.name());
     }
 
 //    public Countries[] getCountries() {
 //        // TODO: getCountries
 //        throw new NotImplementedException();
 //    }
+
+    private void updateView(int index) {
+        // TODO: updateView
+    }
+
+
+
+    private boolean validateIndex(int index) {
+        // TODO: validateIndex
+        return false;
+    }
+
+//    private Guest getGuestDataFromView() {
+//        // TODO: getGuestDataFromView
+//    }
+
 
 }

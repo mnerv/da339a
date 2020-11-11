@@ -14,10 +14,8 @@ public class MainFrame extends JFrame {
     public MainFrame(Controller controller) {
         this.controller = controller;
         setupFrame();
-
     }
 
-    //standard settings
     public void setupFrame() {
         final int offsetX = width / 5;
         final int offsetY = height / 5;

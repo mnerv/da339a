@@ -1,9 +1,7 @@
 package partyView;
 
-//import partyModel.ProductType;
-
 import partyController.Controller;
-//import partyModel.Countries;
+import partyModel.Countries;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -25,23 +23,14 @@ public class SouthPanelButtons extends JPanel {
         this.width = width;
         this.height = height;
 
-        int buttonHeight = height - 4;  //4 = margin
+        int buttonHeight = height - 4;  // 4 = margin
         int buttonWidth = width / 6;
-/*
-        setBorder(BorderFactory.createTitledBorder(""));
-        Border border = this.getBorder();
-        Border emptyBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
-        setBorder(new CompoundBorder(border, emptyBorder));
 
- */
-        //GridLayout layout = new GridLayout(2, 1, 2, 2);  //fungerar inte!!
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
-        // JPanel pnlRButtons = new JPanel();
         JPanel pnlButtons = new JPanel();
 
-        //pnlButtons.setBorder(BorderFactory.createTitledBorder(""));
         btnOK = new JButton("Add");
         Dimension dim = new Dimension(buttonWidth, buttonHeight);
         btnOK.setSize(dim);
@@ -56,7 +45,6 @@ public class SouthPanelButtons extends JPanel {
         pnlButtons.add(btnChange);
         pnlButtons.add(btnDelete);
 
-        // add(pnlRButtons);
         add(pnlButtons);
 
         addListeners();
@@ -74,16 +62,16 @@ public class SouthPanelButtons extends JPanel {
     class ButtonActionListeners implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == btnOK)
-//                controller.buttonPressed(ButtonType.Add);
-//            else if (e.getSource() == btnChange) {
-//                controller.buttonPressed(ButtonType.Change);
-//            } else if (e.getSource() == btnDelete) {
-//                controller.buttonPressed(ButtonType.Delete);
-//            }
+
+            if (e.getSource() == btnOK)
+                controller.buttonPressed(ButtonType.Add);
+            else if (e.getSource() == btnChange) {
+                controller.buttonPressed(ButtonType.Change);
+            } else if (e.getSource() == btnDelete) {
+                controller.buttonPressed(ButtonType.Delete);
+            }
 
         }
+
     }
-
-
-}//class
+}

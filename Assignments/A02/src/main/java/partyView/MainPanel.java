@@ -19,7 +19,6 @@ public class MainPanel extends JPanel {
     BorderLayout layout;
     EastPanelGuestList pnlEast;
 
-
     public MainPanel(Controller controller, int width, int height) {
         this.controller = controller;
         this.width = width;
@@ -45,11 +44,9 @@ public class MainPanel extends JPanel {
 
         pnlEast = new EastPanelGuestList(controller, 6 * width / 10, 8 * height / 10, 6);
         add(pnlCenter, layout.CENTER);
-        //getPnlCenter().createInfoTextArea();
 
         add(pnlEast, BorderLayout.EAST);
     }
-
 
     public CenterPanelGuestInput getPnlCenter() {
         return pnlCenter;
@@ -62,7 +59,6 @@ public class MainPanel extends JPanel {
     public EastPanelGuestList getPnlEast() {
         return pnlEast;
     }
-    //public int getListIndex(){return pnlEast.getListIndex();}
 
 }
 
