@@ -1,4 +1,4 @@
-package partyModel;
+package Model;
 
 public enum Countries {
     Afghanistan,

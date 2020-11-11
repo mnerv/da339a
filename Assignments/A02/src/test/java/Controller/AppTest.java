@@ -1,4 +1,4 @@
-package partyController;
+package Controller;
 
 import static org.junit.Assert.assertTrue;
 

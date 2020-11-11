@@ -1,9 +1,7 @@
-package partyController;
+package Controller;
 
-import javax.swing.*;
-
-import partyView.*;
-import partyModel.*;
+import View.*;
+import Model.*;
 
 /**
  * Author: Pratchaya Khansomboon
@@ -38,16 +36,13 @@ public class Controller {
         System.out.println("Hello, Pressed: " + btn.name());
     }
 
-//    public Countries[] getCountries() {
-//        // TODO: getCountries
-//        throw new NotImplementedException();
-//    }
+    public Countries[] getCountries() {
+        return Countries.values();
+    }
 
     private void updateView(int index) {
         // TODO: updateView
     }
-
-
 
     private boolean validateIndex(int index) {
         // TODO: validateIndex

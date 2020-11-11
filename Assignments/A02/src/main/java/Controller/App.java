@@ -1,4 +1,4 @@
-package partyController;
+package Controller;
 
 /**
  * Author: Pratchaya Khansomboon

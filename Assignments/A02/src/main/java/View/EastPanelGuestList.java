@@ -1,4 +1,4 @@
-package partyView;
+package View;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
-import partyController.Controller;
+import Controller.Controller;
 
 public class EastPanelGuestList extends JPanel {
     private JList<String> list;

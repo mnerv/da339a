@@ -1,4 +1,4 @@
-package partyView;
+package View;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import partyController.Controller;
+import Controller.Controller;
 
 public class CenterPanelGuestInput extends JPanel {
     private int width;
@@ -115,18 +115,18 @@ public class CenterPanelGuestInput extends JPanel {
     }
 
     private void createAndInitiateComBox() {
-        // TODO: createAndInitiateComBox
-//        cmbCountries = new JComboBox(controller.getCountriesItems());
-//        cmbCountries.setSelectedIndex(0);
-//        pnlRight.add(cmbCountries);
-//        cmbCountries.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                Object obj = cmbCountries.getSelectedItem();
-//                int index = cmbCountries.getSelectedIndex();
-//                controller.setCountryItem(obj, index);
-//            }
-//        });
+        cmbCountries = new JComboBox(controller.getCountries());
+        cmbCountries.setSelectedIndex(0);
+        pnlRight.add(cmbCountries);
+
+        cmbCountries.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Object obj = cmbCountries.getSelectedItem();
+                int index = cmbCountries.getSelectedIndex();
+                controller.setCountryItem(obj, index);
+            }
+        });
     }
 
     public String getFirstNameText() {

@@ -1,8 +1,8 @@
-package partyView;
+package View;
 
 import javax.swing.*;
 
-import partyController.Controller;
+import Controller.Controller;
 
 public class MainFrame extends JFrame {
     private int width = 800;

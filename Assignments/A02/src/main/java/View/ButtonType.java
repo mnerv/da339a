@@ -1,4 +1,4 @@
-package partyView;
+package View;
 
 public enum ButtonType {
     Add,

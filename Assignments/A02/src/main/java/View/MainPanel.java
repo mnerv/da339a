@@ -1,6 +1,6 @@
-package partyView;
+package View;
 
-import partyController.Controller;
+import Controller.Controller;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -34,9 +34,7 @@ public class MainPanel extends JPanel {
         Border margin = BorderFactory.createEmptyBorder(6, 6, 6, 6);
         setBorder(new CompoundBorder(border, margin));
 
-
         pnlCenter = new CenterPanelGuestInput(controller, 4 * width / 10, 8 * height / 10, 6);  //labels and textboxes
-
 
         //Buttons at south
         pnlSouth = new SouthPanelButtons(controller, width, 2 * height / 10);

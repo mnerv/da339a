@@ -1,11 +1,8 @@
-package partyView;
+package View;
 
-import partyController.Controller;
-import partyModel.Countries;
+import Controller.Controller;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

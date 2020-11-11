@@ -1,4 +1,4 @@
-package partyModel;
+package Model;
 
 /**
  * Author: Pratchaya Khansomboon
