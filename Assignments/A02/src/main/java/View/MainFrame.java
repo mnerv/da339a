@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
         panel.getPnlCenter().setFirstNameText(str);
     }
 
-    public String getLastText() {
+    public String getLastNameText() {
         return panel.getPnlCenter().getLastNameText();
     }
 
@@ -77,8 +77,12 @@ public class MainFrame extends JFrame {
         panel.getPnlCenter().setTxtNumGuest(str);
     }
 
-    public Object getCountriesItem() {
-        return panel.getPnlCenter().getCountriesItem();
+    public Object getSelectedCountry() {
+        return panel.getPnlCenter().getSelectedCountry();
+    }
+
+    public void setSelectedCountry(Object country) {
+        panel.getPnlCenter().setSelectedCountry(country);
     }
 
     public void errMessage(String message) {

@@ -44,6 +44,58 @@ public class CenterPanelGuestInput extends JPanel {
         CreateComponents();
     }
 
+    public String getFirstNameText() {
+        return txtFirstName.getText();
+    }
+
+    public void setFirstNameText(String text) {
+        txtFirstName.setText(text);
+    }
+
+    public String getLastNameText() {
+        return txtLastName.getText();
+    }
+
+    public void setLastNameText(String text) {
+        txtLastName.setText(text);
+    }
+
+    public String getStreetText() {
+        return txtStreet.getText();
+    }
+
+    public void setStreetText(String text) {
+        txtStreet.setText(text);
+    }
+
+    public String getCityText() {
+        return txtCity.getText();
+    }
+
+    public void setCityText(String text) {
+        txtCity.setText(text);
+    }
+
+    public String getZipCodeText() {
+        return txtZipCode.getText();
+    }
+
+    public void setZipCodeText(String text) {
+        txtZipCode.setText(text);
+    }
+
+    public void setTxtNumGuest(String text) {
+        txtNumGuest.setText(text);
+    }
+
+    public Object getSelectedCountry() {
+        return cmbCountries.getSelectedItem();
+    }
+
+    public void setSelectedCountry(Object country) {
+        cmbCountries.setSelectedItem(country);
+    }
+
     private void CreateComponents() {
         createComponentsOnLeftPanel();
         createComponentsOnRightPanel();
@@ -122,57 +174,10 @@ public class CenterPanelGuestInput extends JPanel {
             public void itemStateChanged(ItemEvent e) {
                 Object obj = cmbCountries.getSelectedItem();
                 int index = cmbCountries.getSelectedIndex();
+
                 controller.setCountryItem(obj, index);
             }
         });
-    }
-
-    public String getFirstNameText() {
-        return txtFirstName.getText();
-    }
-
-    public void setFirstNameText(String text) {
-        txtFirstName.setText(text);
-    }
-
-    public String getLastNameText() {
-        return txtLastName.getText();
-    }
-
-    public void setLastNameText(String text) {
-        txtLastName.setText(text);
-    }
-
-    public String getStreetText() {
-        return txtStreet.getText();
-    }
-
-    public void setStreetText(String text) {
-        txtStreet.setText(text);
-    }
-
-    public String getCityText() {
-        return txtCity.getText();
-    }
-
-    public void setCityText(String text) {
-        txtCity.setText(text);
-    }
-
-    public String getZipCodeText() {
-        return txtZipCode.getText();
-    }
-
-    public void setZipCodeText(String text) {
-        txtZipCode.setText(text);
-    }
-
-    public void setTxtNumGuest(String text) {
-        txtNumGuest.setText(text);
-    }
-
-    public Object getCountriesItem() {
-        return cmbCountries.getSelectedItem();
     }
 
 }

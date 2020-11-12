@@ -15,6 +15,8 @@ public class Controller {
 
         view = new MainFrame(this);
         view.updateGuestList(gm.getGuestList()); // TODO: updateGuestList
+
+        view.setNumGuest(String.valueOf(gm.getGuestCount()));
     }
 
     public void guestTypeChanged(ButtonType btn) {
@@ -28,11 +30,11 @@ public class Controller {
      * @param index Selected item index in the list.
      */
     public void guestListIndexChanged(int index) {
-        // TODO: guestListIndexChanged
-        System.out.println(index);
+        updateView(index);
     }
 
     public void setCountryItem(Object country, int index) {
+        System.out.println("Hello, setCountryItem " + country.toString() + ", i: " + index);
         // TODO: setCountryItem
     }
 
@@ -57,6 +59,19 @@ public class Controller {
 
     private void updateView(int index) {
         // TODO: updateView
+        Guest guest = gm.getGuestAt(index);
+        if (guest == null)
+            return;
+
+        view.setNumGuest(String.valueOf(gm.getGuestCount()));
+
+        view.setFirstNameText(guest.getFirstname());
+        view.setLastNameText(guest.getLastname());
+        view.setStreetText(guest.getAddress().getStreet());
+        view.setCityText(guest.getAddress().getCity());
+        view.setZipCodeText(guest.getAddress().getZipcode());
+        view.setSelectedCountry(guest.getAddress().getCountry());
+
     }
 
     private boolean validateIndex(int index) {
@@ -67,12 +82,12 @@ public class Controller {
     private Guest getGuestDataFromView() {
         Guest guest = new Guest();
         String firstName = view.getFirstNameText();
-        String lastName = view.getLastText();
+        String lastName = view.getLastNameText();
         String street = view.getStreetText();
         String city = view.getCityText();
         String zipCode = view.getZipCodeText();
 
-        Countries country = (Countries) view.getCountriesItem();
+        Countries country = (Countries) view.getSelectedCountry();
 
         if (firstName != null && !firstName.isEmpty())
             guest.setFirstName(firstName);

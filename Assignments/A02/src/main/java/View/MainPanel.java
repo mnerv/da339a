@@ -15,7 +15,7 @@ public class MainPanel extends JPanel {
     private CenterPanelGuestInput pnlCenter;
     private SouthPanelButtons pnlSouth;
 
-    //JTextArea txtAreaInfo;
+    // JTextArea txtAreaInfo;
     BorderLayout layout;
     EastPanelGuestList pnlEast;
 
@@ -24,26 +24,6 @@ public class MainPanel extends JPanel {
         this.width = width;
         this.height = height;
         setupPanel();
-    }
-
-    private void setupPanel() {
-        layout = new BorderLayout();
-        setLayout(layout);
-
-        Border border = this.getBorder();
-        Border margin = BorderFactory.createEmptyBorder(6, 6, 6, 6);
-        setBorder(new CompoundBorder(border, margin));
-
-        pnlCenter = new CenterPanelGuestInput(controller, 4 * width / 10, 8 * height / 10, 6);  //labels and textboxes
-
-        //Buttons at south
-        pnlSouth = new SouthPanelButtons(controller, width, 2 * height / 10);
-        add(pnlSouth, layout.SOUTH);
-
-        pnlEast = new EastPanelGuestList(controller, 6 * width / 10, 8 * height / 10, 6);
-        add(pnlCenter, layout.CENTER);
-
-        add(pnlEast, BorderLayout.EAST);
     }
 
     public CenterPanelGuestInput getPnlCenter() {
@@ -58,5 +38,24 @@ public class MainPanel extends JPanel {
         return pnlEast;
     }
 
-}
+    private void setupPanel() {
+        layout = new BorderLayout();
+        setLayout(layout);
 
+        Border border = this.getBorder();
+        Border margin = BorderFactory.createEmptyBorder(6, 6, 6, 6);
+        setBorder(new CompoundBorder(border, margin));
+
+        pnlCenter = new CenterPanelGuestInput(controller, 4 * width / 10, 8 * height / 10, 6); // labels and textboxes
+
+        // Buttons at south
+        pnlSouth = new SouthPanelButtons(controller, width, 2 * height / 10);
+        add(pnlSouth, layout.SOUTH);
+
+        pnlEast = new EastPanelGuestList(controller, 6 * width / 10, 8 * height / 10, 6);
+        add(pnlCenter, layout.CENTER);
+
+        add(pnlEast, BorderLayout.EAST);
+    }
+
+}

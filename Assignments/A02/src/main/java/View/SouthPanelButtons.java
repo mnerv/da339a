@@ -14,13 +14,12 @@ public class SouthPanelButtons extends JPanel {
 
     JButton btnOK, btnChange, btnDelete;
 
-
     public SouthPanelButtons(Controller controller, int width, int height) {
         this.controller = controller;
         this.width = width;
         this.height = height;
 
-        int buttonHeight = height - 4;  // 4 = margin
+        int buttonHeight = height - 4; // 4 = margin
         int buttonWidth = width / 6;
 
         BorderLayout layout = new BorderLayout();
