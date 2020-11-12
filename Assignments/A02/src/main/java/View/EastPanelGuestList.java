@@ -22,14 +22,14 @@ public class EastPanelGuestList extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(margin, margin, margin, margin);
         setBorder(new CompoundBorder(border, emptyBorder));
 
-        //String[] data = addTestValue();
-        list = new JList(); //data has type Object[]
+        // String[] data = addTestValue();
+        list = new JList<>(); // data has type Object[]
 
         Font font = new Font("Courier New", Font.PLAIN, 11);
         list.setFont(font);
 
         JScrollPane s = new JScrollPane(list);
-        //extra saker
+        // extra saker
         s.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         s.setPreferredSize(new Dimension(width - margin, height - 2 * margin));
@@ -50,14 +50,12 @@ public class EastPanelGuestList extends JPanel {
     public void addListener() {
         list.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent evt) {
-                //int index = evt.getFirstIndex();
                 int index = list.getSelectedIndex();
                 if (index > -1) {
-//                    controller.guestLisIndexChanged(index);
+                    controller.guestListIndexChanged(index);
                 }
             }
         });
     }
-
 
 }

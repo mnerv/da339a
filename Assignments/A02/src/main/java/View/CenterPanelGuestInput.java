@@ -22,8 +22,8 @@ public class CenterPanelGuestInput extends JPanel {
 
     private JComboBox cmbCountries;
 
-    private JPanel pnlLeft;  //for labels at left
-    private JPanel pnlRight; //for textboxes at right
+    private JPanel pnlLeft; // for labels at left
+    private JPanel pnlRight; // for textboxes at right
 
     private Controller controller;
 
@@ -44,7 +44,6 @@ public class CenterPanelGuestInput extends JPanel {
         CreateComponents();
     }
 
-
     private void CreateComponents() {
         createComponentsOnLeftPanel();
         createComponentsOnRightPanel();
@@ -59,7 +58,6 @@ public class CenterPanelGuestInput extends JPanel {
         JLabel lblCountry = new JLabel("Country");
         JLabel lblCity = new JLabel("City");
         JLabel lblZipCode = new JLabel("Zip code");
-
 
         GridLayout layoutLeft = new GridLayout(10, 1, 2, 2);
         Dimension dim = new Dimension(4 * width / 10, height);
@@ -178,7 +176,3 @@ public class CenterPanelGuestInput extends JPanel {
     }
 
 }
-
-
-
-

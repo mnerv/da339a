@@ -1,16 +1,15 @@
-# User-specific stuff
-workspace.xml
-tasks.xml
-usage.statistics.xml
-dictionaries
-shelf
-
 # Compiled class
 *.class
 
 # directories
 target
 .idea
+.settings
+.vscode
 
 # files
 *.iml
+.project
+.classpath
+*.vpp.bak*
+*.vpp.lck

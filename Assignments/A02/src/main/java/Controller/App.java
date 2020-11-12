@@ -6,9 +6,9 @@ package Controller;
 public class App {
 
     public static void main(String[] args) {
-       int maxGuestsCount = 10;
+        int maxGuests = 10;
 
-       Controller c = new Controller(maxGuestsCount);
+        Controller c = new Controller(maxGuests);
 
     }
 
