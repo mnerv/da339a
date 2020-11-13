@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * A bill calculator
+ */
 public class Task11 extends Task {
 
     @Override

@@ -1,7 +1,12 @@
+//
+// Author: Pratchaya Khansomboon
+//
+
+
 package Model;
 
 /**
- * Author: Pratchaya Khansomboon
+ * Guest model
  */
 public class Guest {
     String firstname;
@@ -10,7 +15,6 @@ public class Guest {
     Address address;
 
     public Guest() {
-        this(null, null, null);
     }
 
     public Guest(String firstname, String lastname, Address address) {

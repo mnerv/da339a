@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Print the difference between array 1 and 2
+ */
 public class Task05 extends Task {
 
     @Override

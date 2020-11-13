@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Calculate the average value and get min and max value
+ */
 public class Task04 extends Task {
 
     @Override

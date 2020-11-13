@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Find min and max value
+ */
 public class Task02 extends Task {
 
     @Override

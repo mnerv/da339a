@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Check the neigboring cell
+ */
 public class Task10 extends Task {
 
     @Override

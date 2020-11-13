@@ -3,6 +3,9 @@ package Tasks;
 import java.util.Scanner;
 import java.util.Locale;
 
+/**
+ * Base class for all the task. This contain helper methods such as printf.
+ */
 public abstract class Task {
     public static Scanner input = new Scanner(System.in);
     protected static Locale locale = new Locale("en", "UK");

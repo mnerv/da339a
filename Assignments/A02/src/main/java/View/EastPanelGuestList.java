@@ -22,7 +22,6 @@ public class EastPanelGuestList extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(margin, margin, margin, margin);
         setBorder(new CompoundBorder(border, emptyBorder));
 
-        // String[] data = addTestValue();
         list = new JList<>(); // data has type Object[]
 
         Font font = new Font("Courier New", Font.PLAIN, 11);

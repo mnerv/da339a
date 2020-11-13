@@ -1,7 +1,12 @@
+//
+// Author: Pratchaya Khansomboon
+//
+
+
 package Model;
 
 /**
- * Author: Pratchaya Khansomboon
+ * This class manage the Guest model
  */
 public class GuestManager {
     Guest[] guests;
@@ -18,19 +23,42 @@ public class GuestManager {
         if (mockdata)
             guests = mockData(maxGuests);
 
-        calculateGuests();
+        calculateGuestCount();
+    }
+
+    public boolean addGuest(Guest guest) {
+        if (getGuestCount() >= getMaxGuests())
+            return false;
+
+        guests[getGuestCount()] = guest;
+
+        return true;
     }
 
     public Guest getGuestAt(int i) {
         return guests[i];
     }
 
+    public void setGuestAt(int i, Guest guest) {
+        guests[i] = guest;
+    }
+
     public int getGuestCount() {
+        calculateGuestCount();
         return guestCount;
     }
 
+    public void deleteAt(int i) {
+        guests[i] = null;
+        moveNulls();
+    }
+
+    public int getMaxGuests() {
+        return guests.length;
+    }
+
     public String[] getGuestList() {
-        String[] tmp = new String[guests.length];
+        String[] tmp = new String[guestCount]; // Don't know if this is buggy.
 
         for (int i = 0; i < guests.length; i++) {
             if (guests[i] != null)
@@ -40,7 +68,32 @@ public class GuestManager {
         return tmp;
     }
 
-    private void calculateGuests() {
+    /**
+     * Move the null values to the last in the list.
+     */
+    private void moveNulls() {
+        int nullCount = 0;
+
+        for (Guest guest : guests) nullCount += guest != null ? 1 : 0;
+
+        for (int i = 0; i < guests.length - 1; i++) {
+            if (guests[i] == null)
+                swap(i, i + 1);
+
+            if (i == guests.length - 2 && nullCount > 0) {
+                nullCount--;
+                i = 0;
+            }
+        }
+    }
+
+    private void swap(int a, int b) {
+        Guest tmp = guests[a];
+        guests[a] = guests[b];
+        guests[b] = tmp;
+    }
+
+    private void calculateGuestCount() {
         guestCount = 0;
 
         for (int i = 0; i < guests.length; i++)

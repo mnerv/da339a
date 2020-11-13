@@ -1,8 +1,10 @@
+//
+// Author: Pratchaya Khansomboon
+//
+
+
 package Controller;
 
-/**
- * Author: Pratchaya Khansomboon
- */
 public class App {
 
     public static void main(String[] args) {

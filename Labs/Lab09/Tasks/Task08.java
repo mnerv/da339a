@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Insertion sort
+ */
 public class Task08 extends Task {
 
     @Override

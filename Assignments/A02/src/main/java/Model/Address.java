@@ -1,7 +1,12 @@
+//
+// Author: Pratchaya Khansomboon
+//
+
+
 package Model;
 
 /**
- * Author: Pratchaya Khansomboon
+ * Address model for Guest
  */
 public class Address {
     String street;

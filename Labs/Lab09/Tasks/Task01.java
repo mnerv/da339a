@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Linear search
+ */
 public class Task01 extends Task {
 
     @Override

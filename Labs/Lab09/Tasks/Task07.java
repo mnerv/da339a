@@ -1,10 +1,14 @@
 package Tasks;
 
+/**
+ * Get the biggest values between 2 2D array and store it in a new list
+ */
 public class Task07 extends Task {
 
     @Override
     public void Run() {
         // int[][] arr1 = { { 1, 4 }, { 2, 3 }, { 6, 7, 2 } }; // Test Array
+        // @formatter:off
         int[][] arr1 = { { 1, 2, 3 }, 
                          { 11, 12, 13 }, 
                          { 21, 22, 23 } 
@@ -12,6 +16,7 @@ public class Task07 extends Task {
         int[][] arr2 = { { 1, 1, 4 }, 
                          { 1, 2, 3 }, 
                          { 6, 7, 2 } };
+        // @formatter:on
 
         int[][] storage = new int[3][3];
 
@@ -42,8 +47,8 @@ public class Task07 extends Task {
             printf("--------------------\n");
         }
 
-        for(int i = 0; i < storage.length; i++){
-            for(int j = 0; j < storage[i].length; j++){
+        for (int i = 0; i < storage.length; i++) {
+            for (int j = 0; j < storage[i].length; j++) {
                 printf("%d", storage[i][j]);
                 printf(", ");
             }

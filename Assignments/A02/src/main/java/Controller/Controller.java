@@ -1,10 +1,14 @@
+//
+// Author: Pratchaya Khansomboon
+//
+
 package Controller;
 
 import View.*;
 import Model.*;
 
 /**
- * Author: Pratchaya Khansomboon
+ * Controller class to interface between the model and view
  */
 public class Controller {
     MainFrame view;
@@ -26,7 +30,7 @@ public class Controller {
     /**
      * Called in EastPanelGuestList in valueChanged method from list whenever the
      * item in list is selected
-     * 
+     *
      * @param index Selected item index in the list.
      */
     public void guestListIndexChanged(int index) {
@@ -38,19 +42,41 @@ public class Controller {
         // TODO: setCountryItem
     }
 
+    /**
+     * This is registered on all 3 buttons listener.
+     * The button type is passed in when it is called.
+     *
+     * @param btn ButtonType
+     */
     public void buttonPressed(ButtonType btn) {
+        Guest guest;
+
+        int index = 0;
+
         switch (btn) {
             case Add:
+                guest = getGuestDataFromView();
+                if (!gm.addGuest(guest))
+                    view.errMessage("Guest list is full, max is " + gm.getMaxGuests());
                 break;
             case Change:
+                index = view.getListIndex();
+                if (validateIndex(index)) {
+                    guest = getGuestDataFromView();
+                    gm.setGuestAt(index, guest);
+                }
                 break;
             case Delete:
+                index = view.getListIndex();
+                if (validateIndex(index))
+                    gm.deleteAt(index);
                 break;
             default:
                 break;
         }
 
-        System.out.println("Hello, Pressed: " + btn.name());
+        view.setNumGuest(Integer.toString(gm.getGuestCount()));
+        view.updateGuestList(gm.getGuestList());
     }
 
     public Countries[] getCountries() {
@@ -58,12 +84,12 @@ public class Controller {
     }
 
     private void updateView(int index) {
-        // TODO: updateView
         Guest guest = gm.getGuestAt(index);
+
         if (guest == null)
             return;
 
-        view.setNumGuest(String.valueOf(gm.getGuestCount()));
+        view.setNumGuest(Integer.toString(gm.getGuestCount()));
 
         view.setFirstNameText(guest.getFirstname());
         view.setLastNameText(guest.getLastname());
@@ -75,8 +101,7 @@ public class Controller {
     }
 
     private boolean validateIndex(int index) {
-        // TODO: validateIndex
-        return false;
+        return index > -1 && index < gm.getGuestCount();
     }
 
     private Guest getGuestDataFromView() {
@@ -92,13 +117,13 @@ public class Controller {
         if (firstName != null && !firstName.isEmpty())
             guest.setFirstName(firstName);
         else
-            view.errMessage("Name is empty");
+            view.errMessage("First name is empty");
 
         try {
             guest.setLastName(lastName);
             guest.setAddress(new Address(street, city, zipCode, country));
         } catch (Exception e) {
-            view.errMessage("Invalid values");
+            view.errMessage("Last name or the address is empty");
 
             return null;
         }

@@ -1,5 +1,8 @@
 package Tasks;
 
+/**
+ * Move zero values to the end of the list
+ */
 public class Task06 extends Task {
 
     @Override
