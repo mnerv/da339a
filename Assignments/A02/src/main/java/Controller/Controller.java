@@ -8,23 +8,23 @@ import View.*;
 import Model.*;
 
 /**
- * Controller class to interface between the model and view
+ * Controller act as an interface between the model and view.
  */
 public class Controller {
     MainFrame view;
     GuestManager gm;
 
     public Controller(int maxGuests) {
-        gm = new GuestManager(maxGuests, true);
-
-        view = new MainFrame(this);
-        view.updateGuestList(gm.getGuestList()); // TODO: updateGuestList
-
-        view.setNumGuest(String.valueOf(gm.getGuestCount()));
+        this(maxGuests, false);
     }
 
-    public void guestTypeChanged(ButtonType btn) {
-        // TODO: guestTypeChanged
+    public Controller(int maxGuests, boolean mockdata) {
+        gm = new GuestManager(maxGuests, mockdata);
+
+        view = new MainFrame(this);
+        view.updateGuestList(gm.getGuestList());
+
+        view.setNumGuest(String.valueOf(gm.getGuestCount()));
     }
 
     /**
@@ -38,13 +38,12 @@ public class Controller {
     }
 
     public void setCountryItem(Object country, int index) {
-        System.out.println("Hello, setCountryItem " + country.toString() + ", i: " + index);
         // TODO: setCountryItem
     }
 
     /**
-     * This is registered on all 3 buttons listener.
-     * The button type is passed in when it is called.
+     * This is registered on all 3 buttons listener. The button type is passed in
+     * when it is called.
      *
      * @param btn ButtonType
      */
@@ -100,10 +99,21 @@ public class Controller {
 
     }
 
+    /**
+     * Check if the selected list index is inside the list
+     * 
+     * @param index Selected list index
+     * @return True if it is inside
+     */
     private boolean validateIndex(int index) {
         return index > -1 && index < gm.getGuestCount();
     }
 
+    /**
+     * Get input data from the input fields
+     * 
+     * @return Guest or null, if some field are empty it'll return null
+     */
     private Guest getGuestDataFromView() {
         Guest guest = new Guest();
         String firstName = view.getFirstNameText();
@@ -116,15 +126,22 @@ public class Controller {
 
         if (firstName != null && !firstName.isEmpty())
             guest.setFirstName(firstName);
-        else
+        else {
             view.errMessage("First name is empty");
+            return null;
+        }
+
+        if (lastName != null && !lastName.isEmpty())
+            guest.setLastName(lastName);
+        else {
+            view.errMessage("Last name is empty");
+            return null;
+        }
 
         try {
-            guest.setLastName(lastName);
             guest.setAddress(new Address(street, city, zipCode, country));
         } catch (Exception e) {
-            view.errMessage("Last name or the address is empty");
-
+            view.errMessage("The address is empty");
             return null;
         }
 

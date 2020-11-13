@@ -2,7 +2,6 @@
 // Author: Pratchaya Khansomboon
 //
 
-
 package Model;
 
 /**
@@ -59,10 +58,14 @@ public class GuestManager {
 
     public String[] getGuestList() {
         String[] tmp = new String[guestCount]; // Don't know if this is buggy.
+        int listIndex = 1;
 
         for (int i = 0; i < guests.length; i++) {
-            if (guests[i] != null)
-                tmp[i] = guests[i].toString();
+            if (guests[i] != null) {
+                tmp[i] = listIndex + ". " + guests[i].toString();
+                listIndex++;
+            }
+
         }
 
         return tmp;
@@ -74,7 +77,8 @@ public class GuestManager {
     private void moveNulls() {
         int nullCount = 0;
 
-        for (Guest guest : guests) nullCount += guest != null ? 1 : 0;
+        for (Guest guest : guests)
+            nullCount += guest != null ? 1 : 0;
 
         for (int i = 0; i < guests.length - 1; i++) {
             if (guests[i] == null)
@@ -96,8 +100,7 @@ public class GuestManager {
     private void calculateGuestCount() {
         guestCount = 0;
 
-        for (int i = 0; i < guests.length; i++)
-            guestCount += guests[i] != null ? 1 : 0;
+        for (Guest guest : guests) guestCount += guest != null ? 1 : 0;
     }
 
     private Guest[] mockData(int maxGuests) {
