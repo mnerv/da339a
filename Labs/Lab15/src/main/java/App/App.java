@@ -3,9 +3,12 @@ package App;
 import Task01.*;
 import Task02.*;
 
+import Task03.Controller.*;
+
 public class App {
+
     public static void main(String[] args) {
-        Task1B();
+        Task2B();
     }
 
     public static void Task1A() {
@@ -47,6 +50,27 @@ public class App {
     }
 
     public static void Task2A() {
+        PhoneNumber phone = new PhoneNumber("123585 ", PhoneType.work);
+        System.out.println(phone);
 
+        Person person = new Person("Bruh", phone);
+        System.out.println(person);
     }
+
+    public static void Task2B() {
+        ContactBook contacts = new ContactBook(5);
+        contacts.AddTestValues();
+
+        String[] test = contacts.getContacts();
+
+        if (test.length > 0)
+            for (String str : test) {
+                System.out.println(str);
+            }
+    }
+
+    public static void Task03() {
+        Controller c = new Controller();
+    }
+
 }
