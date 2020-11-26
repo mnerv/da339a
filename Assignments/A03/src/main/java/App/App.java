@@ -10,7 +10,18 @@ import View.Window;
 public class App {
 
   public static void main(String[] args) {
-    Application.launch(Window.class, args);
+    boolean nogui = false;
+
+    if (args.length > 0) {
+      nogui = args[0].equals("-nogui");
+    }
+
+    if (!nogui)
+      Application.launch(Window.class, args);
+    else {
+      System.out.println("no gui");
+    }
+
   }
 
 }

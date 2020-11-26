@@ -37,7 +37,7 @@ public class Window extends Application {
     mainScene = new Scene(layout, 640, 480);
     stage.setScene(mainScene);
 
-    System.out.println(getParameters().getUnnamed());
+    System.out.printf("Arguments: %s\n", getParameters().getUnnamed());
 
     stage.setTitle("Assignment 03");
     stage.show();
