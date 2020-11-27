@@ -7,16 +7,20 @@ import Task03.Controller.Controller;
 public class App {
 
     public static void main(String[] args) {
+        // Task01A();
+        // Task01B();
+        // Task02A();
+        // Task02B();
         Task03();
     }
 
-    public static void Task1A() {
+    public static void Task01A() {
         Login login = new Login("me@kthexiii.com", "12345");
         System.out.println(login);
     }
 
-    public static void Task1B() {
-        int max = 5;
+    public static void Task01B() {
+        int max = 2;
         LoginHandler loginList = new LoginHandler(max);
 
         TestADD1B(loginList, new Login("id", "password"));
@@ -48,7 +52,7 @@ public class App {
             System.out.println("Error deleting");
     }
 
-    public static void Task2A() {
+    public static void Task02A() {
         PhoneNumber phone = new PhoneNumber("123585 ", PhoneType.work);
         System.out.println(phone);
 
@@ -56,7 +60,7 @@ public class App {
         System.out.println(person);
     }
 
-    public static void Task2B() {
+    public static void Task02B() {
         ContactBook contacts = new ContactBook(5);
         contacts.AddTestValues();
 

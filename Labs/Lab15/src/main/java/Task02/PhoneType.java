@@ -1,5 +1,5 @@
 package Task02;
 
 public enum PhoneType {
-    home, work
+    home, work, mobile
 }

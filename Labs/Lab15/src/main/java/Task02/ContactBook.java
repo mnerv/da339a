@@ -10,7 +10,7 @@ public class ContactBook {
     }
 
     public boolean addNew(Person person) {
-        if (count >= persons.length - 1)
+        if (count >= persons.length)
             return false;
 
         persons[count] = person;
@@ -38,6 +38,7 @@ public class ContactBook {
         addNew(new Person("Hello World", "3429875", PhoneType.work));
         addNew(new Person("Hello dkhjs", "36724", PhoneType.home));
         addNew(new Person("Hello 3w2i", "23784", PhoneType.work));
+        addNew(new Person("Hello 3w2i", "23784", PhoneType.mobile));
     }
 
 }
