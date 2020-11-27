@@ -66,4 +66,5 @@ public class MainPanel extends JPanel {
     public SouthPanel getPnlSouth() {
         return pnlSouth;
     }
+
 }

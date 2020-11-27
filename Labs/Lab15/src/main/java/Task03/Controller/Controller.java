@@ -61,10 +61,12 @@ public class Controller {
             view.errMessage("Invalid quantity");
         }
 
+        product.setProductType(view.getProductType());
     }
 
     private void updateView() {
         view.showProductInfo(product.toString());
+        view.setProductType(product.getProductType());
     }
 
 }

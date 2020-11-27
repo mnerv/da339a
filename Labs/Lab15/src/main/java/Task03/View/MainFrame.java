@@ -58,4 +58,12 @@ public class MainFrame extends JFrame {
     public void errMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
+
+    public void setProductType(ProductType productType) {
+        panel.getPnlSouth().setProductType(productType);
+    }
+
+    public ProductType getProductType() {
+        return panel.getPnlSouth().getProductType();
+    }
 }
