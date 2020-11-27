@@ -1,8 +1,8 @@
 package Task02;
 
 public class PhoneNumber {
-    String number;
-    PhoneType phoneType;
+    private String number;
+    private PhoneType phoneType;
 
     public PhoneNumber(String number, PhoneType phoneType) {
         this.number = number;

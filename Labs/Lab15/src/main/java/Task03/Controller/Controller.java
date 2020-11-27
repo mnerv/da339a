@@ -5,8 +5,8 @@ import Task03.Model.*;
 
 public class Controller {
 
-    MainFrame view;
-    Product product;
+    private MainFrame view;
+    private Product product;
 
     public Controller() {
         product = new Product();
@@ -39,9 +39,10 @@ public class Controller {
         return UnitType.values();
     }
 
-    void validateAndSaveProduct() {
+    private void validateAndSaveProduct() {
         String name = view.getNameText();
         String strPrice = view.getPriceText();
+        String strCount = view.getCount();
 
         if (name != null && !name.isEmpty())
             product.setName(name);
@@ -54,9 +55,15 @@ public class Controller {
             view.errMessage("Invalid price or count!");
         }
 
+        try {
+            product.setCount(Integer.parseInt(strCount));
+        } catch (NumberFormatException e) {
+            view.errMessage("Invalid quantity");
+        }
+
     }
 
-    void updateView() {
+    private void updateView() {
         view.showProductInfo(product.toString());
     }
 

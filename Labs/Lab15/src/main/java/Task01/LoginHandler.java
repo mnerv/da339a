@@ -1,8 +1,8 @@
 package Task01;
 
 public class LoginHandler {
-    Login[] loginList;
-    int listCount;
+    private Login[] loginList;
+    private int listCount;
 
     public LoginHandler(int maxElements) {
         loginList = new Login[maxElements];

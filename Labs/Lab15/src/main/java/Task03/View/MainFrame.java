@@ -47,6 +47,10 @@ public class MainFrame extends JFrame {
         return panel.getPnlCenter().getPriceText();
     }
 
+    public String getCount() {
+        return panel.getPnlCenter().getCount();
+    }
+
     public void showProductInfo(String str) {
         panel.setTxtAreaInfo(str);
     }

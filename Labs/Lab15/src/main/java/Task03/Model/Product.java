@@ -1,12 +1,12 @@
 package Task03.Model;
 
 public class Product {
-    String name;
-    double price;
-    int count;
+    private String name;
+    private double price;
+    private int count;
 
-    ProductType productType;
-    UnitType unit;
+    private ProductType productType;
+    private UnitType unit;
 
     public Product() {
         initializeValues();

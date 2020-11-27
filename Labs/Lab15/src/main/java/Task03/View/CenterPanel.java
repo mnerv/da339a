@@ -105,4 +105,8 @@ public class CenterPanel extends JPanel {
         txtPrice.setText(text);
     }
 
+    public String getCount() {
+        return txtCount.getText();
+    }
+
 }

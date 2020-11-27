@@ -1,9 +1,9 @@
 package Task02;
 
 public class ContactBook {
-    Person[] persons;
+    private Person[] persons;
 
-    int count;
+    private int count;
 
     public ContactBook(int max) {
         persons = new Person[max];

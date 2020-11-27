@@ -1,8 +1,8 @@
 package Task01;
 
 public class Login {
-    String id;
-    String password;
+    private String id;
+    private String password;
 
     public Login(String id, String password) {
         this.id = id;
