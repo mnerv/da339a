@@ -1,10 +1,19 @@
 package Controller;
 
-public class Controller {
-  int click = 0;
+import View.Window;
 
-  public void Hello() {
-    System.out.println("Hello from controller: " + click);
-    click++;
+public class Controller {
+  Window view;
+  int counter = 0;
+
+  public Controller() {
+  }
+
+  public Controller(Window view) {
+    this.view = view;
+  }
+
+  public String Hello() {
+    return "World!";
   }
 }

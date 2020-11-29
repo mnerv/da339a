@@ -1,5 +1,5 @@
 module App {
-    requires javafx.controls;
+    requires transitive javafx.controls;
 
     exports App;
     exports View;
