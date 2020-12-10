@@ -4,9 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-  List<Pizza> pizzas;
+  List<Entity> entities;
+  long id;
+
+  private static long idIndex = 0;
 
   public Order() {
-    pizzas = new ArrayList<Pizza>();
+    entities = new ArrayList<Entity>();
+
+    id = idIndex;
   }
+
+  public long getID() {
+    return id;
+  }
+
 }
