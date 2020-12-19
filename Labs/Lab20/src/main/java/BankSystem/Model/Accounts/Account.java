@@ -6,7 +6,7 @@ package BankSystem.Model.Accounts;
 public abstract class Account implements IAccount {
   // TODO: Transactions
 
-  private String accNum;
+  private String accNum; // Account number
   private long balance;
 
   @Override
