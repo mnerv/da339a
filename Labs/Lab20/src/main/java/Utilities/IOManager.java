@@ -3,7 +3,7 @@ package Utilities;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class InputManager {
+public class IOManager {
 
     public static Scanner input = new Scanner(System.in);
     protected static Locale locale = new Locale("en", "UK");

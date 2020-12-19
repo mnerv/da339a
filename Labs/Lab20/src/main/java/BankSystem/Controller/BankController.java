@@ -10,7 +10,20 @@ public class BankController {
   private BankManager manager;
   private MainView view;
 
-  private String[] options = { "Add account", "View accounts" };
+  // @formatter:off
+  private String[] accountTypes = {
+    "Corporate",
+    "Credit",
+    "Pension",
+    "Salary",
+    "Saving"
+  };
+
+  private String[] accountOptions = { 
+    "Add account",
+    "List account",
+  };
+  // @formatter:on
 
   // private currCustomer = null;
 
@@ -21,52 +34,69 @@ public class BankController {
     view = new MainView(this);
 
     while (true) {
-      showMenu();
+      showMainMenu();
 
     }
-
   }
 
-  private void showMenu() {
+  private void showMainMenu() {
     int choice = 0;
 
-    view.showList(options);
-    choice = view.showMenu();
-    // TODO: Add account
+    view.hLine();
+    view.display("Welcome to the Bank Manager \nThese are the existing account types: ");
 
-    // TODO: View accounts
+    view.showList(accountTypes);
+
+    choice = view.getOption("Select option: ");
+
+    switch (choice) {
+      case 4:
+        accountTypeHandle(AccountType.Saving);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private void accountTypeHandle(AccountType type) {
+    view.hLine();
+    view.display(String.format("Selected %s", type.toString()));
+    view.hLine();
+
+    view.showList(accountOptions);
+
+    int choice = view.getOption("Select option: ");
 
     switch (choice) {
       case 0:
-        typeHandler();
+        addAccount(type);
         break;
       case 1:
-        view.showList(manager.getSavingAccountList());
+        listAccountInfo(type);
         break;
-    }
-  }
-
-  private void typeHandler() {
-    int typeChoice = 0;
-
-    switch (typeChoice) {
-      case 0:
-        addAccount(AccountType.Saving);
-        break;
-
-      // case 1:
-      // addAccount(AccountType.Salary);
-      // break;
     }
   }
 
   private void addAccount(AccountType type) {
+    // TODO add input of balance and such for the account
+
     switch (type) {
       case Saving:
         SavingAccount tmp = new SavingAccount();
         tmp.setAccountNumber("1234567890");
         tmp.setBalance(100);
         manager.getSavingManager().addAccount(tmp);
+        break;
+      default:
+        break;
+    }
+  }
+
+  // TODO stop it from printing the balance as that is personal info
+  private void listAccountInfo(AccountType type) {
+    switch (type) {
+      case Saving:
+        view.showList(manager.getSavingAccountList());
         break;
       default:
         break;

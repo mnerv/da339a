@@ -6,6 +6,8 @@ package BankSystem.Model.Accounts;
 public abstract class Account implements IAccount {
   // TODO: Transactions
 
+  // TODO: auto generate account number
+
   protected String accNum; // Account number
   protected long balance;
 
@@ -33,5 +35,4 @@ public abstract class Account implements IAccount {
   public String toString() {
     return String.format("Account nbr. %s, Balance: %d", accNum, balance);
   }
-
 }
