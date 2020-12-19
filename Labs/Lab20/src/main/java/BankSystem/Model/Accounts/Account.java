@@ -6,8 +6,8 @@ package BankSystem.Model.Accounts;
 public abstract class Account implements IAccount {
   // TODO: Transactions
 
-  private String accNum; // Account number
-  private long balance;
+  protected String accNum; // Account number
+  protected long balance;
 
   @Override
   public String getAccountNumber() {
@@ -22,6 +22,16 @@ public abstract class Account implements IAccount {
   @Override
   public long getBalance() {
     return balance;
+  }
+
+  @Override
+  public void setBalance(long balance) {
+    this.balance = balance;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Account nbr. %s, Balance: %d", accNum, balance);
   }
 
 }

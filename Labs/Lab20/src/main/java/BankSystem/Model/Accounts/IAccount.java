@@ -10,4 +10,6 @@ public interface IAccount {
 
   public long getBalance();
 
+  public void setBalance(long balance);
+
 }
