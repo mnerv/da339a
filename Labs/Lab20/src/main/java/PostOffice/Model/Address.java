@@ -9,6 +9,16 @@ public class Address {
   private String zipCode;
   private Countries country;
 
+  public Address() {
+  }
+
+  public Address(String street, String city, String zipCode, Countries country) {
+    this.street = street;
+    this.city = city;
+    this.zipCode = zipCode;
+    this.country = country;
+  }
+
   public String getStreet() {
     return street;
   }
@@ -53,7 +63,7 @@ public class Address {
 
   @Override
   public String toString() {
-    return String.format("%s %s %s %s", this.street, this.city, this.zipCode, this.getCountryString());
+    return String.format("%s, %s %s, %s", this.street, this.zipCode, this.city, this.getCountryString());
   }
 
 }

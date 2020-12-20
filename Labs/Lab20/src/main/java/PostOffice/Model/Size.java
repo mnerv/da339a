@@ -28,4 +28,9 @@ public class Size {
   public void setHeight(double height) {
     this.height = height;
   }
+
+  @Override
+  public String toString() {
+    return String.format("L: %.2f, W: %.2f, H: %.2f", length, width, height);
+  }
 }

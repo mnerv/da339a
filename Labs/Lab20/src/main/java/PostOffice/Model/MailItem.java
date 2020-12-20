@@ -10,6 +10,8 @@ public abstract class MailItem implements IMailItem {
   private double weight;
   private double cost;
 
+  protected PostalType type;
+
   public Receiver getReceiver() {
     return receiver;
   }
@@ -40,6 +42,11 @@ public abstract class MailItem implements IMailItem {
 
   public void setCost(double cost) {
     this.cost = cost;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("To: %s\nFrom: %s", receiver.toString(), sender.toString());
   }
 
 }
