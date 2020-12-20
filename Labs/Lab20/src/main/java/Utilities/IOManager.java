@@ -12,11 +12,10 @@ public class IOManager {
         int value = Integer.MIN_VALUE;
 
         try {
-            value = input.nextInt();
-            input.nextLine();
+            String raw = input.nextLine();
+            value = Integer.valueOf(raw);
         } catch (Exception e) {
-            System.err.printf(
-                    "\n\u001b[31;1mError parsing input. It might not be an integer.\n\u001b[33;1mReturning MIN_VALUE\u001b[0m\n\n");
+            error("\n\u001b[31;1mError parsing input. It might not be an integer.\n\u001b[33;1mReturning MIN_VALUE\u001b[0m\n\n");
             input.nextLine();
 
             return Integer.MIN_VALUE;
@@ -29,18 +28,25 @@ public class IOManager {
         return input.nextLine();
     }
 
-    public static int ReadDecimal() {
+    public static double ReadDouble() {
+        double value = 0;
 
         try {
-
+            String raw = input.nextLine();
+            value = Double.valueOf(raw);
         } catch (Exception e) {
+            error("\n\u001b[31;1mError parsing input. It might not be a double.\n\u001b[33;1mReturning MIN_VALUE\u001b[0m\n\n");
         }
 
-        return 0;
+        return value;
     }
 
     public static void printf(String format, Object... args) {
         System.out.printf(locale, format, args);
+    }
+
+    public static void error(String format, Object... args) {
+        System.err.printf(format, args);
     }
 
     private static void Clear() {

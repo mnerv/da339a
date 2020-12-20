@@ -8,6 +8,6 @@ import BankSystem.Controller.BankController;
  */
 public class App {
     public static void main(String[] args) {
-        BankController bc = new BankController();
+        // BankController bc = new BankController();
     }
 }
