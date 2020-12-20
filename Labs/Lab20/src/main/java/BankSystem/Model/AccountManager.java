@@ -1,8 +1,17 @@
 package BankSystem.Model;
 
-public class AccountManager<T> {
+import BankSystem.Model.Accounts.Account;
+
+public class AccountManager<T extends Account> {
   protected T accounts[];
   protected int count = 0;
+
+  public AccountManager() {
+  }
+
+  public AccountManager(T accounts[]) {
+    this.accounts = accounts;
+  }
 
   public boolean addAccount(T account) {
     if (count > accounts.length - 1)

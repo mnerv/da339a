@@ -25,8 +25,27 @@ public class IOManager {
         return value;
     }
 
+    public static String ReadLine() {
+        return input.nextLine();
+    }
+
+    public static int ReadDecimal() {
+
+        try {
+
+        } catch (Exception e) {
+        }
+
+        return 0;
+    }
+
     public static void printf(String format, Object... args) {
         System.out.printf(locale, format, args);
+    }
+
+    private static void Clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }

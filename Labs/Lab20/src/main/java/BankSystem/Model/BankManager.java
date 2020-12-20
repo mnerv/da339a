@@ -7,9 +7,12 @@ import BankSystem.Model.Accounts.*;
  */
 public class BankManager {
   SavingManager savingAccounts;
+  SalaryManager salaryAccounts;
 
   public BankManager(int max) {
     savingAccounts = new SavingManager(max);
+    salaryAccounts = new SalaryManager(max);
+
   }
 
   public String[] getSavingAccountList() {
@@ -20,4 +23,11 @@ public class BankManager {
     return savingAccounts;
   }
 
+  public String[] getSalaryAccountList() {
+    return salaryAccounts.getAccountList();
+  }
+
+  public SalaryManager getSalaryManager() {
+    return salaryAccounts;
+  }
 }

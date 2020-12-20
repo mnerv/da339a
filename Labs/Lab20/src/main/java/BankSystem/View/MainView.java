@@ -10,7 +10,6 @@ public class MainView {
 
   public MainView(BankController controller) {
     this.controller = controller;
-
   }
 
   public int showMenu() {
@@ -23,7 +22,7 @@ public class MainView {
   }
 
   public void display(String text) {
-    IOManager.printf("%s\n", text);
+    IOManager.printf("%s", text);
   }
 
   public void hLine() {
@@ -46,5 +45,19 @@ public class MainView {
 
   public void showMessage(String message) {
     System.out.println(message);
+  }
+
+  public int inputInt() {
+    int inputInt;
+    inputInt = IOManager.ReadInt();
+
+    return inputInt;
+  }
+
+  public String inputText() {
+    String inputText;
+    inputText = IOManager.ReadLine();
+
+    return inputText;
   }
 }
