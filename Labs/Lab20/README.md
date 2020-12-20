@@ -54,3 +54,20 @@ Select account to view:
 Example, `0. Account nbr. xxxxx`
 
 ## Post office
+
+### Main View
+
+page.
+
+### Page
+
+```
+---------------------------------------
+<page_title>
+---------------------------------------
+Options:
+  <option_list>
+
+Input: <user_input>
+```
+

@@ -10,6 +10,7 @@ import PostOffice.Model.Postcard;
 import PostOffice.Model.Receiver;
 import PostOffice.Model.Sender;
 import PostOffice.Model.Size;
+import PostOffice.View.MainFrame;
 import Utilities.IOManager;
 
 /**
@@ -22,9 +23,13 @@ public class PostalController {
 
   Package _package;
 
+  MainFrame view;
+
   // TODO: Create view for display
 
   public PostalController() {
+    view = new MainFrame(this);
+
     postcard = createPostcard();
     letter = createLetter();
     parcel = createParcel();
@@ -41,6 +46,9 @@ public class PostalController {
 
   }
 
+  public void listIndexChanged(int index) {
+  }
+
   public String getLetter() {
     return letter.toString();
   }
@@ -55,6 +63,10 @@ public class PostalController {
 
   public String getPackage() {
     return _package.toString();
+  }
+
+  public Countries[] getCountries() {
+    return Countries.values();
   }
 
   private Letter createLetter() {
@@ -141,3 +153,29 @@ public class PostalController {
     return newPackage;
   }
 }
+// public void productTypeChanged(ButtonType radiobtn)
+// {
+// switch (radiobtn)
+// {
+// case rbtnBook:
+// {
+// product.setProductType(ProductType.Books);
+// validateAndSaveProduct();
+// break;
+// }
+
+// case rbtnFood:
+// {
+// product.setProductType(ProductType.Food);
+// validateAndSaveProduct();
+// break;
+// }
+
+// case rbtnOther:
+// {
+// product.setProductType(ProductType.Other);
+// validateAndSaveProduct();
+// break;
+// }
+// }
+// }
