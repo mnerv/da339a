@@ -48,10 +48,12 @@ public class Schedule {
         return totNumOfCols;
     }
 
+    // TODO should be called for when switching month so it calculate days for that
+    // month
     // Calculates the number of days in a given month,for a given year.
     // If the year is a leap year, days in feb will be 29.
     // The number of days for the given mnh and year.</returns>
-    public int calculateDays(Model.MonthsOfYear month, int year) {
+    public int calculateDays(MonthsOfYear month, int year) {
         switch (month) {
             // jan, march,may,july,oct & dec
             case Jan:
@@ -92,8 +94,9 @@ public class Schedule {
         return days;
     }
 
-    public void setNewValueInTable(int month, int day, double value) {
-
+    public void setNewValueInTable(int day, int month, double value) {
+        if (day < calculateDays(MonthsOfYear.values()[month], 2021))
+            timeReport[day][month] = value;
     }
 
     public String[] getTableColumnStrings() {

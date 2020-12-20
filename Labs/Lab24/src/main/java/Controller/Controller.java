@@ -35,13 +35,13 @@ public class Controller {
         return schedule.getNumOfCols(); // Day + 12 månader
     }
 
-    public void setHours(int month, int day, double value) {
-        schedule.setNewValueInTable(month, day, value);
+    public void setHours(int day, int month, double value) {
+        System.out.println(month + ", " + day);
+        schedule.setNewValueInTable(day, month, value);
         updateView();
     }
 
-    // TodDo
-    // Metoden skall returnera en array av stränger
+    // ToDo Metoden skall returnera en array av stränger
     // "Day", "Jan", "Feb", ....
     public String[] getColTitles() {
         String[] columnNames = schedule.getTableColumnStrings();
