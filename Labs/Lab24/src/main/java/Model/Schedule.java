@@ -95,7 +95,7 @@ public class Schedule {
     }
 
     public void setNewValueInTable(int day, int month, double value) {
-        if (day < calculateDays(MonthsOfYear.values()[month], 2021))
+        if (day < calculateDays(MonthsOfYear.values()[month], 2021) && value <= 24.0)
             timeReport[day][month] = value;
     }
 
@@ -108,6 +108,27 @@ public class Schedule {
         }
 
         return tmp;
+    }
+
+    public double getTotalHoursYear() {
+        double sum = 0;
+        for (double[] ds : timeReport) {
+            for (double d : ds) {
+                sum += d;
+            }
+        }
+
+        return sum;
+    }
+
+    public double getTotalHoursMonth(int month) {
+        double sum = 0;
+
+        for (int i = 0; i < calculateDays(MonthsOfYear.values()[month], 2020); i++) {
+            sum += timeReport[i][month];
+        }
+
+        return sum;
     }
 
     // A year will be a leap year if it is divisible by 4 but not by 100.

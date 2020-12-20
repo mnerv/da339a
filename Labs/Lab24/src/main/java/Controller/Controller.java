@@ -21,6 +21,7 @@ public class Controller {
     private void updateView() {
         String[][] tableData = schedule.getTimeReportTable();
         view.updateTableData(tableData);
+
     }
 
     // TODO
@@ -36,8 +37,12 @@ public class Controller {
     }
 
     public void setHours(int day, int month, double value) {
-        System.out.println(month + ", " + day);
+        // System.out.println(month + ", " + day);
         schedule.setNewValueInTable(day, month, value);
+
+        getTotalHoursMonthStrings(month);
+        getTotalHoursYearStrings();
+
         updateView();
     }
 
@@ -62,5 +67,22 @@ public class Controller {
     }
 
     // Komplettera med andra metoder som kan behövas.
+    public String getTotalHoursYearStrings() {
+        System.out.println("Total hours worked this year: " + schedule.getTotalHoursYear());
 
+        return String.valueOf(schedule.getTotalHoursYear());
+    }
+
+    public String getTotalHoursMonthStrings(int month) {
+        // System.out.println(schedule.getTotalHoursMonth());
+
+        // for (int i = 0; i < getMonthStrings().length; i++) {
+        // System.out.println(schedule.getTotalHoursMonth(i));
+        // }
+
+        System.out.println(
+                "\nTotal hours worked month " + (month + 1) + ": " + schedule.getTotalHoursMonth(month) + "\n");
+
+        return String.valueOf(schedule.getTotalHoursMonth(0));
+    }
 }
