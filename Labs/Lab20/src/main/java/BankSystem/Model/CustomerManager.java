@@ -104,7 +104,7 @@ public class CustomerManager {
    * @return Selected Customer
    */
   public Customer getSelectedCustomer() {
-    if (selectedCustomer > 0 && selectedCustomer < customerCount)
+    if (selectedCustomer > -1 && selectedCustomer < customerCount)
       return customers[selectedCustomer];
 
     return null;
@@ -118,7 +118,22 @@ public class CustomerManager {
    */
   public boolean setSelectedCustomer(int i) {
     selectedCustomer = i;
-    return i > 0 && i < customerCount;
+    return i > -1 && i < customerCount;
+  }
+
+  /**
+   * Save selected Customer
+   * 
+   * @param customer Customer that needs to be change
+   * @return True if save is successful and False if it's not.
+   */
+  public boolean saveSelectedCustomer(Customer customer) {
+    if (selectedCustomer > -1 && selectedCustomer < customerCount) {
+      customers[selectedCustomer] = customer;
+      return true;
+    }
+
+    return false;
   }
 
 }

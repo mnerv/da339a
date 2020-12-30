@@ -80,16 +80,18 @@ public class MainView {
     return idNumber;
   }
 
-  // TODO: Show create account menu
-  public int showCreateAccount(String accountTypes[]) {
-    hLine();
-    display("Create Account menu\n");
-    hLine();
-    display("Input: ");
+  public String readLine() {
+    return IOManager.ReadLine();
+  }
 
-    IOManager.ReadInt();
+  public int readNumber() {
+    int value = Integer.MIN_VALUE;
 
-    return 0;
+    while (value == Integer.MIN_VALUE) {
+      value = IOManager.ReadInt();
+    }
+
+    return value;
   }
 
   public void display(String format, Object... args) {
@@ -109,8 +111,9 @@ public class MainView {
   // TODO: Clear screen needs to be work on.
   // It might be better to have a buffer and then just one display command.
   public void Clear() {
-    if (!errorFlag)
+    if (!errorFlag) {
       IOManager.Clear();
+    }
     errorFlag = false;
   }
 }

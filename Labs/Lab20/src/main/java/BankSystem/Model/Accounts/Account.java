@@ -15,6 +15,7 @@ public abstract class Account implements IAccount {
   public Account() {
     accountNumCounter++;
     accNum = String.valueOf(accountNumCounter);
+    balance = 0;
   }
 
   @Override

@@ -2,58 +2,21 @@
 
 ## Bank system
 
-### Main menu
+### TODO
+  - [x] Edit customer (add accounts)
+  - [ ] Create new account
+  - [ ] Array of accounts for each customer
+  - [ ] Cleanup and restructure code
 
-```
------------------------------------------
-Bank Manager
------------------------------------------
-  1. Corporate
-  2. Credit
-  3. Pension
-  4. Salary
-  5. Saving
-Select Account Type:
-```
-
-### Account
-
-```
------------------------------------------
-Selected <account_type>
------------------------------------------
-Select options:
-  1. Add account
-  3. List accounts
-```
-
-#### Add
-
-```
------------------------------------------
-<account_type> Add
------------------------------------------
-<mode>: 
-```
-
-`<mode>`: Set balance
-
-#### List
-
-```
------------------------------------------
-<account_type> List
------------------------------------------
-<list_of_account_info>
-_________________________________________
-Select account to view: 
-```
-
-`<list_of_account_info>`: 
-
-Example, `0. Account nbr. xxxxx`
+#### MISC
+  - [ ] Transfer code to Marcus
+  - [ ] Fix money display
+  - [ ] Refactor display, create a buffer for displaying instead of printing immediately
 
 ## Post office
+
+### TODO
+  - [ ] Remind Marcus to tell Pratchaya what to do
 
 ### Main View
 
