@@ -1,40 +1,99 @@
 package BankSystem.View;
 
+import java.nio.file.FileSystemLoopException;
+
 import BankSystem.Controller.BankController;
 import Utilities.IOManager;
 
+/**
+ * MainView.
+ */
 public class MainView {
 
   BankController controller;
   boolean isRunning = true;
 
+  boolean errorFlag = false;
+
+  String firstname, lastname, idNumber;
+
   public MainView(BankController controller) {
     this.controller = controller;
   }
 
-  public int showMenu() {
-    int choice = 0;
+  /**
+   * Generic Show Menu
+   * 
+   * @param title Menu title
+   * @param list  List on the menu
+   * 
+   * @return The selected option in the list
+   */
+  public int showMenu(String title, String list[]) {
+    int choice = Integer.MIN_VALUE;
 
-    IOManager.printf("Select option: ");
-    choice = IOManager.ReadInt();
+    while (choice == Integer.MIN_VALUE) {
+      // Clear(); // TODO: The clear needs work since there might be list we want to
+      // display
+
+      hLine();
+      display("%s\n", title);
+      hLine();
+
+      showList(list);
+      display("Input: ");
+      choice = IOManager.ReadInt();
+
+      // Handle error, this prevent the clearing from happening
+      if (choice == Integer.MIN_VALUE)
+        errorFlag = true;
+    }
 
     return choice - 1;
   }
 
-  public void display(String text) {
-    IOManager.printf("%s", text);
+  /**
+   * Customer view handler
+   */
+  public void createCustomerView() {
+    display("Create a customer\n");
+
+    display("Firstname: ");
+    firstname = IOManager.ReadLine();
+
+    display("Lastname: ");
+    lastname = IOManager.ReadLine();
+
+    display("National ID Number: ");
+    idNumber = IOManager.ReadLine();
   }
 
-  public void hLine() {
-    IOManager.printf("-----------------------------------------\n");
+  public String getFistname() {
+    return firstname;
   }
 
-  public int getOption(String text) {
-    int option = 0;
-    IOManager.printf("%s: ", text);
-    option = IOManager.ReadInt();
+  public String getLastname() {
+    return lastname;
+  }
 
-    return option - 1;
+  public String getIDNumber() {
+    return idNumber;
+  }
+
+  // TODO: Show create account menu
+  public int showCreateAccount(String accountTypes[]) {
+    hLine();
+    display("Create Account menu\n");
+    hLine();
+    display("Input: ");
+
+    IOManager.ReadInt();
+
+    return 0;
+  }
+
+  public void display(String format, Object... args) {
+    IOManager.printf(format, args);
   }
 
   public void showList(String[] list) {
@@ -43,21 +102,15 @@ public class MainView {
     }
   }
 
-  public void showMessage(String message) {
-    System.out.println(message);
+  public void hLine() {
+    IOManager.HLine();
   }
 
-  public int inputInt() {
-    int inputInt;
-    inputInt = IOManager.ReadInt();
-
-    return inputInt;
-  }
-
-  public String inputText() {
-    String inputText;
-    inputText = IOManager.ReadLine();
-
-    return inputText;
+  // TODO: Clear screen needs to be work on.
+  // It might be better to have a buffer and then just one display command.
+  public void Clear() {
+    if (!errorFlag)
+      IOManager.Clear();
+    errorFlag = false;
   }
 }

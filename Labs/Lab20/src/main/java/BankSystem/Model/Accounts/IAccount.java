@@ -12,4 +12,8 @@ public interface IAccount {
 
   public void setBalance(long balance);
 
+  public AccountType getAccountType();
+
+  public void setAccountType(AccountType type);
+
 }

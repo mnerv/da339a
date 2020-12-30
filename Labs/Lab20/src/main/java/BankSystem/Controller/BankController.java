@@ -1,144 +1,121 @@
 package BankSystem.Controller;
 
-import BankSystem.Model.BankManager;
-import BankSystem.Model.Accounts.*;
+import BankSystem.Model.Customer;
+import BankSystem.Model.CustomerManager;
 import BankSystem.View.MainView;
 
+/**
+ * Bank Controller.
+ */
 public class BankController {
 
-  private BankManager manager;
   private MainView view;
 
   // @formatter:off
+  
+  // Main menu options
+  private String[] customerOptions = {
+    "List customers",
+    "New customer",
+    "Edit customer",
+    "Exit"
+  };
+
+  // Customer view option, this is used when
+  // where in an edit state for customer
+  private String[] accountOptions = { 
+    "Add new account",
+    "List accounts",
+    "Go back"
+  };
+
+  // Account type options, this can only be 
+  // accessed when there is customer selected
+  // It's used for when creating an account
   private String[] accountTypes = {
     "Corporate",
     "Credit",
     "Pension",
     "Salary",
-    "Saving"
+    "Saving",
+    "Cancel"
   };
 
-  private String[] accountOptions = { 
-    "Add account",
-    "List account",
-  };
+  enum State {
+    MainMenu, CreateCustomer, AccountView
+  }
+
   // @formatter:on
 
+  // State management
+  private State currentState = State.MainMenu;
+  private boolean isRunning = true;
+
+  // TODO: Put current customer in the manager
+  private CustomerManager customerManager;
+
   public BankController() {
-
-    manager = new BankManager(10);
-
     view = new MainView(this);
+    customerManager = new CustomerManager(10);
 
-    while (true) {
-      showMainMenu();
+    while (isRunning) {
+      switch (currentState) {
+        case MainMenu:
+          mainMenu();
+          break;
+        case CreateCustomer:
+          createCustomer();
+          break;
+        case AccountView:
+          accountView();
+          break;
+        default:
+          break;
+      }
     }
   }
 
-  private void showMainMenu() {
-    int choice = 0;
-
-    view.hLine();
-    view.display("Welcome to the Bank Manager \nThese are the existing account types: \n");
-
-    view.showList(accountTypes);
-
-    choice = view.getOption("Select option: ");
-
-    switch (choice) {
-      case 3:
-        accountTypeHandle(AccountType.Salary);
-        break;
-      case 4:
-        accountTypeHandle(AccountType.Saving);
-        break;
-      default:
-        break;
-    }
-  }
-
-  private void accountTypeHandle(AccountType type) {
-    view.hLine();
-    view.display(String.format("Selected %s\n", type.toString()));
-    view.hLine();
-
-    view.showList(accountOptions);
-
-    int choice = view.getOption("Select option: ");
+  // TODO: Main menu handler
+  public void mainMenu() {
+    int choice = view.showMenu("Main Menu", customerOptions);
 
     switch (choice) {
       case 0:
-        addAccount(type);
+        view.showList(customerManager.getCustomerList());
         break;
       case 1:
-        listAccountInfo(type);
+        // Switch to create customer
+        currentState = State.CreateCustomer;
         break;
-    }
-  }
-
-  private void addAccount(AccountType type) {
-    // TODO add input of balance and such for the salary and saving accounts
-
-    switch (type) {
-      case Saving:
-        SavingAccount savingAccount = new SavingAccount();
-        view.display("Enter your saving interests (get a high one ;)\n");
-        savingAccount.setInterests(view.inputInt());
-
-        view.display("Enter balance: ");
-        savingAccount.setBalance(view.inputInt());
-
-        if (savingAccount.getBalance() > savingAccount.getMinBalance())
-          manager.getSavingManager().addAccount(savingAccount);
-        else
-          view.display(String.format(
-              "Error adding account! Stop being poor!\nSpecified balance is less than minimum balance of %s\n",
-              savingAccount.getMinBalance()));
-
+      case 2:
+        // TODO: Show all customer
+        view.display("Edit Custmer\n");
         break;
-      case Salary:
-        SalaryAccount salaryAccount = new SalaryAccount();
-
-        view.display("Input your Employers name:\n");
-        salaryAccount.setEmployerName(view.inputText());
-
-        view.display("Enter balance: ");
-        salaryAccount.setBalance(view.inputInt());
-        manager.getSalaryManager().addAccount(salaryAccount);
       default:
+        view.display("Invalid menu option\n");
         break;
     }
   }
 
-  private void listAccountInfo(AccountType type) {
-    switch (type) {
-      case Saving:
-        view.showList(manager.getSavingAccountList());
-        break;
+  // TODO: Create customer view
+  public void createCustomer() {
+    view.createCustomerView();
 
-      case Salary:
-        view.showList(manager.getSalaryAccountList());
+    Customer customer = new Customer();
+    customer.setFirstName(view.getFistname());
+    customer.setLastName(view.getLastname());
+    customer.setPersonNr(view.getIDNumber());
+    customerManager.addCustomer(customer);
 
-      default:
-        break;
-    }
+    currentState = State.AccountView;
   }
 
-  // TODO make this work so we get a balance and stuff from the account that we
-  // choce (implement so we can chose)
-  private void showAccountInfo(AccountType type, int index) {
-    switch (type) {
-      case Saving:
-        view.showMessage(manager.getSavingManager().getAccountAt(index).toString());
-        break;
+  // TODO: Account view handler
+  public void accountView() {
+    String tmp[] = new String[] { "Hello", "World" };
+    int choice = view.showMenu("Account View", tmp);
 
-      case Salary:
-        view.showMessage(manager.getSalaryManager().getAccountAt(index).toString());
-        break;
-
-      default:
-        view.showMessage("No account");
-        break;
-    }
+    currentState = State.MainMenu;
   }
+
 }

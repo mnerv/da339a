@@ -7,7 +7,7 @@ import static BankSystem.Model.Accounts.AccountConst.*;
  */
 public class PensionAccount extends SavingAccount {
   private int minAge = PENSION_MIN_AGE;
-  private int withdrawAge = PENSION_MIN_AGE; // Withdrawal age
+  private int withdrawAge = PENSION_MIN_AGE;
 
   public PensionAccount() {
     minBalance = PENSION_MIN_BALANCE;

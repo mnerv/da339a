@@ -6,18 +6,14 @@ import java.util.UUID;
  * Base Account
  */
 public abstract class Account implements IAccount {
-  // TODO: Transactions
-
-  // TODO: auto generate account number
-
   protected String accNum; // Account number
   protected long balance;
+  protected AccountType accountType;
 
-  private static long accountNumCounter = 123456780;
+  private static long accountNumCounter = 123456780; // Starting ID number
 
   public Account() {
     accountNumCounter++;
-    // accNum = UUID.randomUUID().toString();
     accNum = String.valueOf(accountNumCounter);
   }
 
@@ -39,6 +35,16 @@ public abstract class Account implements IAccount {
   @Override
   public void setBalance(long balance) {
     this.balance = balance;
+  }
+
+  @Override
+  public AccountType getAccountType() {
+    return accountType;
+  }
+
+  @Override
+  public void setAccountType(AccountType type) {
+    accountType = type;
   }
 
   @Override
