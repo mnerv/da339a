@@ -11,6 +11,10 @@ public class SavingAccount extends Account {
 
   private long maxWithdAnn = SAVING_MAX_WITHD_ANNUALLY; // Max withdrawal annually
 
+  public SavingAccount() {
+    accountType = AccountType.Saving;
+  }
+
   public long getInterests() {
     return interests;
   }
@@ -45,4 +49,9 @@ public class SavingAccount extends Account {
     this.maxWithdAnn = maxWithdAnn;
   }
 
+  @Override
+  public String getInfo() {
+    return String.format("Account number: %s\nBalance: %s\nIntereset: %s\nMax Widrawal Annually: %s", accNum, balance,
+        interests, maxWithdAnn);
+  }
 }

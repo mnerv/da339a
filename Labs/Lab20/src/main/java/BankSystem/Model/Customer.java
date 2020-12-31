@@ -11,10 +11,15 @@ import BankSystem.Model.Accounts.*;
 public class Customer extends Person {
     private String id;
 
-    SalaryAccount salaryAccount;
-    SavingAccount savingAccount;
+    Account accounts[];
+    int accountCount = 0;
 
     public Customer() {
+        this(5);
+    }
+
+    public Customer(int max) {
+        accounts = new Account[max];
     }
 
     public String getId() {
@@ -25,26 +30,29 @@ public class Customer extends Person {
         this.id = id;
     }
 
-    public SalaryAccount getSalaryAccount() {
-        return salaryAccount;
+    public boolean addAccount(Account account) {
+        if (accountCount > accounts.length - 1)
+            return false;
+
+        accounts[accountCount] = account;
+        accountCount++;
+
+        return true;
     }
 
-    public void setSalaryAccount(SalaryAccount salaryAccount) {
-        this.salaryAccount = salaryAccount;
+    public Account getAccountAt(int i) {
+        if (i > -1 && i < accountCount)
+            return accounts[i];
+
+        return null;
     }
 
-    public SavingAccount getSavingAccount() {
-        return savingAccount;
-    }
-
-    public void setSavingAccount(SavingAccount savingAccount) {
-        this.savingAccount = savingAccount;
-    }
-
-    // TODO: Temporary getting all accounts
     public String[] getAccountList() {
-        String tmp[] = new String[] { salaryAccount.toString(), savingAccount.toString(), };
-        return tmp;
+        String[] accountList = new String[accountCount];
+        for (int i = 0; i < accountCount; i++) {
+            accountList[i] = accounts[i].toString();
+        }
+        return accountList;
     }
 
 }

@@ -14,8 +14,9 @@ public class AccountManager<T extends Account> {
   }
 
   public boolean addAccount(T account) {
-    if (count > accounts.length - 1)
+    if (count > accounts.length - 1) {
       return false;
+    }
 
     accounts[count] = account;
     count++;
@@ -64,9 +65,7 @@ public class AccountManager<T extends Account> {
         nullCount--;
         i = 0;
       }
-
     }
-
   }
 
   public int getTotalAccounts() {
@@ -77,13 +76,12 @@ public class AccountManager<T extends Account> {
     String[] tmp = new String[count]; // Don't know if this is buggy.
     int listIndex = 0;
 
-    for (int i = 0; i < accounts.length; i++)
+    for (int i = 0; i < accounts.length; i++) {
       if (accounts[i] != null) {
         tmp[i] = accounts[i].toString();
         listIndex++;
       }
-
+    }
     return tmp;
   }
-
 }

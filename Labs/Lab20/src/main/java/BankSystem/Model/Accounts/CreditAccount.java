@@ -26,4 +26,9 @@ public class CreditAccount extends Account {
     this.limit = limit;
   }
 
+  @Override
+  public String getInfo() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

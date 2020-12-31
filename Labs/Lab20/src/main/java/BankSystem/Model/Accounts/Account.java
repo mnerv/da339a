@@ -1,7 +1,5 @@
 package BankSystem.Model.Accounts;
 
-import java.util.UUID;
-
 /**
  * Base Account
  */
@@ -10,7 +8,7 @@ public abstract class Account implements IAccount {
   protected long balance;
   protected AccountType accountType;
 
-  private static long accountNumCounter = 123456780; // Starting ID number
+  private static long accountNumCounter = 0; // Starting ID number
 
   public Account() {
     accountNumCounter++;
@@ -50,6 +48,7 @@ public abstract class Account implements IAccount {
 
   @Override
   public String toString() {
-    return String.format("Account: %s", accNum);
+    return String.format("Type: %s, Nbr. %s", getAccountType(), getAccountNumber().toString());
   }
+
 }

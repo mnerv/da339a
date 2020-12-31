@@ -27,7 +27,7 @@ public class BankController {
   // where in an edit state for customer
   private final String[] customerOptions = { 
     "Add new account",
-    "List accounts",
+    "Select account",
     "Go back to Main Menu"
   };
 
@@ -132,11 +132,11 @@ public class BankController {
     int choice = view.showMenu(menuTitle, customerOptions);
 
     switch (choice) {
-      case 0:
+      case 0: // Add account
         addNewAccount();
         break;
-      case 1:
-        view.showList(selected.getAccountList());
+      case 1: // Select account
+        accountView();
         break;
       case 2:
         currentState = State.MainMenu;
@@ -155,20 +155,35 @@ public class BankController {
 
     switch (choice) {
       case 0: // Salary
+      {
         SalaryAccount ac = new SalaryAccount();
         view.display("Employer name: ");
         String eName = view.readLine();
 
         ac.setEmployerName(eName);
-        isValid = !eName.isBlank();
-        customer.setSalaryAccount(ac);
+
+        view.display("Balance: ");
+        int balance = view.readNumber();
+        ac.setBalance(balance);
+
+        customer.addAccount(ac);
+
+        isValid = !eName.isBlank() && balance != 0;
+      }
         break;
       case 1: // Saving
+      {
         SavingAccount sa = new SavingAccount();
         view.display("Saving interests: ");
         int interests = view.readNumber();
         sa.setInterests(interests);
+        customer.addAccount(sa);
 
+        view.display("Balance: ");
+        int balance = view.readNumber();
+
+        isValid = interests != 0 && balance != 0;
+      }
         break;
       case 2: // Cancel
         break;
@@ -182,12 +197,15 @@ public class BankController {
     }
   }
 
-  // TODO: Account view handler
   public void accountView() {
-    String tmp[] = new String[] { "Hello", "World" };
-    int choice = view.showMenu("Account View", tmp);
+    String[] accountList = customerManager.getSelectedCustomer().getAccountList();
+    if (accountList.length > 0) {
+      int choice = view.showMenu("Account list", accountList);
+      view.display("%s\n", customerManager.getSelectedCustomer().getAccountAt(choice).getInfo());
+    } else {
+      view.display("No account :(\n");
+    }
 
-    currentState = State.MainMenu;
   }
 
 }

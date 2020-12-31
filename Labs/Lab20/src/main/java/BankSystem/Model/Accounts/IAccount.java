@@ -16,4 +16,6 @@ public interface IAccount {
 
   public void setAccountType(AccountType type);
 
+  public String getInfo();
+
 }
