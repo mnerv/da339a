@@ -4,9 +4,9 @@
 
 ### TODO
   - [x] Edit customer (add accounts)
-  - [ ] Create new account
-  - [ ] Array of accounts for each customer
-  - [ ] Cleanup and restructure code
+  - [x] Create new account
+  - [x] Array of accounts for each customer
+  - [x] Cleanup and restructure code
 
 #### MISC
   - [ ] Transfer code to Marcus
@@ -16,21 +16,60 @@
 ## Post office
 
 ### TODO
-  - [ ] Remind Marcus to tell Pratchaya what to do
+  - [-] Remind Marcus to tell Pratchaya what to do
 
 ### Main View
 
-page.
-
-### Page
+Letter:
 
 ```
----------------------------------------
-<page_title>
----------------------------------------
-Options:
-  <option_list>
-
-Input: <user_input>
+┌─────────────────────────────────────┐
+│                                     │
+│  Firstname Lastname                 │
+│  Addresss                           │
+│  zip code                           │
+│  City                               │
+│  Country                            │
+│                                     │
+└─────────────────────────────────────┘
 ```
 
+```
+Main Menu
+
+1. Customer -> Customer View
+2. Mail -> Mail View
+3. Exit
+```
+
+```
+Customer View
+
+1. List Customers
+2. Add Customer
+3. Go Back -> Main Menu
+```
+
+```
+Mail View
+
+1. List Mail Items
+2. Add Mail -> Create a Mail
+3. Go Back -> Main Menu
+```
+
+
+```
+Create a Mail
+
+<list_type>
+Type: <input_here>
+
+<list all customer>
+Sender: <input_here>
+Receiver: <input_here>
+
+...
+
+Mail View
+```

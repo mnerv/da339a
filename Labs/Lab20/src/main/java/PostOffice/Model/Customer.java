@@ -12,22 +12,6 @@ public class Customer {
     this.address = address;
   }
 
-  public Person getPerson() {
-    return person;
-  }
-
-  public void setPerson(Person person) {
-    this.person = person;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
   @Override
   public String toString() {
     return String.format("Name: %s, Address: %s", person.toString(), address.toString());

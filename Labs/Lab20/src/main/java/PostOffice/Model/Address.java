@@ -47,8 +47,30 @@ public class Address {
     return country;
   }
 
+  /**
+   * Set country directly using enum.
+   * 
+   * @param country Country from enum Countries
+   */
   public void setCountry(Countries country) {
     this.country = country;
+  }
+
+  /**
+   * Using string to search for a country in a list. O(n) time complexity for
+   * getting country from enum
+   * 
+   * @param country Country name
+   */
+  public void setCountry(String country) {
+    // Search for country in the list
+    // O(n) time complexity for getting country from enum
+    for (int i = 0; i < Countries.values().length; i++) {
+      if (country.equalsIgnoreCase(Countries.values()[i].toString())) {
+        setCountry(Countries.values()[i]);
+        break;
+      }
+    }
   }
 
   /**
@@ -65,5 +87,4 @@ public class Address {
   public String toString() {
     return String.format("%s, %s %s, %s", this.street, this.zipCode, this.city, this.getCountryString());
   }
-
 }

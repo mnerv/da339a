@@ -9,7 +9,7 @@ import PostOffice.Controller.PostalController;
  */
 public class App {
     public static void main(String[] args) {
-        BankController bc = new BankController();
-        // PostalController pc = new PostalController();
+        // BankController bc = new BankController();
+        PostalController pc = new PostalController();
     }
 }

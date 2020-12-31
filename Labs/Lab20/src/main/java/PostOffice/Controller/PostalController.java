@@ -1,181 +1,173 @@
 package PostOffice.Controller;
 
-import PostOffice.Model.Address;
-import PostOffice.Model.Countries;
-import PostOffice.Model.Letter;
+import PostOffice.Model.*;
+import PostOffice.View.MainView;
 import PostOffice.Model.Package;
-import PostOffice.Model.Parcel;
-import PostOffice.Model.Person;
-import PostOffice.Model.Postcard;
-import PostOffice.Model.Receiver;
-import PostOffice.Model.Sender;
-import PostOffice.Model.Size;
-import PostOffice.View.MainFrame;
-import Utilities.IOManager;
 
 /**
  * PostalController
  */
 public class PostalController {
-  Letter letter;
-  Postcard postcard;
-  Parcel parcel;
 
-  Package _package;
+  PostalManager manager;
+  MainView view;
 
-  MainFrame view;
+  // @formatter:off
+  String mainOptions[] = new String[] { 
+      "Customer",
+      "Mail",
+      "Exit" 
+  };
 
-  // TODO: Create view for display
+  String customerOptions[] = new String[] { 
+      "List Customers",
+      "Add Customer",
+      "Go Back" 
+  };
+
+  String mailOptions[] = new String[] { 
+      "List Mail Items",
+      "Add Mail Item",
+      "Go Back" 
+  };
+  // @formatter:on
+
+  boolean isRunning = true;
+
+  enum State {
+    Main, Customer, Mail
+  };
+
+  State currentState = State.Main;
 
   public PostalController() {
-    view = new MainFrame(this);
+    manager = new PostalManager(10);
+    view = new MainView(this);
 
-    postcard = createPostcard();
-    letter = createLetter();
-    parcel = createParcel();
-    _package = createPackage();
-
-    IOManager.Clear();
-    System.out.println(getLetter());
-    System.out.println();
-    System.out.println(getPostcard());
-    System.out.println();
-    System.out.println(getParcel());
-    System.out.println();
-    System.out.println(getPackage());
+    while (isRunning) {
+      switch (currentState) {
+        case Main:
+          mainMenu();
+          break;
+        case Customer:
+          customerMenu();
+          break;
+        case Mail:
+          mailMenu();
+          break;
+        default:
+          break;
+      }
+    }
 
   }
 
-  public void listIndexChanged(int index) {
+  // TODO: Call the main view
+  private void mainMenu() {
+    int choice = view.menuView("Main Menu", mainOptions);
+
+    switch (choice) {
+      case 0: // Customer view
+        currentState = State.Customer;
+        break;
+      case 1: // Mail view
+        currentState = State.Mail;
+        break;
+      case 2: // Exit
+        isRunning = false;
+        break;
+      default: // Invalid option
+        break;
+    }
   }
 
-  public String getLetter() {
-    return letter.toString();
+  // TODO: Customer Menu
+  private void customerMenu() {
+    int choice = view.menuView("Customer Menu", customerOptions);
+
+    switch (choice) {
+      case 0: // list customers
+        break;
+      case 1: // add customer
+        break;
+      case 2: // go back to main menu
+        currentState = State.Main;
+        break;
+      default: // Invalid option
+        break;
+    }
   }
 
-  public String getPostcard() {
-    return postcard.toString();
+  // TODO: Mail Menu
+  private void mailMenu() {
+    int choice = view.menuView("Mail Menu", mailOptions);
+
+    switch (choice) {
+      case 0: // List Mail Items
+        break;
+      case 1: // Add Mail
+        break;
+      case 2: // Go back
+        currentState = State.Main;
+        break;
+      default: // Invalid Option
+        break;
+    }
   }
 
-  public String getParcel() {
-    return parcel.toString();
+  // TODO: Call the customer view
+  private void createCustomer() {
+    view.createCustomerView();
   }
 
-  public String getPackage() {
-    return _package.toString();
+  // TODO: Call the create mail view
+  private void createMail() {
   }
 
-  public Countries[] getCountries() {
-    return Countries.values();
+  /**
+   * Add a customer to the list.
+   * 
+   * @param firstname Firstname of the customer
+   * @param lastname  Lastname of the customer
+   * @param street    The street address
+   * @param city      City name
+   * @param zipcode   The Zip Code for the city
+   * @param country   The country for the address
+   * 
+   * @return False if the list is full and true if successful.
+   */
+  public boolean addCustomer(String firstname, String lastname, String street, String city, String zipcode,
+      String country) {
+    Person person = new Person(firstname, lastname);
+    Address address = new Address();
+    address.setStreet(street);
+    address.setCity(city);
+    address.setZipCode(zipcode);
+    address.setCountry(country);
+
+    Customer customer = new Customer(person, address);
+
+    return manager.addCustomer(customer);
   }
 
-  private Letter createLetter() {
-    Letter newLetter = new Letter();
-
-    // TODO: Get values from view for letter
-
-    Sender sender = new Sender(new Person("Charlie", "Ringstrom"),
-        new Address("Per Albin Hanssons väg", "Malmö", "214 32", Countries.Sweden));
-    Receiver receiver = new Receiver(new Person("Pratchaya", "Khansomboon"),
-        new Address("Lars väg 27-19", "Hjärup", "245 63", Countries.Sweden));
-
-    newLetter.setCost(20);
-    newLetter.setSender(sender);
-    newLetter.setReceiver(receiver);
-    newLetter.setWeight(10);
-
-    return newLetter;
+  public boolean addParcel() {
+    return false;
   }
 
-  private Postcard createPostcard() {
-    Postcard newPostcard = new Postcard();
-
-    // TODO: Get values from view for postcard
-
-    Sender sender = new Sender(new Person("Charlie", "Ringstrom"),
-        new Address("Per Albin Hanssons väg", "Malmö", "214 32", Countries.Sweden));
-    Receiver receiver = new Receiver(new Person("Pratchaya", "Khansomboon"),
-        new Address("Lars väg 27-19", "Hjärup", "245 63", Countries.Sweden));
-
-    newPostcard.setCost(10);
-    newPostcard.setSender(sender);
-    newPostcard.setReceiver(receiver);
-    newPostcard.setWeight(0.01);
-
-    return newPostcard;
+  public boolean addPackage() {
+    return false;
   }
 
-  private Parcel createParcel() {
-    Parcel newParcel = new Parcel();
-
-    // TODO: Get values from view for parcel
-
-    Sender sender = new Sender(new Person("Charlie", "Ringstrom"),
-        new Address("Per Albin Hanssons väg", "Malmö", "214 32", Countries.Sweden));
-    Receiver receiver = new Receiver(new Person("Pratchaya", "Khansomboon"),
-        new Address("Lars väg 27-19", "Hjärup", "245 63", Countries.Sweden));
-
-    Size size = new Size();
-    size.setLength(1);
-    size.setWidth(1);
-    size.setHeight(1);
-
-    newParcel.setSender(sender);
-    newParcel.setReceiver(receiver);
-    newParcel.setSize(size);
-    newParcel.setWeight(10);
-    newParcel.setCost(100);
-
-    return newParcel;
+  public boolean addLetter() {
+    return false;
   }
 
-  private Package createPackage() {
-    Package newPackage = new Package();
-
-    // TODO: Get values from view for package
-
-    Sender sender = new Sender(new Person("Charlie", "Ringstrom"),
-        new Address("Per Albin Hanssons väg", "Malmö", "214 32", Countries.Sweden));
-    Receiver receiver = new Receiver(new Person("Pratchaya", "Khansomboon"),
-        new Address("Lars väg 27-19", "Hjärup", "245 63", Countries.Sweden));
-
-    Size size = new Size();
-    size.setLength(1);
-    size.setWidth(1);
-    size.setHeight(1);
-
-    newPackage.setSender(sender);
-    newPackage.setReceiver(receiver);
-    newPackage.setSize(size);
-    newPackage.setWeight(10);
-    newPackage.setCost(100);
-
-    return newPackage;
+  public boolean addPostCard() {
+    return false;
   }
+
+  public String[] getCustomerList() {
+    return manager.getCustomerList();
+  }
+
 }
-// public void productTypeChanged(ButtonType radiobtn)
-// {
-// switch (radiobtn)
-// {
-// case rbtnBook:
-// {
-// product.setProductType(ProductType.Books);
-// validateAndSaveProduct();
-// break;
-// }
-
-// case rbtnFood:
-// {
-// product.setProductType(ProductType.Food);
-// validateAndSaveProduct();
-// break;
-// }
-
-// case rbtnOther:
-// {
-// product.setProductType(ProductType.Other);
-// validateAndSaveProduct();
-// break;
-// }
-// }
-// }

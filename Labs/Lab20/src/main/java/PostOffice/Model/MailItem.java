@@ -48,5 +48,4 @@ public abstract class MailItem implements IMailItem {
   public String toString() {
     return String.format("To: %s\nFrom: %s", receiver.toString(), sender.toString());
   }
-
 }
