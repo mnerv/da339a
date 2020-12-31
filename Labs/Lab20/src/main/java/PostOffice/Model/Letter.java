@@ -11,7 +11,6 @@ public class Letter extends MailItem {
 
   @Override
   public String toString() {
-    return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg\n%s", type, getCost(), getWeight(),
-        super.toString());
+    return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg", type, getCost(), getWeight());
   }
 }

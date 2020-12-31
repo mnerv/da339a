@@ -70,6 +70,23 @@ public class PostalManager {
   }
 
   /**
+   * Get all Mail Items
+   *
+   * @return MailItem list
+   */
+  public String[] getMailItemList() {
+    String[] tmp = new String[mailCount];
+
+    for (int i = 0; i < mailItems.length; i++) {
+      if (mailItems[i] != null) {
+        tmp[i] = mailItems[i].toString();
+      }
+    }
+
+    return tmp;
+  }
+
+  /**
    * Used when you want to add a mail item to the list
    * 
    * @param mailItem the created mail item

@@ -4,27 +4,27 @@ package PostOffice.Model;
  * Mailitem is used for Letters and Parcel to derived from.
  */
 public abstract class MailItem implements IMailItem {
-  private Receiver receiver;
-  private Sender sender;
+  private Customer receiver;
+  private Customer sender;
 
   private double weight;
   private double cost;
 
   protected PostalType type;
 
-  public Receiver getReceiver() {
+  public Customer getReceiver() {
     return receiver;
   }
 
-  public void setReceiver(Receiver receiver) {
+  public void setReceiver(Customer receiver) {
     this.receiver = receiver;
   }
 
-  public Sender getSender() {
+  public Customer getSender() {
     return sender;
   }
 
-  public void setSender(Sender sender) {
+  public void setSender(Customer sender) {
     this.sender = sender;
   }
 
@@ -44,8 +44,4 @@ public abstract class MailItem implements IMailItem {
     this.cost = cost;
   }
 
-  @Override
-  public String toString() {
-    return String.format("To: %s\nFrom: %s", receiver.toString(), sender.toString());
-  }
 }

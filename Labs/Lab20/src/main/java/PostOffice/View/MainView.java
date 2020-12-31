@@ -15,11 +15,16 @@ public class MainView {
   public int menuView(String title, String list[]) {
     boolean exitFlag = false;
     int input = Integer.MIN_VALUE;
+    // @formatter:off
+    String titleFormat = "\n"+
+      "––––––––––––––––––––––––––––––––––––––––\n" +
+      "          %s\n"+
+      "––––––––––––––––––––––––––––––––––––––––\n";
+    // @formatter:on
 
     while (!exitFlag) {
-      IOManager.printf("\n––––––––––––––––––––––––––––––––––\n%s\n––––––––––––––––––––––––––––––––––\n", title);
-      for (int i = 0; i < list.length; i++)
-        IOManager.printf("%s. %s\n", i + 1, list[i]);
+      IOManager.printf(titleFormat, title);
+      showList(list);
 
       IOManager.printf("Input: ");
       input = IOManager.ReadInt() - 1;
@@ -33,9 +38,9 @@ public class MainView {
   public void createCustomerView() {
     // @formatter:off
     String title = 
-      "––––––––––––––––––––––––––––––––––\n" +
-      "          Add a customer          \n" +
-      "––––––––––––––––––––––––––––––––––\n";
+      "––––––––––––––––––––––––––––––––––––––––\n" +
+      "             Add a customer             \n" +
+      "––––––––––––––––––––––––––––––––––––––––\n";
     // @formatter:on
     IOManager.printf("%s", title);
     boolean exitFlag = false;
@@ -64,7 +69,7 @@ public class MainView {
       exitFlag = !firstname.isBlank() && !lastname.isBlank() && !street.isBlank() && !city.isBlank()
           && !zipcode.isBlank() && !country.isBlank();
 
-      if (!exitFlag)
+      if (exitFlag)
         controller.addCustomer(firstname, lastname, street, city, zipcode, country);
     }
 
@@ -85,4 +90,37 @@ public class MainView {
     }
   }
 
+  public void showList(String[] list) {
+    for (int i = 0; i < list.length; i++) {
+      IOManager.printf("%d. %s\n", i + 1, list[i]);
+    }
+  }
+
+  public void display(String format, Object... args) {
+    IOManager.printf(format, args);
+  }
+
+  public String readLine() {
+    return IOManager.ReadLine();
+  }
+
+  public int readInt() {
+    int value = Integer.MIN_VALUE;
+
+    while (value == Integer.MIN_VALUE) {
+      value = IOManager.ReadInt();
+    }
+
+    return value;
+  }
+
+  public double readDouble() {
+    double value = Double.MIN_VALUE;
+
+    while (value == Double.MIN_VALUE) {
+      value = IOManager.ReadDouble();
+    }
+
+    return value;
+  }
 }

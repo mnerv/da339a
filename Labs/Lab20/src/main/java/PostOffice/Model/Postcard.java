@@ -7,4 +7,9 @@ public class Postcard extends Letter {
   public Postcard() {
     type = PostalType.Postcard;
   }
+
+  @Override
+  public String toString() {
+    return super.toString();
+  }
 }

@@ -8,10 +8,8 @@ public class Package extends Parcel {
     this.type = PostalType.Package;
   }
 
-  // @Override
-  // public String toString() {
-  // return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg\n%s",
-  // this.type, getCost(), getWeight(),
-  // super.toString());
-  // }
+  @Override
+  public String toString() {
+    return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg", this.type, getCost(), getWeight());
+  }
 }

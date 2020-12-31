@@ -20,7 +20,7 @@ public class Parcel extends MailItem {
 
   @Override
   public String toString() {
-    return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg\nDimensions (m): %s\n%s", type, getCost(),
-        getWeight(), size.toString(), super.toString());
+    return String.format("Type: %s, Cost: %.2f kr, Weight: %.2f kg\nDimensions (m): %s", type, getCost(), getWeight(),
+        size.toString());
   }
 }

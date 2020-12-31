@@ -1,8 +1,8 @@
 package PostOffice.Controller;
 
 import PostOffice.Model.*;
-import PostOffice.View.MainView;
 import PostOffice.Model.Package;
+import PostOffice.View.MainView;
 
 /**
  * PostalController
@@ -59,7 +59,6 @@ public class PostalController {
           break;
       }
     }
-
   }
 
   // TODO: Call the main view
@@ -86,11 +85,13 @@ public class PostalController {
     int choice = view.menuView("Customer Menu", customerOptions);
 
     switch (choice) {
-      case 0: // list customers
+      case 0: // List exisiting customers
+        view.showList(manager.getCustomerList());
         break;
-      case 1: // add customer
+      case 1: // Add customer
+        view.createCustomerView();
         break;
-      case 2: // go back to main menu
+      case 2: // Go back to main menu
         currentState = State.Main;
         break;
       default: // Invalid option
@@ -104,8 +105,10 @@ public class PostalController {
 
     switch (choice) {
       case 0: // List Mail Items
+        view.showList(manager.getMailItemList());
         break;
       case 1: // Add Mail
+        createMailItem();
         break;
       case 2: // Go back
         currentState = State.Main;
@@ -115,20 +118,175 @@ public class PostalController {
     }
   }
 
-  // TODO: Call the customer view
-  private void createCustomer() {
-    view.createCustomerView();
+  private void createMailItem() {
+    int choice = view.menuView("Create Mail Item", getMailItemTypeList());
+
+    switch (choice) {
+      case 0: // Letter
+        createLetter();
+        break;
+      case 1: // Postcard
+        createPostCard();
+        break;
+      case 2: // Parcel
+        createParcel();
+        break;
+      case 3: // Package
+        createPackage();
+        break;
+      default:
+        break;
+    }
+
   }
 
-  // TODO: Call the create mail view
-  private void createMail() {
+  private void createLetter() {
+    boolean exitFlag = false;
+
+    while (!exitFlag) {
+      view.showList(manager.getCustomerList());
+      view.display("Receiver: ");
+
+      Letter letter = new Letter();
+      int receiver = view.readInt();
+      letter.setReceiver(manager.getCustomerAt(receiver));
+
+      view.display("Sender: ");
+      int sender = view.readInt();
+      letter.setSender(manager.getCustomerAt(sender));
+
+      view.display("Weight: ");
+      double weight = view.readDouble();
+      letter.setWeight(weight);
+
+      view.display("Cost: ");
+      double cost = view.readDouble();
+      letter.setCost(cost);
+
+      exitFlag = receiver != Integer.MIN_VALUE && sender != Integer.MIN_VALUE && weight != Double.MIN_VALUE && cost > 0;
+
+      if (exitFlag)
+        manager.addMailitem(letter);
+    }
+  }
+
+  private void createPostCard() {
+    boolean exitFlag = false;
+
+    while (!exitFlag) {
+      view.showList(manager.getCustomerList());
+      view.display("Receiver: ");
+
+      Postcard postcard = new Postcard();
+      int receiver = view.readInt();
+      postcard.setReceiver(manager.getCustomerAt(receiver));
+
+      view.display("Sender: ");
+      int sender = view.readInt();
+      postcard.setSender(manager.getCustomerAt(sender));
+
+      view.display("Cost: ");
+      double cost = view.readDouble();
+      postcard.setCost(cost);
+
+      exitFlag = receiver != Integer.MIN_VALUE && sender != Integer.MIN_VALUE && cost > 0;
+
+      if (exitFlag)
+        manager.addMailitem(postcard);
+    }
+  }
+
+  private void createParcel() {
+    boolean exitFlag = false;
+
+    while (!exitFlag) {
+      view.showList(manager.getCustomerList());
+      view.display("Receiver: ");
+
+      Parcel parcel = new Parcel();
+      int receiver = view.readInt();
+      parcel.setReceiver(manager.getCustomerAt(receiver));
+
+      view.display("Sender: ");
+      int sender = view.readInt();
+      parcel.setSender(manager.getCustomerAt(sender));
+
+      view.display("Weight: ");
+      double weight = view.readDouble();
+      parcel.setWeight(weight);
+
+      view.display("Size: ");
+      Size size = new Size();
+      view.display("Length: ");
+      double length = view.readDouble();
+      view.display("Height: ");
+      double height = view.readDouble();
+      view.display("Width: ");
+      double width = view.readDouble();
+      size.setLength(length);
+      size.setHeight(height);
+      size.setWidth(width);
+      parcel.setSize(size);
+
+      view.display("Cost: ");
+      double cost = view.readDouble();
+      parcel.setCost(cost);
+
+      exitFlag = receiver != Integer.MIN_VALUE && sender != Integer.MIN_VALUE && cost > 0;
+
+      if (exitFlag)
+        manager.addMailitem(parcel);
+    }
+  }
+
+  private void createPackage() {
+    boolean exitFlag = false;
+
+    while (!exitFlag) {
+      view.showList(manager.getCustomerList());
+      view.display("Receiver: ");
+
+      Package _package = new Package();
+      int receiver = view.readInt();
+      _package.setReceiver(manager.getCustomerAt(receiver));
+
+      view.display("Sender: ");
+      int sender = view.readInt();
+      _package.setSender(manager.getCustomerAt(sender));
+
+      view.display("Weight: ");
+      double weight = view.readDouble();
+      _package.setWeight(weight);
+
+      view.display("Size: ");
+      Size size = new Size();
+      view.display("Length: ");
+      double length = view.readDouble();
+      view.display("Height: ");
+      double height = view.readDouble();
+      view.display("Width: ");
+      double width = view.readDouble();
+      size.setLength(length);
+      size.setHeight(height);
+      size.setWidth(width);
+      _package.setSize(size);
+
+      view.display("Cost: ");
+      double cost = view.readDouble();
+      _package.setCost(cost);
+
+      exitFlag = receiver != Integer.MIN_VALUE && sender != Integer.MIN_VALUE && cost > 0;
+
+      if (exitFlag)
+        manager.addMailitem(_package);
+    }
   }
 
   /**
    * Add a customer to the list.
    * 
-   * @param firstname Firstname of the customer
-   * @param lastname  Lastname of the customer
+   * @param firstname First name of the customer
+   * @param lastname  Last name of the customer
    * @param street    The street address
    * @param city      City name
    * @param zipcode   The Zip Code for the city
@@ -150,24 +308,30 @@ public class PostalController {
     return manager.addCustomer(customer);
   }
 
-  public boolean addParcel() {
-    return false;
+  public void addMailItem(int type, int sender, int receiver, double weight, double cost) {
+
   }
 
-  public boolean addPackage() {
-    return false;
-  }
+  public void addMailItem(int type, int sender, int receiver, double weight, double cost, double length, double width,
+      double height) {
 
-  public boolean addLetter() {
-    return false;
-  }
-
-  public boolean addPostCard() {
-    return false;
   }
 
   public String[] getCustomerList() {
     return manager.getCustomerList();
   }
 
+  public String[] getMailItemList() {
+    return manager.getMailItemList();
+  }
+
+  public String[] getMailItemTypeList() {
+    String[] tmpTypes = new String[PostalType.values().length];
+
+    for (int i = 0; i < PostalType.values().length; i++) {
+      tmpTypes[i] = PostalType.values()[i].toString();
+    }
+
+    return tmpTypes;
+  }
 }

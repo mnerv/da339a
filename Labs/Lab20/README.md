@@ -17,6 +17,9 @@
 
 ### TODO
   - [-] Remind Marcus to tell Pratchaya what to do
+DONE: added customers, and menu navigation
+
+To DO: create mail item thing and list them
 
 ### Main View
 
