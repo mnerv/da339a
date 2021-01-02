@@ -1,30 +1,39 @@
 package Model;
 
-public abstract class Entity {
-  String name;
-  EntityType type;
+public abstract class Entity implements IEntity {
+    protected String name;
+    protected EntityType type;
 
-  int price;
+    protected double price;
 
-  public Entity() {
-    name = "n/a";
-    price = 0;
-  }
+    public Entity() {
+        name = "n/a";
+        price = 0;
+    }
 
-  public void setType(EntityType type) {
-    this.type = type;
-  }
+    @Override
+    public EntityType getType() {
+        return type;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    @Override
+    public void setType(EntityType type) {
+        this.type = type;
+    }
 
-  public String getName() {
-    return name;
-  }
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public EntityType getType() {
-    return type;
-  }
+    @Override
+    public String getName() {
+        return name;
+    }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public abstract String getInfo();
 }

@@ -1,25 +1,36 @@
 package Controller;
 
 import Model.OrderManager;
-import View.Window;
+import View.MainView;
 
+/**
+ * Controller
+ */
 public class Controller {
-  Window view;
-  int counter = 0;
+    OrderManager manager;
+    MainView view;
 
-  OrderManager orderMng;
+    public Controller(MainView view) {
+        manager = new OrderManager();
+        this.view = view;
+    }
 
-  public Controller() {
-    orderMng = new OrderManager();
-  }
+    /**
+     * Getters for the different lists
+     */
+    public String[] getOrderList() {
+        return manager.getOrderList();
+    }
 
-  public Controller(Window view) {
-    this();
+    public String[] getPizzaList() {
+        return manager.getPizzaList();
+    }
 
-    this.view = view;
-  }
+    public String[] getToppingList() {
+        return manager.getToppingList();
+    }
 
-  public String Hello() {
-    return "World!";
-  }
+    public String[] getDrinkList() {
+        return manager.getDrinkList();
+    }
 }
