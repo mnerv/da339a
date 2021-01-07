@@ -1,9 +1,9 @@
 package Model;
-//TODO
+// TODO
 
-//Skriv de metoder som anropas av Controller-klassen och som saknas här
+// Skriv de metoder som anropas av Controller-klassen och som saknas här
 
-//Schedule to keep track of the of the name of hours in a scheduled task.
+// Schedule to keep track of the of the name of hours in a scheduled task.
 // In this version, the schedule works only for one year.
 // TotNumofRows = number of days in the chosen month.
 // The number of days is calculted for the leap years.
@@ -81,7 +81,6 @@ public class Schedule {
 
                 return 31;
         }
-
     }
 
     public String[] getDayNames() {
@@ -103,7 +102,6 @@ public class Schedule {
         // TODO: TEMP FIX
         String[] tmp = new String[MonthsOfYear.values().length];
         for (int i = 0; i < tmp.length; i++) {
-
             tmp[i] = MonthsOfYear.values()[i].toString();
         }
 
@@ -123,8 +121,9 @@ public class Schedule {
 
     public double getTotalHoursMonth(int month) {
         double sum = 0;
+        int year = 2021;
 
-        for (int i = 0; i < calculateDays(MonthsOfYear.values()[month], 2020); i++) {
+        for (int i = 0; i < calculateDays(MonthsOfYear.values()[month], year); i++) {
             sum += timeReport[i][month];
         }
 
@@ -139,5 +138,4 @@ public class Schedule {
         leapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
         return leapYear;
     }
-
 }

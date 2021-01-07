@@ -21,7 +21,6 @@ public class Controller {
     private void updateView() {
         String[][] tableData = schedule.getTimeReportTable();
         view.updateTableData(tableData);
-
     }
 
     // TODO
@@ -80,8 +79,8 @@ public class Controller {
         // System.out.println(schedule.getTotalHoursMonth(i));
         // }
 
-        System.out.println(
-                "\nTotal hours worked month " + (month + 1) + ": " + schedule.getTotalHoursMonth(month) + "\n");
+        System.out.println("\nTotal hours worked month " + (month + 1) + ": "
+            + schedule.getTotalHoursMonth(month) + "\n");
 
         return String.valueOf(schedule.getTotalHoursMonth(0));
     }

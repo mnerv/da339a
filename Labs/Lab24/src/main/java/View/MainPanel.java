@@ -1,12 +1,11 @@
 package View;
 
 import Controller.Controller;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import javax.swing.*;
 
 public class MainPanel extends JPanel implements ActionListener {
     private int width;
@@ -72,15 +71,13 @@ public class MainPanel extends JPanel implements ActionListener {
         add(splitPane);
 
         btnOK.addActionListener(this);
-
     }
 
     private String[][] setTestValues(int rows, int columns) {
         String[][] emptyData = new String[rows][columns];
 
         for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < columns; col++)
-                emptyData[row][col] = "";
+            for (int col = 0; col < columns; col++) emptyData[row][col] = "";
         }
         return emptyData;
     }
@@ -93,7 +90,8 @@ public class MainPanel extends JPanel implements ActionListener {
                 double hours = Double.parseDouble(txtHours.getText());
                 controller.setHours(day, month, hours);
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid input", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(
+                    null, "Invalid input", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
