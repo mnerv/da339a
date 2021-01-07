@@ -12,16 +12,22 @@ import BankSystem.View.MainView;
 public class BankController {
     private MainView view;
 
-    // @formatter:off
+    // clang-format off
 
     // Main menu options
     private final String[] mainMenuOptions = {
-        "List customers", "New customer", "Edit customer", "Exit"};
+        "List customers",
+        "New customer",
+        "Edit customer",
+        "Exit"
+    };
 
     // Customer view option, this is used when
     // where in an edit state for customer
     private final String[] customerOptions = {
-        "Add new account", "Select account", "Go back to Main Menu"};
+        "Add new account",
+        "Select account",
+        "Go back to Main Menu"};
 
     // Account type options, this can only be
     // accessed when there is customer selected
@@ -30,11 +36,14 @@ public class BankController {
         // "Corporate",
         // "Credit",
         // "Pension",
-        "Salary", "Saving", "Cancel"};
+        "Salary",
+        "Saving",
+        "Cancel"
+    };
 
     enum State { MainMenu, CreateCustomer, CustomerView, AccountView }
 
-    // @formatter:on
+    // clang-format on
 
     // State management
     private State currentState = State.MainMenu;

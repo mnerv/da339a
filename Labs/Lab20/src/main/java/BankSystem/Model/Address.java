@@ -31,7 +31,6 @@ public class Address {
 
     @Override
     public String toString() {
-        String strOut = String.format("%s %s %s", street, city, zipCode);
-        return strOut;
+        return String.format("%s %s %s", street, city, zipCode);
     }
 }
