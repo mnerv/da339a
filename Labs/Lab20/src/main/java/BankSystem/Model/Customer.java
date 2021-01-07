@@ -4,7 +4,7 @@ import BankSystem.Model.Accounts.*;
 
 /**
  * Customer
- * 
+ *
  * @discussion The Customer class manage their own accounts. Only one type of
  *             account is allowed(this might not be true).
  */
@@ -54,5 +54,4 @@ public class Customer extends Person {
         }
         return accountList;
     }
-
 }

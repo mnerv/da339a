@@ -1,7 +1,7 @@
 package PostOffice.Model;
 
 public interface IMailItem {
-  public double getCost();
+    public double getCost();
 
-  public void setCost(double cost);
+    public void setCost(double cost);
 }
