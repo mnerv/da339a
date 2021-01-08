@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Order
@@ -10,14 +11,14 @@ public class Order {
     private List<Entity> productList;
     private List<Integer> quantityList;
 
-    long id;
+    int id;
 
     public Order() {
         productList = new ArrayList<Entity>();
         quantityList = new ArrayList<Integer>();
     }
 
-    public long getID() {
+    public int getID() {
         return id;
     }
 
@@ -80,7 +81,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return String.format("#%d: Total price: %.2f kr", id, getTotal());
+        return String.format("#%d", id, getTotal());
     }
 
     public double getTotal() {

@@ -1,7 +1,7 @@
 package Model.Topping;
 
 /**
- * Toppings as objects containing the different type of toppings, price
+ * Predefined toppings
  */
 public interface Toppings {
     Topping TomatoSauce = new Topping("Tomato Sauce", 10.0);
@@ -18,4 +18,5 @@ public interface Toppings {
     Topping Pork = new Topping("Pork", 205.0);
     Topping Shrimps = new Topping("Shrimps", 205.0);
     Topping BearnaiseSauce = new Topping("Béarnaise sauce", 205.0);
+    Topping Peperoncino = new Topping("Peperoncino", 5.0);
 }

@@ -13,7 +13,7 @@ public class OrderManager {
     Topping toppingList[];
 
     List<Order> orders;
-    long orderID = 0;
+    int orderID = 0;
     int selectedOrder = -1;
 
     boolean isOver18 = false;
@@ -58,13 +58,11 @@ public class OrderManager {
         pizza.addTopping(Toppings.Cheese);
         pizzaList.add(pizza);
 
-        pizza = new Pizza("Sven Special");
-        pizza.addTopping(Toppings.TomatoSauce);
+        pizza = new Pizza("Chicken pizza");
+        pizza.addTopping(Toppings.Chicken);
         pizza.addTopping(Toppings.Cheese);
-        pizza.addTopping(Toppings.Pork);
-        pizza.addTopping(Toppings.Shrimps);
-        pizza.addTopping(Toppings.BearnaiseSauce);
-        pizza.addTopping(Toppings.Ham);
+        pizza.addTopping(Toppings.TomatoSauce);
+        pizza.addTopping(Toppings.Peperoncino);
         pizzaList.add(pizza);
     }
 

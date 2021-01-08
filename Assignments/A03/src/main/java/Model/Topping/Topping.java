@@ -1,6 +1,10 @@
 package Model.Topping;
 
+import java.util.Locale;
+
 public class Topping {
+    private final Locale locale = new Locale("en", "UK");
+
     private String name;
     private double price;
 
@@ -18,7 +22,7 @@ public class Topping {
     }
 
     public String getInfo() {
-        return String.format("%s, Price: %.2f kr", name, price);
+        return String.format(locale, "%s, Price: %.2f kr", name, price);
     }
 
     @Override

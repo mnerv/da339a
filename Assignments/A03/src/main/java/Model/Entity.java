@@ -6,11 +6,6 @@ public abstract class Entity implements IEntity {
 
     protected double price;
 
-    public Entity() {
-        name = "n/a";
-        price = 0;
-    }
-
     @Override
     public EntityType getType() {
         return type;

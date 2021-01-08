@@ -1,10 +1,12 @@
 package Model;
 
 import Model.Topping.*;
+import java.util.Locale;
 
 public class Pizza extends Entity {
     private final int MAX_TOPPINGS = 6;
     private final double BASE_PRICE = 30.00;
+    private final Locale locale = new Locale("en", "UK");
 
     private int toppingCount = 0;
     private Topping[] toppings = new Topping[MAX_TOPPINGS];
@@ -71,24 +73,20 @@ public class Pizza extends Entity {
         return tmp;
     }
 
-    // used in the cart
     @Override
     public String toString() {
-        // use for cart list
-        return String.format("%s, Price: %.2f kr", name, price);
+        return String.format(locale, "%s, Price: %.2f kr", name, price);
     }
 
-    // used to choose from
     @Override
     public String getInfo() {
-        // Arrays.toString(toppings),
         String t = "";
         for (int i = 0; i < toppingCount; i++) {
             t += toppings[i].getName();
-            if (i < toppings.length - 1)
+            if (i < toppingCount - 1)
                 t += ", ";
         }
 
-        return String.format("%s, Toppings: %s Price: %.2f kr", name, t, price);
+        return String.format(locale, "%s: %s, Price: %.2f kr", name, t, price);
     }
 }

@@ -6,6 +6,7 @@ import Model.OrderManager;
 import Model.Pizza;
 import Model.Topping.Topping;
 import View.MainView;
+import java.util.Locale;
 
 /**
  * Controller
@@ -21,9 +22,11 @@ public class Controller {
 
     Pizza customPizza;
 
-    public Controller() {
+    public Controller(MainView view) {
+        this.view = view;
+
         manager = new OrderManager();
-        // view = new MainView(this);
+        newOrder = new Order();
     }
 
     /**
@@ -71,10 +74,11 @@ public class Controller {
         return tmpList;
     }
 
-    public void addProduct(int i, int quantity) {
-        if (newOrder == null)
-            newOrder = new Order();
+    public String[] getDetailList() {
+        return newOrder.getProductList();
+    }
 
+    public void addProduct(int i, int quantity) {
         switch (type) {
             case Food:
                 addPizza(i, quantity);
@@ -83,8 +87,6 @@ public class Controller {
                 addBeverage(i, quantity);
                 break;
         }
-
-        // view.updateCartList(newOrder.getProductList());
     }
 
     // TODO: Fix this so that loop is not needed, it's inefficient
@@ -103,7 +105,6 @@ public class Controller {
 
     public void removeProductAt(int i, int quantity) {
         newOrder.removeProductAt(i, quantity);
-        // view.updateCartList(newOrder.getProductList());
     }
 
     public boolean checkout() {
@@ -113,8 +114,6 @@ public class Controller {
             manager.addOrder(tmp);
 
             newOrder = new Order();
-            // view.updateOrderList(manager.getOrderList());
-            // view.updateCartList(newOrder.getProductList());
             return true;
         }
 
@@ -126,7 +125,6 @@ public class Controller {
     }
 
     public void newCustomPizza(String name) {
-        customPizza = null;
         customPizza = new Pizza(name);
     }
 
@@ -134,15 +132,15 @@ public class Controller {
         manager.addCustomPizza(customPizza);
     }
 
-    public void addTopping(int i) {
-        customPizza.addTopping(manager.getToppingList()[i]);
+    public boolean addTopping(int i) {
+        return customPizza.addTopping(manager.getToppingList()[i]);
     }
 
     public void removeToppingAt(int i) {
         customPizza.removeToppingAt(i);
     }
 
-    public String[] getAddedTopping() {
+    public String[] getAddedToppingList() {
         return customPizza.getToppings();
     }
 
@@ -151,7 +149,7 @@ public class Controller {
     }
 
     public String getTotal() {
-        return String.format("%.2f kr", newOrder.getTotal());
+        return String.format(new Locale("en", "UK"), "%.2f kr", newOrder.getTotal());
     }
 
     public boolean setSelectOrder(int i) {
@@ -171,7 +169,7 @@ public class Controller {
         return formattedString;
     }
 
-    public long getSelectedOrderID() {
+    public int getSelectedOrderID() {
         return manager.getSelectedOrder().getID();
     }
 
