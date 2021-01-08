@@ -3,10 +3,9 @@ package Model;
 import Model.Topping.*;
 
 public class Pizza extends Entity {
-    final int MAX_TOPPINGS = 6;
-    final double BASE_PRICE = 30.00;
+    private final int MAX_TOPPINGS = 6;
+    private final double BASE_PRICE = 30.00;
 
-    private int maxToppings = MAX_TOPPINGS;
     private int toppingCount = 0;
     private Topping[] toppings = new Topping[MAX_TOPPINGS];
 
@@ -38,7 +37,9 @@ public class Pizza extends Entity {
     }
 
     public boolean removeToppingAt(int index) {
-        if (index > -1 && index < maxToppings - 1 && toppings[index] != null) {
+        if (index > -1 && index < MAX_TOPPINGS - 1 && toppings[index] != null) {
+            price -= toppings[index].getPrice();
+
             toppings[index] = null;
             toppingCount--;
 
@@ -70,12 +71,14 @@ public class Pizza extends Entity {
         return tmp;
     }
 
+    // used in the cart
     @Override
     public String toString() {
         // use for cart list
-        return String.format("Pizza: %s, Price: %.2f", name, price);
+        return String.format("%s, Price: %.2f kr", name, price);
     }
 
+    // used to choose from
     @Override
     public String getInfo() {
         // Arrays.toString(toppings),
@@ -86,6 +89,6 @@ public class Pizza extends Entity {
                 t += ", ";
         }
 
-        return String.format("%s, Toppings: %s, Price: %.2f kr", name, t, price);
+        return String.format("%s, Toppings: %s Price: %.2f kr", name, t, price);
     }
 }

@@ -37,18 +37,26 @@ public class MainView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primary = stage;
-        c = new Controller(this);
+        // c = new Controller(this);
 
         var grid = new GridPane();
         grid.setPadding(new Insets(10));
-        // grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(true);
 
         var titleFont = new Font("Arial", 16);
 
         // Add the header text
+        var productsHBox = new HBox();
         var lblPizzas = new Label("Pizzas");
+
         lblPizzas.setFont(titleFont);
-        grid.add(lblPizzas, 0, 0);
+        var switchProductBtn = new Button("Drinks");
+        switchProductBtn.setOnAction(e -> onSwitchProductBtn());
+        switchProductBtn.setAlignment(Pos.CENTER_RIGHT);
+        productsHBox.setSpacing(100);
+        productsHBox.getChildren().addAll(lblPizzas, switchProductBtn);
+
+        grid.add(productsHBox, 0, 0);
 
         var lblDetail = new Label("Order details");
         lblDetail.setFont(titleFont);
@@ -60,19 +68,22 @@ public class MainView extends Application {
 
         // Items list column
         productList = new ListView<>();
-        productList.getItems().addAll(c.getPizzaList());
+        // productList.getItems().addAll(c.getPizzaList());
         productList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         grid.add(productList, 0, 1);
 
         // Order detail column
         detailsContainer = new VBox();
         detailsContainer.setSpacing(10);
-        detailsContainer.setAlignment(Pos.TOP_CENTER);
+        detailsContainer.setAlignment(Pos.TOP_LEFT);
         detailsContainer.setPadding(new Insets(0, 0, 5, 0));
         detailList = new ListView<>();
         detailList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         lblTotal = new Label("Total: 0.00 kr");
+        VBox.setVgrow(detailList, Priority.ALWAYS);
         detailsContainer.getChildren().addAll(detailList, lblTotal);
+        detailsContainer.setFillWidth(true);
+
         grid.add(detailsContainer, 1, 1);
 
         // Order list column
@@ -86,18 +97,10 @@ public class MainView extends Application {
         grid.add(bottomHBox, 0, 2, 3, 2);
 
         var btnAdd = new Button("Add");
-        btnAdd.setOnAction(e -> onButtonClicked(ButtonType.Add));
+        btnAdd.setOnAction(e -> onAddBtn());
         var btnRemove = new Button("Remove");
-        btnRemove.setOnAction(e -> onButtonClicked(ButtonType.Remove));
-        var btnRemoveAll = new Button("Remove all");
-        btnRemoveAll.setOnAction(e -> onButtonClicked(ButtonType.RemoveAll));
-        var btnAddOrder = new Button("Add order");
-        btnAddOrder.setOnAction(e -> onButtonClicked(ButtonType.AddOrder));
-        var btnRemoveOrder = new Button("Remove order");
-        btnRemoveOrder.setOnAction(e -> onButtonClicked(ButtonType.RemoveOrder));
-
-        bottomHBox.getChildren().addAll(
-            btnAdd, btnRemove, btnRemoveAll, btnAddOrder, btnRemoveOrder);
+        btnRemove.setOnAction(e -> onRemoveBtn());
+        bottomHBox.getChildren().addAll(btnAdd, btnRemove);
 
         // Set Column and Row gap
         grid.setHgap(10);
@@ -142,19 +145,14 @@ public class MainView extends Application {
         lblTotal.setText("Total: " + value + " kr.");
     }
 
-    public void onButtonClicked(ButtonType type) {
-        switch (type) {
-            case Add:
-                break;
-            case Remove:
-                break;
-            case RemoveAll:
-                break;
-            default:
-                break;
-        }
+    public void onAddBtn() {}
 
-        System.out.println(type.toString());
+    public void onRemoveBtn() {}
+
+    public void onRemoveAllBtn() {}
+
+    public void onSwitchProductBtn() {
+        System.out.println("Hello");
     }
 
     public void setSelectedList(ListType type) {

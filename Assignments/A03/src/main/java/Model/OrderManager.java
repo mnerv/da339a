@@ -7,20 +7,22 @@ import java.util.List;
 
 public class OrderManager {
     List<Pizza> pizzaList;
-    List<Drinks> drinksList;
+    List<Beverage> beverageList;
 
     final int TOPPINGS_COUNT = 14;
     Topping toppingList[];
 
     List<Order> orders;
     long orderID = 0;
-    int selectedOrder = 0;
+    int selectedOrder = -1;
+
+    boolean isOver18 = false;
 
     public OrderManager() {
         toppingList = new Topping[TOPPINGS_COUNT];
         orders = new ArrayList<Order>();
         pizzaList = new ArrayList<Pizza>();
-        drinksList = new ArrayList<Drinks>();
+        beverageList = new ArrayList<Beverage>();
 
         initPizzaList();
         initToppingList();
@@ -28,7 +30,7 @@ public class OrderManager {
     }
 
     /**
-     * Initialize predefined pizzas list
+     * Initialize predefined pizza list
      */
     private void initPizzaList() {
         Pizza pizza = new Pizza("Vesuvio");
@@ -86,19 +88,44 @@ public class OrderManager {
         toppingList[13] = Toppings.BearnaiseSauce;
     }
 
-    // TODO: Create Drinks List
-    private void initDrinksList() {}
+    // Drink list both alcoholic and non alcoholic
+    private void initDrinksList() {
+        Beverage beverage;
 
-    public boolean setSelectedOrder(int id) {
-        if (id > 0 && id < orders.size()) {
-            selectedOrder = id;
-            return true;
-        }
+        beverage = new Beverage("Carlsberg", 55.95, 3.5);
+        beverageList.add(beverage);
 
-        return false;
+        beverage = new Beverage("Vodka", 95.95, 40.0);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Cider", 75.95, 4.5);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Pilsner", 15.0, 2.25);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Red wine", 150.55, 6.5);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Water", 0.0);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Trocadero", 7.5);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Fanta", 8.0);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Coca cola", 8.5);
+        beverageList.add(beverage);
+
+        beverage = new Beverage("Non-alcoholic cider", 35.0);
+        beverageList.add(beverage);
     }
 
     /**
+     * Add order to the order list
+     *
      * @param order
      */
     public void addOrder(Order order) {
@@ -116,7 +143,7 @@ public class OrderManager {
      * @return ToF: If selected index is within the range.
      */
     public boolean selectOrder(int i) {
-        if (i > 0 && i < drinksList.size()) {
+        if (i > -1 && i < orders.size()) {
             selectedOrder = i;
             return true;
         }
@@ -124,6 +151,10 @@ public class OrderManager {
         return false;
     }
 
+    /**
+     * Get selected order. If there's no selection i.e the selection index is at -1 then null is
+     * returned.
+     */
     public Order getSelectedOrder() {
         if (selectedOrder > -1)
             return orders.get(selectedOrder);
@@ -143,31 +174,37 @@ public class OrderManager {
         return tmpList;
     }
 
-    public String[] getPizzaList() {
-        String tmpList[] = new String[pizzaList.size()];
-
-        for (int i = 0; i < tmpList.length; i++) {
-            tmpList[i] = pizzaList.get(i).getInfo();
-        }
-
-        return tmpList;
+    public void addCustomPizza(Pizza pizza) {
+        pizzaList.add(pizza);
     }
 
-    public String[] getToppingList() {
-        String tmpList[] = new String[TOPPINGS_COUNT];
-
-        for (int i = 0; i < tmpList.length; i++) tmpList[i] = toppingList[i].getInfo();
-
-        return tmpList;
+    public List<Pizza> getPizzaList() {
+        return pizzaList;
     }
 
-    public String[] getDrinkList() {
-        String tmpList[] = new String[drinksList.size()];
+    public Topping[] getToppingList() {
+        return toppingList;
+    }
 
-        for (int i = 0; i < tmpList.length; i++) {
-            tmpList[i] = drinksList.get(i).getInfo();
+    public List<Beverage> getBeverageList() {
+        List<Beverage> list = new ArrayList<>();
+
+        for (int i = 0; i < beverageList.size(); i++) {
+            if (isOver18) {
+                list.add(beverageList.get(i));
+            } else if (!beverageList.get(i).getIsAlcohol()) {
+                list.add(beverageList.get(i));
+            }
         }
 
-        return tmpList;
+        return list;
+    }
+
+    public boolean getIsOver18() {
+        return isOver18;
+    }
+
+    public void setIsOver18(boolean tof) {
+        isOver18 = tof;
     }
 }

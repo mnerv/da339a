@@ -22,17 +22,23 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public abstract String getInfo();

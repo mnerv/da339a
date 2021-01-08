@@ -1,8 +1,8 @@
 package Model.Topping;
 
 public class Topping {
-    String name;
-    double price;
+    private String name;
+    private double price;
 
     public Topping(String name, Double price) {
         this.name = name;
@@ -18,7 +18,7 @@ public class Topping {
     }
 
     public String getInfo() {
-        return String.format("%s, Price: %.2f", name, price);
+        return String.format("%s, Price: %.2f kr", name, price);
     }
 
     @Override
