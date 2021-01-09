@@ -81,11 +81,6 @@ public class Order {
         return s;
     }
 
-    @Override
-    public String toString() {
-        return String.format("#%d", id, getTotal());
-    }
-
     public double getTotal() {
         double total = 0.0;
 
@@ -93,5 +88,10 @@ public class Order {
             total += productList.get(i).getPrice() * quantityList.get(i);
 
         return total;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("#%d", id, getTotal());
     }
 }

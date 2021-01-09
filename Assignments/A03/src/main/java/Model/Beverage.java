@@ -6,7 +6,7 @@ import java.util.Locale;
  * Drinks
  */
 public class Beverage extends Entity {
-    private final Locale locale = new Locale("en", "UK");
+    private final Locale LOCALE = new Locale("en", "UK");
 
     private double alcoholContent;
 
@@ -24,14 +24,8 @@ public class Beverage extends Entity {
         return price;
     }
 
-    // used in the cart
-    @Override
-    public String toString() {
-        String format = String.format("%s, ", name);
-        if (alcoholContent > 0.)
-            format += String.format(locale, "Alcohol: %.2f", alcoholContent);
-        return String.format(locale, "%s, Price: %s", format, price);
-        // return String.format("%s, Alcohol: %.2f %%, Price: %s kr", name, alcoholContent, price);
+    public boolean getIsAlcohol() {
+        return alcoholContent > 0.0;
     }
 
     // what to order
@@ -40,7 +34,13 @@ public class Beverage extends Entity {
         return toString();
     }
 
-    public boolean getIsAlcohol() {
-        return alcoholContent > 0.0;
+    // used in the cart
+    @Override
+    public String toString() {
+        String format = String.format("%s, ", name);
+        if (alcoholContent > 0.)
+            format += String.format(LOCALE, "Alcohol: %.2f", alcoholContent);
+        return String.format(LOCALE, "%s, Price: %s", format, price);
+        // return String.format("%s, Alcohol: %.2f %%, Price: %s kr", name, alcoholContent, price);
     }
 }

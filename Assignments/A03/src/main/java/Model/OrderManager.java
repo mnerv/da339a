@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager {
-    List<Pizza> pizzaList;
-    List<Beverage> beverageList;
+    private List<Pizza> pizzaList;
+    private List<Beverage> beverageList;
 
-    final int TOPPINGS_COUNT = 14;
-    Topping toppingList[];
+    private final int TOPPINGS_COUNT = 14;
+    private Topping toppingList[];
 
-    List<Order> orders;
-    int orderID = 0;
-    int selectedOrder = -1;
+    private List<Order> orders;
+    private int orderID = 0;
+    private int selectedOrder = -1;
 
-    boolean isOver18 = false;
+    private boolean isOver18 = false;
 
     public OrderManager() {
         toppingList = new Topping[TOPPINGS_COUNT];
@@ -27,6 +27,91 @@ public class OrderManager {
         initPizzaList();
         initToppingList();
         initDrinksList();
+    }
+
+    /**
+     * Add order to the order list
+     *
+     * @param order
+     */
+    public void addOrder(Order order) {
+        order.id = orderID;
+        orderID++;
+
+        orders.add(order);
+    }
+
+    /**
+     * Select an order
+     *
+     * @param i Order index in the list
+     *
+     * @return ToF: If selected index is within the range.
+     */
+    public boolean selectOrder(int i) {
+        if (i > -1 && i < orders.size()) {
+            selectedOrder = i;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get selected order. If there's no selection i.e the selection index is at -1 then null is
+     * returned.
+     */
+    public Order getSelectedOrder() {
+        if (selectedOrder > -1)
+            return orders.get(selectedOrder);
+
+        return null;
+    }
+
+    public void updateSelectedOrder(Order order) {
+        if (selectedOrder > -1)
+            orders.set(selectedOrder, order);
+    }
+
+    public String[] getOrderList() {
+        String tmpList[] = new String[orders.size()];
+        for (int i = 0; i < tmpList.length; i++) tmpList[i] = orders.get(i).toString();
+
+        return tmpList;
+    }
+
+    public void addCustomPizza(Pizza pizza) {
+        pizzaList.add(pizza);
+    }
+
+    public List<Pizza> getPizzaList() {
+        return pizzaList;
+    }
+
+    public Topping[] getToppingList() {
+        return toppingList;
+    }
+
+    public List<Beverage> getBeverageList() {
+        List<Beverage> list = new ArrayList<>();
+
+        for (int i = 0; i < beverageList.size(); i++) {
+            if (isOver18) {
+                list.add(beverageList.get(i));
+            } else if (!beverageList.get(i).getIsAlcohol()) {
+                list.add(beverageList.get(i));
+            }
+        }
+
+        return list;
+    }
+
+    public boolean getIsOver18() {
+        return isOver18;
+    }
+
+    public void setIsOver18(boolean tof) {
+        isOver18 = tof;
     }
 
     /**
@@ -119,90 +204,5 @@ public class OrderManager {
 
         beverage = new Beverage("Non-alcoholic cider", 35.0);
         beverageList.add(beverage);
-    }
-
-    /**
-     * Add order to the order list
-     *
-     * @param order
-     */
-    public void addOrder(Order order) {
-        order.id = orderID;
-        orderID++;
-
-        orders.add(order);
-    }
-
-    /**
-     * Select an order
-     *
-     * @param i Order index in the list
-     *
-     * @return ToF: If selected index is within the range.
-     */
-    public boolean selectOrder(int i) {
-        if (i > -1 && i < orders.size()) {
-            selectedOrder = i;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Get selected order. If there's no selection i.e the selection index is at -1 then null is
-     * returned.
-     */
-    public Order getSelectedOrder() {
-        if (selectedOrder > -1)
-            return orders.get(selectedOrder);
-
-        return null;
-    }
-
-    public void updateSelectedOrder(Order order) {
-        if (selectedOrder > -1)
-            orders.set(selectedOrder, order);
-    }
-
-    public String[] getOrderList() {
-        String tmpList[] = new String[orders.size()];
-        for (int i = 0; i < tmpList.length; i++) tmpList[i] = orders.get(i).toString();
-
-        return tmpList;
-    }
-
-    public void addCustomPizza(Pizza pizza) {
-        pizzaList.add(pizza);
-    }
-
-    public List<Pizza> getPizzaList() {
-        return pizzaList;
-    }
-
-    public Topping[] getToppingList() {
-        return toppingList;
-    }
-
-    public List<Beverage> getBeverageList() {
-        List<Beverage> list = new ArrayList<>();
-
-        for (int i = 0; i < beverageList.size(); i++) {
-            if (isOver18) {
-                list.add(beverageList.get(i));
-            } else if (!beverageList.get(i).getIsAlcohol()) {
-                list.add(beverageList.get(i));
-            }
-        }
-
-        return list;
-    }
-
-    public boolean getIsOver18() {
-        return isOver18;
-    }
-
-    public void setIsOver18(boolean tof) {
-        isOver18 = tof;
     }
 }

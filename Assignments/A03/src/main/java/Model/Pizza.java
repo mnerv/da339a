@@ -6,7 +6,7 @@ import java.util.Locale;
 public class Pizza extends Entity {
     private final int MAX_TOPPINGS = 6;
     private final double BASE_PRICE = 30.00;
-    private final Locale locale = new Locale("en", "UK");
+    private final Locale LOCALE = new Locale("en", "UK");
 
     private int toppingCount = 0;
     private Topping[] toppings = new Topping[MAX_TOPPINGS];
@@ -74,11 +74,6 @@ public class Pizza extends Entity {
     }
 
     @Override
-    public String toString() {
-        return String.format(locale, "%s, Price: %.2f kr", name, price);
-    }
-
-    @Override
     public String getInfo() {
         String t = "";
         for (int i = 0; i < toppingCount; i++) {
@@ -87,6 +82,11 @@ public class Pizza extends Entity {
                 t += ", ";
         }
 
-        return String.format(locale, "%s: %s, Price: %.2f kr", name, t, price);
+        return String.format(LOCALE, "%s: %s, Price: %.2f kr", name, t, price);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(LOCALE, "%s, Price: %.2f kr", name, price);
     }
 }
