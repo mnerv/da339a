@@ -8,6 +8,7 @@ public abstract class Ship {
     protected final int size;
     protected int hp;
     protected boolean isDestroyed = false;
+    protected int id;
 
     // Ship's origin
     private int row, col;
