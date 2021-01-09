@@ -21,6 +21,9 @@ public class GUIView extends View {
 
     private JButton newGameBtn;
 
+    private String hitSprite = "╳";
+    private String missedSprite = "⬤";
+
     public GUIView() {
         frame = new JFrame();
         changeUI();
@@ -74,7 +77,7 @@ public class GUIView extends View {
 
     private void onButtonClicked(int id) {
         var btn = (JButton) gridPanel.getComponent(id);
-        btn.setText("0");
+        btn.setText(missedSprite);
         btn.setEnabled(false);
     }
 
@@ -82,10 +85,13 @@ public class GUIView extends View {
     public void initGrid() {
         gridPanel.setLayout(new GridLayout(row, col));
 
+        Font font = new Font("Arial", Font.PLAIN, 42);
+
         for (int i = 0; i < row * col; i++) {
             final int id = i;
 
             var btn = new JButton();
+            // btn.setFont(font);
             btn.setPreferredSize(new Dimension(10, 10));
             btn.addActionListener(e -> onButtonClicked(id));
 
