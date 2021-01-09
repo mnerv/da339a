@@ -84,4 +84,7 @@ public class ConsoleView extends View {
 
         System.out.println(boardFormat);
     }
+
+    @Override
+    public void initGrid() {}
 }

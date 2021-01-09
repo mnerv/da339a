@@ -12,49 +12,29 @@ import View.*;
 public class GameController {
     int boardSize = 10;
 
-    // View view;
+    View view;
     Board board;
 
     public GameController() {
         board = new Board(boardSize);
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                String sprite = " ";
-                if (board.data[i * boardSize + j] != null) {
-                    switch (board.data[i * boardSize + j].getType()) {
-                        case Carrier:
-                            sprite = "A";
-                            break;
-                        case Battleship:
-                            sprite = "B";
-                            break;
-                        case Cruiser:
-                            sprite = "C";
-                            break;
-                        case Submarine:
-                            sprite = "D";
-                            break;
-                        case Destroyer:
-                            sprite = "E";
-                            break;
-                    }
-                }
+    }
 
-                if (j == 0)
-                    System.out.print("|");
-                System.out.print(sprite);
-                System.out.print("|");
-            }
-            System.out.println();
-        }
+    public GameController(View view) {
+        this();
+        setView(view);
+
+        view.setTitle("Assignment 04 - Battleship");
+        view.setGridSize(10, 10);
+        view.initGrid();
     }
 
     public void setView(View view) {
-        // this.view = view;
+        this.view = view;
+        this.view.setController(this);
     }
 
     public void run() {
-        // view.run();
+        view.run();
     }
 
     /**

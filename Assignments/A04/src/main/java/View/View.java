@@ -1,5 +1,7 @@
 package View;
 
+import Controller.GameController;
+
 /**
  * View is the base class for all the main view.
  *
@@ -9,6 +11,10 @@ package View;
  * </p>
  */
 public abstract class View {
+    protected String title;
+    protected GameController controller;
+    protected int row, col;
+
     /**
      * Call once to start the program
      */
@@ -18,4 +24,23 @@ public abstract class View {
      * Calls everytime anything is updated
      */
     public abstract void update();
+
+    public abstract void initGrid();
+
+    public void setGridSize(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setController(GameController c) {
+        controller = c;
+    }
 }

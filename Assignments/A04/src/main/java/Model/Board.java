@@ -24,9 +24,6 @@ public class Board {
         maxShips = ShipType.values().length;
 
         rng = new Random();
-        // randomPlacement();
-        Carrier c = new Carrier();
-        placeShip(0, 4, c);
     }
 
     private Ship getData(int row, int col) {
@@ -52,17 +49,17 @@ public class Board {
     private boolean placeShip(int row, int col, Ship ship) {
         boolean status = false;
 
-        if (getData(row, col) == null) {
-            ship.setOrigin(row, col);
-            // Magic number, will need to be refactor
-            int dirX = 1, dirY = 0; // Direction
-            boolean validRow = false, validCol = false;
-            int len = ship.getSize();
+        // if (getData(row, col) == null) {
+        //     ship.setOrigin(row, col);
+        //     // Magic number, will need to be refactor
+        //     int dirX = 1, dirY = 0; // Direction
+        //     boolean validRow = false, validCol = false;
+        //     int len = ship.getSize();
 
-            // TODO: Make it so the origin is dynamic instead.
-            for (int i = 0; i < ship.getSize(); i++) {
-            }
-        }
+        //     // TODO: Make it so the origin is dynamic instead.
+        //     for (int i = 0; i < ship.getSize(); i++) {
+        //     }
+        // }
 
         return status;
     }

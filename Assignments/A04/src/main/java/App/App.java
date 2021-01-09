@@ -9,17 +9,8 @@ import View.*;
  */
 public class App {
     public static void main(String[] args) {
-        GameController gc = new GameController();
-
-        // if (args.length > 0 && args[0].equalsIgnoreCase("-c")) {
-        //     ConsoleView view = new ConsoleView(gc);
-        //     gc.setView(view);
-        // } else {
-        //     // TODO: GUI View
-        //     GUIView view = new GUIView();
-        //     gc.setView(view);
-        // }
-
+        GUIView v = new GUIView();
+        GameController gc = new GameController(v);
         gc.run();
     }
 }
