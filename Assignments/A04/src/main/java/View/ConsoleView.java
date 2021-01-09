@@ -1,5 +1,7 @@
 package View;
 
+import Controller.GameController;
+
 public class ConsoleView extends View {
     // clang-format off
   final String boardSprite =
@@ -32,11 +34,13 @@ public class ConsoleView extends View {
 
     boolean isRunning = true;
 
+    GameController controller;
+
     /**
      * Create a 10x10 view
      */
-    public ConsoleView() {
-        this(10);
+    public ConsoleView(GameController controller) {
+        this(controller, 10);
     }
 
     /**
@@ -44,8 +48,8 @@ public class ConsoleView extends View {
      *
      * @param size Size of the board
      */
-    public ConsoleView(int size) {
-        initBoardFormat();
+    public ConsoleView(GameController controller, int size) {
+        this.controller = controller;
         this.size = size;
     }
 
@@ -55,20 +59,29 @@ public class ConsoleView extends View {
     @Override
     public void update() {}
 
-    public void initBoardFormat() {
-        boardFormat = boardSprite.replaceAll("x", "%s");
-    }
+    private void showBoard() {
+        int[] boardData = controller.getBoardData();
 
-    public void showBoard(String boardData[]) {
         if (boardData.length > size)
             return;
 
-        String tmpFormat = boardFormat;
+        boardFormat = boardFormat;
 
         for (int i = 0; i < size * size; i++) {
-            tmpFormat.replace("x", boardData[i]);
+            switch (boardData[i]) {
+                case 1: // Miss
+                    boardFormat = boardFormat.replace(" x ", " ◦ ");
+                    break;
+                case 3: // Hit
+                    boardFormat = boardFormat.replace(" x ", " ✕ ");
+                    break;
+                case 0: // Empty
+                default:
+                    boardFormat = boardFormat.replace(" x ", "   ");
+                    break;
+            }
         }
 
-        System.out.println(tmpFormat);
+        System.out.println(boardFormat);
     }
 }

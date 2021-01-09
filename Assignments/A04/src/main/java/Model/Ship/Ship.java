@@ -9,6 +9,10 @@ public abstract class Ship {
     protected int hp;
     protected boolean isDestroyed = false;
 
+    // Ship's origin
+    private int row, col;
+    private int direction = 0; // 0 Vertical, 1 Horizontal
+
     public Ship(ShipType type, int size) {
         this.type = type;
         this.size = size;
@@ -51,5 +55,10 @@ public abstract class Ship {
      */
     public int getSize() {
         return size;
+    }
+
+    public void setOrigin(int row, int col) {
+        this.row = row;
+        this.col = col;
     }
 }
