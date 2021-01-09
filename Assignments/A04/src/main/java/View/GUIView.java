@@ -22,7 +22,7 @@ public class GUIView extends View {
     private JButton newGameBtn;
 
     private String hitSprite = "╳";
-    private String missedSprite = "⬤";
+    private String missedSprite = "●";
 
     public GUIView() {
         frame = new JFrame();
@@ -32,10 +32,11 @@ public class GUIView extends View {
         btnPanel.setLayout(new FlowLayout());
 
         newGameBtn = new JButton("New Game");
+        newGameBtn.addActionListener(e -> onNewGameBtn());
         btnPanel.add(newGameBtn);
 
         gridPanel = new JPanel();
-        gridPanel.setBackground(Color.BLUE);
+        // gridPanel.setBackground(Color.BLUE);
         gridPanel.setPreferredSize(new Dimension(500, 500));
 
         panel = new JPanel();
@@ -75,10 +76,24 @@ public class GUIView extends View {
         }
     }
 
+    private void onNewGameBtn() {
+        resetGrid();
+    }
+
     private void onButtonClicked(int id) {
+        frame.requestFocusInWindow();
+
         var btn = (JButton) gridPanel.getComponent(id);
         btn.setText(missedSprite);
         btn.setEnabled(false);
+    }
+
+    private void resetGrid() {
+        for (int i = 0; i < row * col; i++) {
+            var btn = (JButton) gridPanel.getComponent(i);
+            btn.setEnabled(true);
+            btn.setText("");
+        }
     }
 
     @Override
