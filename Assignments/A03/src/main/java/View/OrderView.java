@@ -216,8 +216,8 @@ public class OrderView {
                 break;
 
             try {
-                q = Integer.valueOf(input);
-            } catch (Exception e) {
+                q = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
                 q = -1;
             }
         }
@@ -238,8 +238,8 @@ public class OrderView {
                 break;
 
             try {
-                q = Integer.valueOf(input);
-            } catch (Exception e) {
+                q = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
                 q = -1;
             }
         }
