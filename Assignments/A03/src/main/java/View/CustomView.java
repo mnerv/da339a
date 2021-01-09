@@ -108,6 +108,7 @@ public class CustomView {
 
     private void onAddBtn() {
         int i = toppingList.getSelectionModel().getSelectedIndex();
+
         if (i > -1) {
             view.addTopping(i);
             updateLists();

@@ -27,7 +27,7 @@ public class Beverage extends Entity {
     // used in the cart
     @Override
     public String toString() {
-        String format = String.format("Drink: %s, ", name);
+        String format = String.format("%s, ", name);
         if (alcoholContent > 0.)
             format += String.format(locale, "Alcohol: %.2f", alcoholContent);
         return String.format(locale, "%s, Price: %s", format, price);

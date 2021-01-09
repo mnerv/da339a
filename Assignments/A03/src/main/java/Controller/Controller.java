@@ -19,7 +19,6 @@ public class Controller {
 
     // Temporary storage value
     Order newOrder;
-
     Pizza customPizza;
 
     public Controller(MainView view) {
@@ -89,18 +88,12 @@ public class Controller {
         }
     }
 
-    // TODO: Fix this so that loop is not needed, it's inefficient
     public void addPizza(int i, int quantity) {
-        for (int j = 0; j < quantity; j++) {
-            newOrder.addProduct(manager.getPizzaList().get(i));
-        }
+        newOrder.addProduct(manager.getPizzaList().get(i), quantity);
     }
 
-    // TODO: Fix this so that loop is not needed, it's inefficient
     public void addBeverage(int i, int quantity) {
-        for (int j = 0; j < quantity; j++) {
-            newOrder.addProduct(manager.getBeverageList().get(i));
-        }
+        newOrder.addProduct(manager.getBeverageList().get(i), quantity);
     }
 
     public void removeProductAt(int i, int quantity) {
@@ -129,7 +122,8 @@ public class Controller {
     }
 
     public void saveCustomPizza() {
-        manager.addCustomPizza(customPizza);
+        if (customPizza.getToppings().length > 0)
+            manager.addCustomPizza(customPizza);
     }
 
     public boolean addTopping(int i) {
@@ -175,7 +169,5 @@ public class Controller {
 
     public void setOver18(boolean tof) {
         manager.setIsOver18(tof);
-        // if (type == EntityType.Drink)
-        //     view.updateBeverageList(getBeverageList());
     }
 }

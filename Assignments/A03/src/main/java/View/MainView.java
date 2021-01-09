@@ -62,6 +62,10 @@ public class MainView extends Application {
         return c.getAddedToppingList();
     }
 
+    void setIsOver18(boolean tof) {
+        c.setOver18(tof);
+    }
+
     String getDetailTotal() {
         return c.getTotal();
     }

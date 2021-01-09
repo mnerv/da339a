@@ -7,16 +7,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class OrderView {
@@ -28,7 +33,11 @@ public class OrderView {
     ListView<String> orderList;
 
     VBox detailsContainer;
-    Label lblTotal;
+    Label totalLbl, productLbl;
+
+    String drinksTxt = "Drinks", pizzaTxt = "Pizza";
+    Button switchProductBtn;
+    CheckBox over18Cb;
 
     public OrderView(MainView view) {
         this.view = view;
@@ -41,11 +50,29 @@ public class OrderView {
 
         // Add the header text
         var productsHBox = new HBox();
-        var lblPizzas = new Label("Pizzas");
+        productLbl = new Label(pizzaTxt);
 
-        lblPizzas.setFont(titleFont);
-        productsHBox.setSpacing(100);
-        productsHBox.getChildren().addAll(lblPizzas);
+        var productBtnHBox = new HBox();
+        switchProductBtn = new Button(drinksTxt);
+        switchProductBtn.setOnAction(e -> onSwitchProductBtn());
+        over18Cb = new CheckBox("18+");
+        over18Cb.setOnAction(e -> onOver18());
+        productBtnHBox.setAlignment(Pos.CENTER_RIGHT);
+        productBtnHBox.setSpacing(10);
+        productBtnHBox.getChildren().addAll(switchProductBtn, over18Cb);
+
+        productLbl.setFont(titleFont);
+
+        productsHBox.setSpacing(10);
+        productsHBox.setAlignment(Pos.CENTER_LEFT);
+
+        HBox.setHgrow(productLbl, Priority.ALWAYS);
+        HBox.setHgrow(productBtnHBox, Priority.ALWAYS);
+        productLbl.setMaxWidth(Double.MAX_VALUE);
+        productBtnHBox.setMaxWidth(Double.MAX_VALUE);
+        productsHBox.getChildren().addAll(productLbl, productBtnHBox);
+        // productsHBox.setBackground(new Background(
+        //     new BackgroundFill(Color.web("#222222"), CornerRadii.EMPTY, Insets.EMPTY)));
 
         root.add(productsHBox, 0, 0);
 
@@ -70,9 +97,9 @@ public class OrderView {
         detailsContainer.setPadding(new Insets(0, 0, 5, 0));
         detailList = new ListView<>();
         detailList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        lblTotal = new Label("Total: 0.00 kr");
+        totalLbl = new Label("Total: 0.00 kr");
         VBox.setVgrow(detailList, Priority.ALWAYS);
-        detailsContainer.getChildren().addAll(detailList, lblTotal);
+        detailsContainer.getChildren().addAll(detailList, totalLbl);
         detailsContainer.setFillWidth(true);
 
         root.add(detailsContainer, 1, 1);
@@ -135,7 +162,7 @@ public class OrderView {
     }
 
     void setTotal(String value) {
-        lblTotal.setText("Total: " + value);
+        totalLbl.setText("Total: " + value);
     }
 
     void updateProductList(String list[]) {
@@ -153,6 +180,26 @@ public class OrderView {
     private void updateDetailView() {
         detailList.getItems().setAll(view.getDetailList());
         setTotal(view.getDetailTotal());
+    }
+
+    private void onSwitchProductBtn() {
+        if (productLbl.getText().equalsIgnoreCase(pizzaTxt)) {
+            switchProductBtn.setText(pizzaTxt);
+            productLbl.setText(drinksTxt);
+
+            productList.getItems().setAll(view.getBeverageList());
+        } else {
+            switchProductBtn.setText(drinksTxt);
+            productLbl.setText(pizzaTxt);
+
+            productList.getItems().setAll(view.getPizzaList());
+        }
+    }
+
+    private void onOver18() {
+        view.setIsOver18(over18Cb.isSelected());
+        if (productLbl.getText().equalsIgnoreCase(drinksTxt))
+            updateProductList(view.getBeverageList());
     }
 
     private void onCustomBtn() {

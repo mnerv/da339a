@@ -2,7 +2,6 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Order
@@ -22,21 +21,24 @@ public class Order {
         return id;
     }
 
-    public void addProduct(Entity entity) {
-        boolean isInList = false;
+    public void addProduct(Entity entity, int quantity) {
+        int location = -1;
+        boolean inList = false;
 
         for (int i = 0; i < productList.size(); i++) {
             if (entity.getName().equalsIgnoreCase(productList.get(i).name)) {
-                int q = quantityList.get(i);
-                quantityList.set(i, ++q);
-                isInList = true;
+                location = i;
+                inList = true;
                 break;
             }
         }
 
-        if (!isInList) {
+        if (inList) {
+            int q = quantityList.get(location);
+            quantityList.set(location, q + q);
+        } else {
             productList.add(entity);
-            quantityList.add(1);
+            quantityList.add(quantity);
         }
     }
 
