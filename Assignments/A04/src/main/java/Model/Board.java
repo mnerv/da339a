@@ -11,27 +11,83 @@ import java.util.Random;
  * </p>
  */
 public class Board {
-    public Ship data[];
-    int maxShips;
+    private Ship data[];
+    private final int maxShips;
 
-    int size;
-    Random rng;
+    private int shipCount;
+
+    private int size;
+    private Random rng;
+
+    private int shotCount = 0;
 
     public Board(int size) {
         this.size = size;
 
         data = new Ship[size * size];
         maxShips = ShipType.values().length;
+        shipCount = maxShips;
 
         rng = new Random();
     }
 
-    private Ship getData(int row, int col) {
-        return data[row * size + col];
+    public boolean shoot(int row, int col) {
+        return shoot(row * size + col);
     }
 
-    private void setData(int row, int col, Ship ship) {
+    public boolean shoot(int i) {
+        var s = data[i];
+        if (s != null) {
+            s.hit();
+            return true;
+        }
+
+        return false;
+    }
+
+    public void initData(int raw_data[]) {
+        Ship ships[] = {
+            new Carrier(),
+            new Battleship(),
+            new Cruiser(),
+            new Submarine(),
+            new Destroyer(),
+        };
+
+        for (int i = 0; i < raw_data.length; i++) {
+            if (raw_data[i] != 0)
+                data[i] = ships[raw_data[i] - 1];
+            else
+                data[i] = null;
+        }
+    }
+
+    public Ship getData(int row, int col) {
+        return getData(row * size + col);
+    }
+
+    public Ship getData(int i) {
+        var s = data[i];
+        shotCount++;
+
+        if (s != null && s.isDead())
+            shipCount--;
+
+        return s;
+    }
+
+    public void setData(int row, int col, Ship ship) {
         data[row * size + col] = ship;
+    }
+
+    public boolean isAllShipDestroyed() {
+        return shipCount == 0;
+    }
+
+    public void reset() {
+        data = new Ship[size * size];
+        shipCount = maxShips;
+        shotCount = 0;
     }
 
     /**
@@ -46,20 +102,10 @@ public class Board {
      *
      * @return True: Valid placement, False: Invalid placement
      */
-    private boolean placeShip(int row, int col, Ship ship) {
+    public boolean placeShip(int row, int col, Ship ship) {
         boolean status = false;
 
-        // if (getData(row, col) == null) {
-        //     ship.setOrigin(row, col);
-        //     // Magic number, will need to be refactor
-        //     int dirX = 1, dirY = 0; // Direction
-        //     boolean validRow = false, validCol = false;
-        //     int len = ship.getSize();
-
-        //     // TODO: Make it so the origin is dynamic instead.
-        //     for (int i = 0; i < ship.getSize(); i++) {
-        //     }
-        // }
+        // TODO: Check for overlapping when placing ships
 
         return status;
     }

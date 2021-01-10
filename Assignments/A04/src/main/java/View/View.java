@@ -27,6 +27,14 @@ public abstract class View {
 
     public abstract void initGrid();
 
+    public abstract boolean confirmMessage(String title, String message);
+
+    public abstract void infoMessage(String title, String message);
+
+    public abstract void errMessage(String title, String message);
+
+    public abstract String inputDialog(String title, String label);
+
     public void setGridSize(int row, int col) {
         this.row = row;
         this.col = col;

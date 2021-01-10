@@ -7,16 +7,12 @@ public abstract class Ship {
     protected final ShipType type;
     protected final int size;
     protected int hp;
-    protected boolean isDestroyed = false;
     protected int id;
-
-    // Ship's origin
-    private int row, col;
-    private int direction = 0; // 0 Vertical, 1 Horizontal
 
     public Ship(ShipType type, int size) {
         this.type = type;
         this.size = size;
+        this.id = type.ordinal();
 
         hp = size;
     }
@@ -25,10 +21,8 @@ public abstract class Ship {
      * Decrement the ship's HP
      */
     public void hit() {
-        if (hp > 0 && !isDestroyed)
+        if (hp > 0)
             hp--;
-        else
-            isDestroyed = true;
     }
 
     /**
@@ -36,8 +30,8 @@ public abstract class Ship {
      *
      * @return True: Ship is destroyed, False: Ships is alive
      */
-    public boolean getIsDestroyed() {
-        return isDestroyed;
+    public boolean isDead() {
+        return hp == 0;
     }
 
     /**
@@ -58,8 +52,11 @@ public abstract class Ship {
         return size;
     }
 
-    public void setOrigin(int row, int col) {
-        this.row = row;
-        this.col = col;
+    public int getID() {
+        return id;
+    }
+
+    public String getName() {
+        return type.toString();
     }
 }

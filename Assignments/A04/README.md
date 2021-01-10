@@ -1,5 +1,10 @@
 # Assignment 04 - Battleship Game
 
+## TODO
+ - [ ] Algorithm for placing ships
+ - [x] Logic for checking if the ship is hit
+ - [ ] Combine GUI and controller
+
 ## Sample screen
 
 ```

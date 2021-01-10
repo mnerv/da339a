@@ -60,31 +60,53 @@ public class ConsoleView extends View {
     public void update() {}
 
     private void showBoard() {
-        int[] boardData = controller.getBoardData();
+        // int[] boardData = controller.getBoardData();
 
-        if (boardData.length > size)
-            return;
+        // if (boardData.length > size)
+        //     return;
 
-        boardFormat = boardFormat;
+        // boardFormat = boardFormat;
 
-        for (int i = 0; i < size * size; i++) {
-            switch (boardData[i]) {
-                case 1: // Miss
-                    boardFormat = boardFormat.replace(" x ", " ◦ ");
-                    break;
-                case 3: // Hit
-                    boardFormat = boardFormat.replace(" x ", " ✕ ");
-                    break;
-                case 0: // Empty
-                default:
-                    boardFormat = boardFormat.replace(" x ", "   ");
-                    break;
-            }
-        }
+        // for (int i = 0; i < size * size; i++) {
+        //     switch (boardData[i]) {
+        //         case 1: // Miss
+        //             boardFormat = boardFormat.replace(" x ", " ◦ ");
+        //             break;
+        //         case 3: // Hit
+        //             boardFormat = boardFormat.replace(" x ", " ✕ ");
+        //             break;
+        //         case 0: // Empty
+        //         default:
+        //             boardFormat = boardFormat.replace(" x ", "   ");
+        //             break;
+        //     }
+        // }
 
-        System.out.println(boardFormat);
+        // System.out.println(boardFormat);
     }
 
     @Override
     public void initGrid() {}
+
+    @Override
+    public void infoMessage(String title, String message) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public boolean confirmMessage(String title, String message) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void errMessage(String title, String message) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public String inputDialog(String title, String label) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

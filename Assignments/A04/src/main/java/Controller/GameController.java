@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Board;
 import View.*;
+import java.util.Random;
 
 /**
  * GameController for Battleship.
@@ -10,13 +11,17 @@ import View.*;
  * </p>
  */
 public class GameController {
-    int boardSize = 10;
+    private int boardSize = 10;
 
-    View view;
-    Board board;
+    private View view;
+    private Board board;
+
+    private Random rng;
 
     public GameController() {
         board = new Board(boardSize);
+
+        rng = new Random();
     }
 
     public GameController(View view) {
@@ -26,6 +31,8 @@ public class GameController {
         view.setTitle("Assignment 04 - Battleship");
         view.setGridSize(10, 10);
         view.initGrid();
+
+        board.initData(Boards.BOARD_1);
     }
 
     public void setView(View view) {
@@ -38,15 +45,37 @@ public class GameController {
     }
 
     /**
-     * Shoot at this coordinate
+     * Shoot at this coordinate.
      *
      * @param row Position in coordinate space
      * @param column Position in coordinate space
      */
-    public void shoot(int row, int column) {}
+    public boolean shoot(int row, int column) {
+        return shoot(row * boardSize + column);
+    }
 
-    // TODO: Return character of arrays for the view to use
-    public int[] getBoardData() {
-        return null;
+    /**
+     * Shoot at the raw location in memory
+     *
+     * @param i Location
+     * @return True if hit, false if missed
+     */
+    public boolean shoot(int i) {
+        boolean isHit = board.shoot(i);
+        var ship = board.getData(i);
+
+        if (ship != null && ship.isDead())
+            view.infoMessage("Ship destroyed!", ship.getName() + " is down!");
+
+        return isHit;
+    }
+
+    public void resetBoard() {
+        board.reset();
+        board.initData(Boards.BOARDS[rng.nextInt(Boards.BOARD_COUNT)]);
+    }
+
+    public boolean isAllShipDestroyed() {
+        return board.isAllShipDestroyed();
     }
 }
