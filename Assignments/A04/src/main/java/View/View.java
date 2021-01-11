@@ -35,6 +35,8 @@ public abstract class View {
 
     public abstract String inputDialog(String title, String label);
 
+    public abstract void showScoreBoard();
+
     public void setGridSize(int row, int col) {
         this.row = row;
         this.col = col;

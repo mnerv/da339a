@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -15,7 +14,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class GUIView extends View {
-    private final int GRID_SIZE_PIXELS = 450;
+    final int GRID_SIZE_PIXELS = 450;
 
     private String HIT_SPRITE = "╳";
     private String MISSED_SPRITE = "●";
@@ -25,10 +24,13 @@ public class GUIView extends View {
 
     private JPanel gridPanel, btnPanel;
     private JButton newGameBtn, showScoreBtn;
+    private GUIScoreView scoreView;
 
     public GUIView() {
         frame = new JFrame();
-        changeUI();
+        changeLook();
+
+        scoreView = new GUIScoreView(this);
 
         btnPanel = new JPanel();
         btnPanel.setLayout(new FlowLayout());
@@ -51,7 +53,7 @@ public class GUIView extends View {
         panel.add(btnPanel, BorderLayout.PAGE_START);
         panel.add(gridPanel, BorderLayout.CENTER);
 
-        frame.add(panel, BorderLayout.CENTER);
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.pack();
@@ -108,6 +110,21 @@ public class GUIView extends View {
         }
     }
 
+    @Override
+    public void showScoreBoard() {
+        showScoreBoard();
+    }
+
+    void changeToGameview() {
+        frame.setContentPane(panel);
+        frame.pack();
+    }
+
+    void changeToScoreView() {
+        frame.setContentPane(scoreView.getPanel());
+        frame.pack();
+    }
+
     private void onNewGameBtn() {
         String name = inputDialog("Enter your name", "Name:");
         if (name != null && !name.isBlank())
@@ -117,10 +134,12 @@ public class GUIView extends View {
     private void onShowScoreBtn() {
         System.out.println("Show LeaderBoard");
 
-        confirmMessage("Confirm", "Please confirm");
-        infoMessage("Information", "Here lies information");
-        errMessage("Error", "Here lies error message");
-        inputDialog("Input", "Input here:");
+        changeToScoreView();
+
+        // confirmMessage("Confirm", "Please confirm");
+        // infoMessage("Information", "Here lies information");
+        // errMessage("Error", "Here lies error message");
+        // inputDialog("Input", "Input here:");
     }
 
     private void onButtonClicked(int id) {
@@ -158,7 +177,7 @@ public class GUIView extends View {
         controller.resetBoard();
     }
 
-    private void changeUI() {
+    private void changeLook() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException

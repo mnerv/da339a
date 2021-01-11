@@ -5,6 +5,16 @@ package Controller;
  */
 public interface Boards {
     final int BOARD_COUNT = 4;
+    /**
+     * Ship IDs
+     * Carrier: 1
+     * Battleship: 2
+     * Cruiser: 3
+     * Submarine: 4
+     * Destroyer: 5
+     *
+     * 0 is empty
+     */
 
     // clang-format off
     final int BOARD_0[] = {

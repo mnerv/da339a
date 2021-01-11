@@ -45,6 +45,11 @@ public class Board {
         return false;
     }
 
+    /**
+     * Init the board with raw data with id for different ships
+     *
+     * @param raw_data The size should be the same as the boards area
+     */
     public void initData(int raw_data[]) {
         Ship ships[] = {
             new Carrier(),

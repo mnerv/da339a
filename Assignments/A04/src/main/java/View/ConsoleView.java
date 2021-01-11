@@ -109,4 +109,9 @@ public class ConsoleView extends View {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public void showScoreBoard() {
+        // TODO Auto-generated method stub
+    }
 }
