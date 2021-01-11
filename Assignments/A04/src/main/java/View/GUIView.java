@@ -112,7 +112,31 @@ public class GUIView extends View {
 
     @Override
     public void showScoreBoard() {
-        showScoreBoard();
+        String[] names = controller.getNameList();
+        String[] scores = controller.getScoreList();
+
+        String formatted = "";
+
+        for (int i = 0; i < scores.length; i++) {
+            int maxOff = scoreView.COLUMN_OFFSET;
+            String nr = i + ". " + (i < 10 ? " " : "");
+            maxOff -= nr.length();
+
+            if (names[i].length() > maxOff - 1)
+                names[i] = names[i].substring(0, maxOff - 2);
+
+            maxOff -= names[i].length();
+
+            formatted += nr + names[i];
+
+            for (int j = 0; j < maxOff; j++) formatted += " ";
+
+            formatted += "SCORE: " + scores[i] + "\n";
+        }
+
+        scoreView.updateScoreText(formatted);
+
+        changeToScoreView();
     }
 
     void changeToGameview() {
@@ -126,20 +150,11 @@ public class GUIView extends View {
     }
 
     private void onNewGameBtn() {
-        String name = inputDialog("Enter your name", "Name:");
-        if (name != null && !name.isBlank())
-            resetGrid();
+        resetGrid();
     }
 
     private void onShowScoreBtn() {
-        System.out.println("Show LeaderBoard");
-
-        changeToScoreView();
-
-        // confirmMessage("Confirm", "Please confirm");
-        // infoMessage("Information", "Here lies information");
-        // errMessage("Error", "Here lies error message");
-        // inputDialog("Input", "Input here:");
+        showScoreBoard();
     }
 
     private void onButtonClicked(int id) {
@@ -154,10 +169,16 @@ public class GUIView extends View {
 
         btn.setEnabled(false);
 
-        if (controller.isAllShipDestroyed()) {
-            disableGrid();
-            infoMessage("All ship destroyed!", "Good job!");
-        }
+        if (controller.isCompleted())
+            gameCompleted();
+    }
+
+    private void gameCompleted() {
+        disableGrid();
+        infoMessage("All ship destroyed!", "Good job!");
+
+        String input = inputDialog("Enter your name", "Name:");
+        controller.saveScore(input);
     }
 
     private void disableGrid() {

@@ -1,6 +1,8 @@
 package Model;
 
 import Model.Ship.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -21,12 +23,16 @@ public class Board {
 
     private int shotCount = 0;
 
+    private List<Score> scoreboard;
+
     public Board(int size) {
         this.size = size;
 
         data = new Ship[size * size];
         maxShips = ShipType.values().length;
         shipCount = maxShips;
+
+        scoreboard = new ArrayList<>();
 
         rng = new Random();
     }
@@ -85,7 +91,7 @@ public class Board {
         data[row * size + col] = ship;
     }
 
-    public boolean isAllShipDestroyed() {
+    public boolean isCompleted() {
         return shipCount == 0;
     }
 
@@ -113,6 +119,20 @@ public class Board {
         // TODO: Check for overlapping when placing ships
 
         return status;
+    }
+
+    public void addScore(Score score) {
+        score.setScore(shotCount);
+        scoreboard.add(score);
+        shotCount = 0;
+    }
+
+    public List<Score> getScoreboard() {
+        return scoreboard;
+    }
+
+    public int getScoreboardSize() {
+        return scoreboard.size();
     }
 
     /**

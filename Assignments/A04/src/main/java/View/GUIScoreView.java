@@ -12,11 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class GUIScoreView {
-    private final int MAX_COLUMN = 53;
+    final int MAX_COLUMN = 53;
+    final int COLUMN_OFFSET = 37;
 
     private GUIView gui;
 
@@ -28,9 +27,7 @@ public class GUIScoreView {
     private JPanel btnPanels;
     private JButton backBtn;
 
-    private JLabel scoreLbl;
-
-    private JTextArea textArea;
+    private JTextArea scoreTArea;
 
     public GUIScoreView(GUIView gui) {
         panel = new JPanel();
@@ -40,28 +37,24 @@ public class GUIScoreView {
         this.gui = gui;
 
         listPanel = new JPanel();
-        // listPanel.setLayout(new GridLayout(1, 1));
         listPanel.setLayout(new GridLayout(1, 1));
         listPanel.setPreferredSize(new Dimension(gui.GRID_SIZE_PIXELS, gui.GRID_SIZE_PIXELS));
-        // listPanel.setBackground(Color.BLACK);
 
-        textArea = new JTextArea();
-        textArea.setEditable(false);
+        scoreTArea = new JTextArea();
+        scoreTArea.setEditable(false);
 
-        String test = "Hello\n";
+        // 36 column offset to score
+        String test = "TEST                                SCORE: 420\n";
 
         for (int i = 0; i < 100; i++) {
-            textArea.append(i + ". " + (i < 10 ? " " : "") + test);
+            scoreTArea.append(i + ". " + (i < 10 ? " " : "") + test);
         }
 
-        JScrollPane scroll = new JScrollPane(textArea);
+        JScrollPane scroll = new JScrollPane(scoreTArea);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         listPanel.add(scroll, BorderLayout.CENTER);
-
-        scoreLbl = new JLabel();
-        scoreLbl.setText("Hello\nHello");
 
         textLbl = new JLabel("High Score", JLabel.CENTER);
         textLbl.setFont(new Font(textLbl.getFont().getName(), textLbl.getFont().getStyle(), 21));
@@ -80,6 +73,10 @@ public class GUIScoreView {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    void updateScoreText(String txt) {
+        scoreTArea.setText(txt);
     }
 
     private void onBackBtn() {

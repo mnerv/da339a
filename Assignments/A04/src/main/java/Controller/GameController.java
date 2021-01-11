@@ -1,7 +1,9 @@
 package Controller;
 
 import Model.Board;
+import Model.Score;
 import View.*;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -75,7 +77,35 @@ public class GameController {
         board.initData(Boards.BOARDS[rng.nextInt(Boards.BOARD_COUNT)]);
     }
 
-    public boolean isAllShipDestroyed() {
-        return board.isAllShipDestroyed();
+    public boolean isCompleted() {
+        return board.isCompleted();
+    }
+
+    public void saveScore(String name) {
+        String playerName =
+            name != null && !name.isBlank() ? name : "DEFAULT - " + board.getScoreboardSize();
+        Score score = new Score(playerName);
+        board.addScore(score);
+    }
+
+    public String[] getNameList() {
+        var scores = board.getScoreboard();
+        Collections.sort(scores);
+
+        String nameList[] = new String[scores.size()];
+        for (int i = 0; i < nameList.length; i++) nameList[i] = scores.get(i).getName();
+
+        return nameList;
+    }
+
+    public String[] getScoreList() {
+        var scores = board.getScoreboard();
+        Collections.sort(scores);
+
+        String scoreList[] = new String[scores.size()];
+        for (int i = 0; i < scoreList.length; i++)
+            scoreList[i] = String.valueOf(scores.get(i).getScore());
+
+        return scoreList;
     }
 }
