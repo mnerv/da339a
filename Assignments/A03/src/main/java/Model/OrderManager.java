@@ -1,16 +1,23 @@
 package Model;
 
-import Model.Topping.Topping;
-import Model.Topping.Toppings;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OrderManager
+ *
+ * <p>
+ * The order manager contain the list of available pizza and beverages and list of orders. This will
+ * create the unique id for different orders and will check which beverages can be shown.
+ * </p>
+ */
 public class OrderManager {
     private List<Pizza> pizzaList;
     private List<Beverage> beverageList;
 
     private final int TOPPINGS_COUNT = 14;
     private Topping toppingList[];
+    private int toppingCount = 0;
 
     private List<Order> orders;
     private int orderID = 0;
@@ -23,10 +30,6 @@ public class OrderManager {
         orders = new ArrayList<Order>();
         pizzaList = new ArrayList<Pizza>();
         beverageList = new ArrayList<Beverage>();
-
-        initPizzaList();
-        initToppingList();
-        initDrinksList();
     }
 
     /**
@@ -35,7 +38,7 @@ public class OrderManager {
      * @param order
      */
     public void addOrder(Order order) {
-        order.id = orderID;
+        order.setID(orderID);
         orderID++;
 
         orders.add(order);
@@ -58,7 +61,9 @@ public class OrderManager {
     }
 
     /**
-     * Get selected order. If there's no selection i.e the selection index is at -1 then null is
+     * Get selected order.
+     *
+     * @return If there's no selection i.e the selection index is at -1 then null is
      * returned.
      */
     public Order getSelectedOrder() {
@@ -68,11 +73,21 @@ public class OrderManager {
         return null;
     }
 
+    /**
+     * Update the selected order.
+     *
+     * @param order The order that needs to be updated.
+     */
     public void updateSelectedOrder(Order order) {
         if (selectedOrder > -1)
             orders.set(selectedOrder, order);
     }
 
+    /**
+     * Get the created order list
+     *
+     * @return The list of orders in array of strings.
+     */
     public String[] getOrderList() {
         String tmpList[] = new String[orders.size()];
         for (int i = 0; i < tmpList.length; i++) tmpList[i] = orders.get(i).toString();
@@ -80,18 +95,65 @@ public class OrderManager {
         return tmpList;
     }
 
-    public void addCustomPizza(Pizza pizza) {
+    /**
+     * Add pizza to the pizza list that can be order from.
+     *
+     * @param pizza The pizza that needs to be added.
+     */
+    public void addPizza(Pizza pizza) {
         pizzaList.add(pizza);
     }
 
+    /**
+     * Get the pizza list
+     *
+     * @return List of pizza
+     */
     public List<Pizza> getPizzaList() {
         return pizzaList;
     }
 
+    /**
+     * Add topping to the available topping list.
+     *
+     * @param topping Valid topping
+     *
+     * @return True if the addition is successful and False for unsuccessful.
+     */
+    public boolean addTopping(Topping topping) {
+        if (toppingCount < toppingList.length) {
+            toppingList[toppingCount] = topping;
+            toppingCount++;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Add beverage to the beverage list
+     *
+     * @param beverage The beverage that needs to be added into the list.
+     */
+    public void addBeverage(Beverage beverage) {
+        beverageList.add(beverage);
+    }
+
+    /**
+     * Get the available toppings.
+     *
+     * @return Array of toppings
+     */
     public Topping[] getToppingList() {
         return toppingList;
     }
 
+    /**
+     * Get the available beverages.
+     *
+     * @return Beverage list
+     */
     public List<Beverage> getBeverageList() {
         List<Beverage> list = new ArrayList<>();
 
@@ -106,103 +168,21 @@ public class OrderManager {
         return list;
     }
 
+    /**
+     * Get is over 18
+     *
+     * @return True if over 18, False for under 18
+     */
     public boolean getIsOver18() {
         return isOver18;
     }
 
+    /**
+     * Set the the is over 18
+     *
+     * @param tof true for over 18 and false for under 18
+     */
     public void setIsOver18(boolean tof) {
         isOver18 = tof;
-    }
-
-    /**
-     * Initialize predefined pizza list
-     */
-    private void initPizzaList() {
-        Pizza pizza = new Pizza("Vesuvio");
-        pizza.addTopping(Toppings.TomatoSauce);
-        pizza.addTopping(Toppings.Cheese);
-        pizza.addTopping(Toppings.Ham);
-        pizzaList.add(pizza);
-
-        pizza = new Pizza("Calzone Bologneze");
-        pizza.addTopping(Toppings.TomatoSauce);
-        pizza.addTopping(Toppings.Cheese);
-        pizza.addTopping(Toppings.Ham);
-        pizza.addTopping(Toppings.Bolognese);
-        pizzaList.add(pizza);
-
-        pizza = new Pizza("Capriccosa");
-        pizza.addTopping(Toppings.TomatoSauce);
-        pizza.addTopping(Toppings.Cheese);
-        pizza.addTopping(Toppings.Ham);
-        pizza.addTopping(Toppings.Mushroom);
-        pizzaList.add(pizza);
-
-        pizza = new Pizza("Margeritha");
-        pizza.addTopping(Toppings.TomatoSauce);
-        pizza.addTopping(Toppings.Cheese);
-        pizzaList.add(pizza);
-
-        pizza = new Pizza("Chicken pizza");
-        pizza.addTopping(Toppings.Chicken);
-        pizza.addTopping(Toppings.Cheese);
-        pizza.addTopping(Toppings.TomatoSauce);
-        pizza.addTopping(Toppings.Peperoncino);
-        pizzaList.add(pizza);
-    }
-
-    /**
-     * Initialize predefined toppings
-     */
-    private void initToppingList() {
-        toppingList[0] = Toppings.TomatoSauce;
-        toppingList[1] = Toppings.Chorizo;
-        toppingList[2] = Toppings.Salami;
-        toppingList[3] = Toppings.Mozzarella;
-        toppingList[4] = Toppings.Chicken;
-        toppingList[5] = Toppings.Beef;
-        toppingList[6] = Toppings.CheddarCheese;
-        toppingList[7] = Toppings.Cheese;
-        toppingList[8] = Toppings.Ham;
-        toppingList[9] = Toppings.Mushroom;
-        toppingList[10] = Toppings.Bolognese;
-        toppingList[11] = Toppings.Pork;
-        toppingList[12] = Toppings.Shrimps;
-        toppingList[13] = Toppings.BearnaiseSauce;
-    }
-
-    // Drink list both alcoholic and non alcoholic
-    private void initDrinksList() {
-        Beverage beverage;
-
-        beverage = new Beverage("Carlsberg", 55.95, 3.5);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Vodka", 95.95, 40.0);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Cider", 75.95, 4.5);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Pilsner", 15.0, 2.25);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Red wine", 150.55, 6.5);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Water", 0.0);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Trocadero", 7.5);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Fanta", 8.0);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Coca cola", 8.5);
-        beverageList.add(beverage);
-
-        beverage = new Beverage("Non-alcoholic cider", 35.0);
-        beverageList.add(beverage);
     }
 }

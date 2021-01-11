@@ -1,6 +1,17 @@
 package Model;
 
+import java.util.Locale;
+
+/**
+ * Entity
+ *
+ * <p>
+ * Name, type and price. This is the super class of all the product available.
+ * </p>
+ */
 public abstract class Entity implements IEntity {
+    protected final Locale LOCALE = new Locale("en", "UK");
+
     protected String name;
     protected EntityType type;
 
@@ -36,5 +47,8 @@ public abstract class Entity implements IEntity {
         this.price = price;
     }
 
+    /**
+     * Unique information for Entity subclass
+     */
     public abstract String getInfo();
 }

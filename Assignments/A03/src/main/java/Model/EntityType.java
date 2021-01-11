@@ -1,3 +1,6 @@
 package Model;
 
-public enum EntityType { Drink, Food }
+/**
+ * Entity Type such as drink and food
+ */
+public enum EntityType { Drink, Food, Misc }

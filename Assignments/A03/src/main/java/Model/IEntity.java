@@ -2,6 +2,10 @@ package Model;
 
 /**
  * IEntity
+ *
+ * <p>
+ * Required method for Entity type object
+ * </p>
  */
 public interface IEntity {
     EntityType getType();

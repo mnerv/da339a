@@ -1,12 +1,8 @@
 package Model;
 
-import Model.Topping.*;
-import java.util.Locale;
-
 public class Pizza extends Entity {
     private final int MAX_TOPPINGS = 6;
-    private final double BASE_PRICE = 30.00;
-    private final Locale LOCALE = new Locale("en", "UK");
+    private final double BASE_START_PRICE = 30.00;
 
     private int toppingCount = 0;
     private Topping[] toppings = new Topping[MAX_TOPPINGS];
@@ -18,7 +14,7 @@ public class Pizza extends Entity {
     public Pizza(String name) {
         this.name = name;
         this.type = EntityType.Food;
-        price = BASE_PRICE;
+        price = BASE_START_PRICE;
     }
 
     public Pizza(String name, int maxToppings) {
@@ -26,8 +22,15 @@ public class Pizza extends Entity {
         toppings = new Topping[MAX_TOPPINGS];
     }
 
+    /**
+     * Add a topping onto the pizza.
+     *
+     * @param topping The topping that need to be added.
+     *
+     * @return True success and False if the list is full. Check MAX_TOPPINGS to change the maximum.
+     */
     public boolean addTopping(Topping topping) {
-        if (toppingCount < MAX_TOPPINGS) {
+        if (toppingCount < toppings.length) {
             price += topping.getPrice();
             toppings[toppingCount] = topping;
             toppingCount++;
@@ -38,6 +41,13 @@ public class Pizza extends Entity {
         return false;
     }
 
+    /**
+     * Removed a topping on the pizza.
+     *
+     * @param index Location of the topping in the list.
+     *
+     * @return True if successful and False for unsuccessful.
+     */
     public boolean removeToppingAt(int index) {
         if (index > -1 && index < MAX_TOPPINGS - 1 && toppings[index] != null) {
             price -= toppings[index].getPrice();
@@ -65,6 +75,11 @@ public class Pizza extends Entity {
         return false;
     }
 
+    /**
+     * Get toppings on the pizza.
+     *
+     * @return The list of toppings in array of strings.
+     */
     public String[] getToppings() {
         String[] tmp = new String[toppingCount];
 
