@@ -107,8 +107,17 @@ public class CustomView {
         return root;
     }
 
-    private void updateLists() {
-        customPizzaList.getItems().setAll(view.getAddedToppingList());
+    void updateToppingList(String list[]) {
+        toppingList.getItems().setAll(list);
+    }
+
+    void updatePizzaToppings(String list[]) {
+        customPizzaList.getItems().setAll(list);
+    }
+
+    void updateLists() {
+        updateToppingList(view.getToppingList());
+        updatePizzaToppings(view.getAddedToppingList());
     }
 
     private void onAddBtn() {

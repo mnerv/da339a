@@ -30,6 +30,8 @@ public class OrderManager {
 
     private boolean isOver18 = false;
 
+    private int productIDCounter = 0;
+
     public OrderManager() {
         toppingList = new Topping[TOPPINGS_COUNT];
         orders = new ArrayList<Order>();
@@ -106,6 +108,7 @@ public class OrderManager {
      * @param pizza The pizza that needs to be added.
      */
     public void addPizza(Pizza pizza) {
+        pizza.setID(productIDCounter++);
         pizzaList.add(pizza);
     }
 
@@ -142,6 +145,7 @@ public class OrderManager {
      * @param beverage The beverage that needs to be added into the list.
      */
     public void addBeverage(Beverage beverage) {
+        beverage.setID(productIDCounter++);
         beverageList.add(beverage);
     }
 

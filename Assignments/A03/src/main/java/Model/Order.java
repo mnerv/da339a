@@ -45,7 +45,7 @@ public class Order {
     }
 
     /**
-     * Add product to the list. This method checks if there is already a product with the same name
+     * Add product to the list. This method checks if there is already a product with the same ID
      * and increase the quantity value instead of adding it onto the list.
      *
      * @param entity Product that needs to be add.
@@ -56,7 +56,7 @@ public class Order {
         boolean inList = false;
 
         for (int i = 0; i < productList.size(); i++) {
-            if (entity.getName().equalsIgnoreCase(productList.get(i).name)) {
+            if (entity.getID() == productList.get(i).getID()) {
                 location = i;
                 inList = true;
                 break;
@@ -65,7 +65,7 @@ public class Order {
 
         if (inList) {
             int q = quantityList.get(location);
-            quantityList.set(location, q + q);
+            quantityList.set(location, q + quantity);
         } else {
             productList.add(entity);
             quantityList.add(quantity);

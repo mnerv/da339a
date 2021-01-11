@@ -114,6 +114,7 @@ public class MainView extends Application {
     void showCustomView() {
         String input = inputDialog("Custom Pizza name", "Name:", "Custom");
         c.newCustomPizza(input);
+        customView.updateLists();
         scene.setRoot(customView.getRoot());
     }
 

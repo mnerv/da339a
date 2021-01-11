@@ -22,6 +22,8 @@ public abstract class Entity implements IEntity {
 
     protected double price;
 
+    private int id;
+
     @Override
     public EntityType getType() {
         return type;
@@ -50,6 +52,14 @@ public abstract class Entity implements IEntity {
     @Override
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     /**
