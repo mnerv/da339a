@@ -1,3 +1,8 @@
+/**
+ * Author: Pratchaya Khansomboon
+ *
+ * Created: 2020-12-10
+ */
 package Model;
 
 import java.util.Locale;

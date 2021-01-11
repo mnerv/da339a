@@ -1,3 +1,8 @@
+/**
+ * Author: Pratchaya Khansomboon
+ *
+ * Created: 2020-11-26
+ */
 package App;
 
 import View.MainView;

@@ -1,3 +1,8 @@
+/**
+ * Author: Pratchaya Khansomboon
+ *
+ * Created: 2020-11-29
+ */
 package Model;
 
 import java.util.ArrayList;

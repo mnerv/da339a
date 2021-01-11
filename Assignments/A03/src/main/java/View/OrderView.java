@@ -1,3 +1,8 @@
+/**
+ * Author: Pratchaya Khansomboon
+ *
+ * Created: 2021-01-09
+ */
 package View;
 
 import javafx.geometry.Insets;
