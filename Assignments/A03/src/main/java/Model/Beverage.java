@@ -59,6 +59,5 @@ public class Beverage extends Entity {
         if (alcoholContent > 0.)
             format += String.format(LOCALE, "Alcohol: %.2f", alcoholContent);
         return String.format(LOCALE, "%s, Price: %s", format, price);
-        // return String.format("%s, Alcohol: %.2f %%, Price: %s kr", name, alcoholContent, price);
     }
 }

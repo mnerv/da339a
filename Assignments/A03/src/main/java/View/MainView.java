@@ -27,9 +27,7 @@ public class MainView extends Application {
 
         orderView = new OrderView(this);
         customView = new CustomView(this);
-        // orderScene = new Scene(orderView.getRoot(), WIDTH, HEIGHT);
         scene = new Scene(orderView.getRoot(), WIDTH, HEIGHT);
-        // customScene = new Scene(customView.getRoot(), WIDTH, HEIGHT);
 
         showOrderView();
 
