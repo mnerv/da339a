@@ -31,10 +31,10 @@ public class GameController {
         setView(view);
 
         view.setTitle("Assignment 04 - Battleship");
-        view.setGridSize(10, 10);
+        view.setGridSize(boardSize, boardSize);
         view.initGrid();
 
-        board.initData(Boards.BOARD_1);
+        resetBoard();
     }
 
     public void setView(View view) {
@@ -59,7 +59,7 @@ public class GameController {
     /**
      * Shoot at the raw location in memory
      *
-     * @param i Location
+     * @param i Grid location ID
      * @return True if hit, false if missed
      */
     public boolean shoot(int i) {
@@ -74,7 +74,20 @@ public class GameController {
 
     public void resetBoard() {
         board.reset();
-        board.initData(Boards.BOARDS[rng.nextInt(Boards.BOARD_COUNT)]);
+
+        String input = view.inputDialog("Select a board", "Value between 1 to 4:");
+        int i = 0;
+
+        try {
+            i = Integer.parseInt(input) - 1;
+        } catch (NumberFormatException e) {
+            i = rng.nextInt(Boards.BOARD_COUNT);
+        }
+
+        if (i < 0 || i > Boards.BOARD_COUNT - 1)
+            i = rng.nextInt(Boards.BOARD_COUNT);
+
+        board.initData(Boards.BOARDS[i]);
     }
 
     public boolean isCompleted() {

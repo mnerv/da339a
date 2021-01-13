@@ -54,9 +54,9 @@ public class Board {
     /**
      * Init the board with raw data with id for different ships
      *
-     * @param raw_data The size should be the same as the boards area
+     * @param rawData The size should be the same as the boards area
      */
-    public void initData(int raw_data[]) {
+    public void initData(int rawData[]) {
         Ship ships[] = {
             new Carrier(),
             new Battleship(),
@@ -65,9 +65,9 @@ public class Board {
             new Destroyer(),
         };
 
-        for (int i = 0; i < raw_data.length; i++) {
-            if (raw_data[i] != 0)
-                data[i] = ships[raw_data[i] - 1];
+        for (int i = 0; i < rawData.length; i++) {
+            if (rawData[i] != 0)
+                data[i] = ships[rawData[i] - 1];
             else
                 data[i] = null;
         }
