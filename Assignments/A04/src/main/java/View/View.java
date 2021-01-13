@@ -37,6 +37,8 @@ public abstract class View {
 
     public abstract void showScoreBoard();
 
+    public abstract void disableGrid();
+
     public void setGridSize(int row, int col) {
         this.row = row;
         this.col = col;

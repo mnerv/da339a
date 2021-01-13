@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Board;
 import Model.Score;
-import View.*;
+import View.View;
 import java.util.Collections;
 import java.util.Random;
 
@@ -90,8 +90,14 @@ public class GameController {
         board.initData(Boards.BOARDS[i]);
     }
 
-    public boolean isCompleted() {
-        return board.isCompleted();
+    public void checkComplete() {
+        if (board.isCompleted()) {
+            view.disableGrid();
+            view.infoMessage("All ship destroyed!", "Good job!");
+
+            String name = view.inputDialog("Enter your name", "Name:");
+            saveScore(name);
+        }
     }
 
     public void saveScore(String name) {

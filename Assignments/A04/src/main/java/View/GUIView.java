@@ -139,6 +139,14 @@ public class GUIView extends View {
         changeToScoreView();
     }
 
+    @Override
+    public void disableGrid() {
+        for (int i = 0; i < gridPanel.getComponentCount(); i++) {
+            var btn = (JButton) gridPanel.getComponent(i);
+            btn.setEnabled(false);
+        }
+    }
+
     void changeToGameview() {
         frame.setContentPane(panel);
         frame.pack();
@@ -169,23 +177,7 @@ public class GUIView extends View {
 
         btn.setEnabled(false);
 
-        if (controller.isCompleted())
-            gameCompleted();
-    }
-
-    private void gameCompleted() {
-        disableGrid();
-        infoMessage("All ship destroyed!", "Good job!");
-
-        String input = inputDialog("Enter your name", "Name:");
-        controller.saveScore(input);
-    }
-
-    private void disableGrid() {
-        for (int i = 0; i < gridPanel.getComponentCount(); i++) {
-            var btn = (JButton) gridPanel.getComponent(i);
-            btn.setEnabled(false);
-        }
+        controller.checkComplete();
     }
 
     private void resetGrid() {

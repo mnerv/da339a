@@ -43,8 +43,14 @@ public class Board {
 
     public boolean shoot(int i) {
         var s = data[i];
+        shotCount++;
+
         if (s != null) {
             s.hit();
+
+            if (s.isDead())
+                shipCount--;
+
             return true;
         }
 
@@ -78,13 +84,7 @@ public class Board {
     }
 
     public Ship getData(int i) {
-        var s = data[i];
-        shotCount++;
-
-        if (s != null && s.isDead())
-            shipCount--;
-
-        return s;
+        return data[i];
     }
 
     public void setData(int row, int col, Ship ship) {

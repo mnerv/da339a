@@ -114,4 +114,9 @@ public class ConsoleView extends View {
     public void showScoreBoard() {
         // TODO Auto-generated method stub
     }
+
+    @Override
+    public void disableGrid() {
+        // TODO Auto-generated method stub
+    }
 }
