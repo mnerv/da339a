@@ -25,18 +25,55 @@ public abstract class View {
      */
     public abstract void update();
 
+    /**
+     * Initial the grid in the view
+     */
     public abstract void initGrid();
 
+    /**
+     * Get confirmation message
+     *
+     * @param title The title of the message
+     * @param message The message content
+     *
+     * @return True for confirm and False for deny
+     */
     public abstract boolean confirmMessage(String title, String message);
 
+    /**
+     * Display information message
+     *
+     * @param title The title of the message
+     * @param message The message contente
+     */
     public abstract void infoMessage(String title, String message);
 
+    /**
+     * Display error message
+     *
+     * @param title The title of the message
+     * @param message The message contente
+     */
     public abstract void errMessage(String title, String message);
 
+    /**
+     * Get input
+     *
+     * @param title The title of the message
+     * @param message The message contente
+     *
+     * @return The input frm the user
+     */
     public abstract String inputDialog(String title, String label);
 
+    /**
+     * Show the scoreboard
+     */
     public abstract void showScoreBoard();
 
+    /**
+     * Disable the grid input
+     */
     public abstract void disableGrid();
 
     public void setGridSize(int row, int col) {

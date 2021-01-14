@@ -37,11 +37,19 @@ public class GameController {
         resetBoard();
     }
 
+    /**
+     * Set the view to use
+     *
+     * @param view The view created
+     */
     public void setView(View view) {
         this.view = view;
         this.view.setController(this);
     }
 
+    /**
+     * Run the Application
+     */
     public void run() {
         view.run();
     }
@@ -72,6 +80,9 @@ public class GameController {
         return isHit;
     }
 
+    /**
+     * Reset the game
+     */
     public void resetBoard() {
         board.reset();
 
@@ -90,6 +101,9 @@ public class GameController {
         board.initData(Boards.BOARDS[i]);
     }
 
+    /**
+     * Check if the game is complete or not
+     */
     public void checkComplete() {
         if (board.isCompleted()) {
             view.disableGrid();
@@ -100,6 +114,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Save the score the list
+     *
+     * @param name The name given
+     */
     public void saveScore(String name) {
         String playerName =
             name != null && !name.isBlank() ? name : "DEFAULT - " + board.getScoreboardSize();
@@ -107,6 +126,10 @@ public class GameController {
         board.addScore(score);
     }
 
+    /**
+     * Get the names in the score list
+     * @return List of names sorted with the lowest score at the top
+     */
     public String[] getNameList() {
         var scores = board.getScoreboard();
         Collections.sort(scores);
@@ -117,6 +140,10 @@ public class GameController {
         return nameList;
     }
 
+    /**
+     * Get the scores in the score list
+     * @return List of scores sorted with the lowest score at the top
+     */
     public String[] getScoreList() {
         var scores = board.getScoreboard();
         Collections.sort(scores);

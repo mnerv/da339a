@@ -37,10 +37,25 @@ public class Board {
         rng = new Random();
     }
 
+    /**
+     * Shoot at location
+     *
+     * @param row Location in row
+     * @param col Location in column
+     *
+     * @return True for hit and false for missed
+     */
     public boolean shoot(int row, int col) {
         return shoot(row * size + col);
     }
 
+    /**
+     * Shoot at location
+     *
+     * @param i location to shoot
+     *
+     * @return True for hit and false for missed
+     */
     public boolean shoot(int i) {
         var s = data[i];
         shotCount++;
@@ -79,16 +94,27 @@ public class Board {
         }
     }
 
+    /**
+     * Get ths ship at
+     *
+     * @param row Location in row
+     * @param col Location in column
+     *
+     * @return Ship in that location
+     */
     public Ship getData(int row, int col) {
         return getData(row * size + col);
     }
 
+    /**
+     * Get ths ship at
+     *
+     * @param i Location in the array
+     *
+     * @return Ship in that location
+     */
     public Ship getData(int i) {
         return data[i];
-    }
-
-    public void setData(int row, int col, Ship ship) {
-        data[row * size + col] = ship;
     }
 
     public boolean isCompleted() {
@@ -101,8 +127,24 @@ public class Board {
         shotCount = 0;
     }
 
+    public void addScore(Score score) {
+        score.setScore(shotCount);
+        scoreboard.add(score);
+        shotCount = 0;
+    }
+
+    public List<Score> getScoreboard() {
+        return scoreboard;
+    }
+
+    public int getScoreboardSize() {
+        return scoreboard.size();
+    }
+
     /**
      * Place a ship onto the board.
+     *
+     * TODO: METHOD NOT IMPLEMENTED
      *
      * @discussion The method check first if it's a valid position, i.e check for overlap between
      * different ships and if it's outside or not.
@@ -121,22 +163,10 @@ public class Board {
         return status;
     }
 
-    public void addScore(Score score) {
-        score.setScore(shotCount);
-        scoreboard.add(score);
-        shotCount = 0;
-    }
-
-    public List<Score> getScoreboard() {
-        return scoreboard;
-    }
-
-    public int getScoreboardSize() {
-        return scoreboard.size();
-    }
-
     /**
      * Randomly place the ships onto the board.
+     *
+     * TODO: FOR FUTURE IMPLEMENTATION
      *
      * <p>
      * The algorithm implemented is not efficient, because it doesn't take into account
