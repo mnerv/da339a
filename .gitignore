@@ -1,15 +1,25 @@
-# Compiled class
-*.class
-
-# directories
-target
-.idea
+# Visual Studio Code
 .settings
 .vscode
 
-# files
+# IntelliJ files
+.idea
 *.iml
 .project
+
+# Maven
+target
+
+# Java files
 .classpath
+*.class
+
+# Visual Paradigm
 *.vpp.bak*
 *.vpp.lck
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
