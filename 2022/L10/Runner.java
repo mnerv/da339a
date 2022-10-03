@@ -18,16 +18,22 @@ public class Runner {
 
         while (true) {
             print_tasks();
-            var value = read_int();
-            if (value == -1) break;
-            if (value == Integer.MIN_VALUE || value < 0 || value > tasks.length - 1) {
+            final var text = read_text();
+            if (text.compareToIgnoreCase("clear") == 0) {
+                clear();
+                continue;
+            }
+
+            final var index = validate_index(text);
+            if (index == -1) break;
+            if (index == Integer.MIN_VALUE || index < 0 || index > tasks.length - 1) {
                 System.out.println("Invalid input. Try again.");
                 continue;
             }
 
             System.out.println();
-            System.out.println("Running task: " + tasks[value].str());
-            tasks[value].run();
+            System.out.println("Running task: " + tasks[index].str());
+            tasks[index].run();
             System.out.println();
         }
     }
@@ -43,9 +49,15 @@ public class Runner {
         }
     }
 
-    private static int read_int() {
+    private static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    private static String read_text() {
         System.out.print("Select task. Enter -1 to quit: ");
-        var text = input.nextLine();
+        return input.nextLine();
+    }
+    private static int validate_index(String text) {
         try {
             return Integer.parseInt(text);
         } catch (Exception e) {

@@ -16,9 +16,8 @@ public class LinearSearch extends Task {
             }
         }
 
-        System.out.println("Uppgift 1: Linjär sökning");
-        System.out.println("  Search for: " + search_value);
-        System.out.println("  Found at position: " + search_index);
+        System.out.println("Search for: " + search_value);
+        System.out.println("Found at position: " + search_index);
     }
 }
 
