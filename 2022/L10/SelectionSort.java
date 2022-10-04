@@ -10,13 +10,13 @@ public class SelectionSort extends Task {
         print_array(array);
 
         for (int i = 0; i < array.length; ++i) {
-            int min_value_index = -1;
-            for (int j = i; j < array.length; ++j) {
-                if (min_value_index == -1 || array[j] < array[min_value_index])
+            int min_value_index = i;
+            for (int j = i + 1; j < array.length; ++j) {
+                if (array[j] < array[min_value_index])
                     min_value_index = j;
             }
 
-            if (min_value_index != -1) {
+            if (min_value_index != i) {
                 final var tmp = array[i];
                 array[i]      = array[min_value_index];
                 array[min_value_index] = tmp;
